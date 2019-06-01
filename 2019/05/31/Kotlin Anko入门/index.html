@@ -97,14 +97,14 @@
 
 
   <meta name="description" content="Kotlin Anko入门简洁Anko的官网就是他的GitHub地址  https://github.com/Kotlin/anko  官方对Anko的解释是  Anko是一个 Kotlin 库，它使Android应用程序开发更快更容易。它使您的代码清晰易读，让您忘记Android SDK for Java的粗糙边缘。">
-<meta name="keywords" content="Android,Kotlin">
+<meta name="keywords" content="Kotlin,Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kotlin Anko入门">
 <meta property="og:url" content="http://yoursite.com/2019/05/31/Kotlin Anko入门/index.html">
 <meta property="og:site_name" content="littlecrogi的小站">
 <meta property="og:description" content="Kotlin Anko入门简洁Anko的官网就是他的GitHub地址  https://github.com/Kotlin/anko  官方对Anko的解释是  Anko是一个 Kotlin 库，它使Android应用程序开发更快更容易。它使您的代码清晰易读，让您忘记Android SDK for Java的粗糙边缘。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-31T15:49:40.000Z">
+<meta property="og:updated_time" content="2019-06-01T04:17:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kotlin Anko入门">
 <meta name="twitter:description" content="Kotlin Anko入门简洁Anko的官网就是他的GitHub地址  https://github.com/Kotlin/anko  官方对Anko的解释是  Anko是一个 Kotlin 库，它使Android应用程序开发更快更容易。它使您的代码清晰易读，让您忘记Android SDK for Java的粗糙边缘。">
@@ -367,12 +367,24 @@
                 
               
 
-              <time title="创建时间：2019-05-31 18:33:58 / 修改时间：23:49:40" itemprop="dateCreated datePublished" datetime="2019-05-31T18:33:58+08:00">2019-05-31</time>
+              <time title="创建时间：2019-05-31 18:33:58" itemprop="dateCreated datePublished" datetime="2019-05-31T18:33:58+08:00">2019-05-31</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-01 12:17:47" itemprop="dateModified" datetime="2019-06-01T12:17:47+08:00">2019-06-01</time>
               
             
           </span>
@@ -446,7 +458,6 @@
 <p>Anko是一个 <a href="https://www.kotlinlang.org/" target="_blank" rel="noopener">Kotlin</a> 库，它使Android应用程序开发更快更容易。它使您的代码清晰易读，让您忘记Android SDK for Java的粗糙边缘。</p>
 </blockquote>
 <a id="more"></a>
-
 <p>为什么这样说呢？<br>比方说如果你写Android，你在xml中定义了一个<code>Button</code>，他的ID是<code>button_login</code>。
 如果是Java：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setContentView(R.layout.activity_words_detail);</span><br><span class="line">Button button = findViewById(R.Id.button_login);</span><br></pre></td></tr></table></figure>
@@ -455,7 +466,56 @@
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> kotlinx.android.synthetic.main.activity_kotlin_main.*</span><br><span class="line">...</span><br><span class="line">button_login.setText(<span class="string">"Kotlin Android Extensions 我不太喜欢"</span>);</span><br></pre></td></tr></table></figure>
 
 <p>这样确实比Java方便多了，不需要对每一个组件都定义再findViewById，可以就直接输入组件的id然后就能使用了。但是我们还是觉得不够啊，为什么我们不能就直接在代码中写入各个组件呢，于是，Anko来了。</p>
-<h1 id="导入Anko"><a href="#导入Anko" class="headerlink" title="导入Anko"></a>导入Anko</h1>
+<h1 id="导入Anko"><a href="#导入Anko" class="headerlink" title="导入Anko"></a>导入Anko</h1><p>Anko由几部分组成：</p>
+<ul>
+<li><em>Anko Commons</em>：一个轻量级的库，包含用于Layouts，Intent，Log等的帮助程序;</li>
+<li><em>Anko Layouts</em>：一种快速且类型安全的方式来编写动态Android布局;</li>
+<li><em>Anko SQLite</em>：Android SQLite的查询DSL和解析器集合;</li>
+<li><em>Anko Coroutines</em>：基于<a href="https://github.com/Kotlin/kotlinx.coroutines" target="_blank" rel="noopener">kotlinx.coroutines</a>库的实用程序。</li>
+</ul>
+<p>你可以在app的<code>build.gradle</code>中添加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">     <span class="comment">// Anko Layouts</span></span><br><span class="line">    implementation <span class="string">"org.jetbrains.anko:anko-sdk25:$anko_version"</span> <span class="comment">// sdk15, sdk19, sdk21, sdk23 are also available</span></span><br><span class="line">    implementation <span class="string">"org.jetbrains.anko:anko-appcompat-v7:$anko_version"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Coroutine listeners for Anko Layouts</span></span><br><span class="line">    implementation <span class="string">"org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"</span></span><br><span class="line">    implementation <span class="string">"org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个依赖可以直接导入所有的可用特性（包括Commons, Layouts, SQLite)。</p>
+<h1 id="使用Anko-layout"><a href="#使用Anko-layout" class="headerlink" title="使用Anko layout"></a>使用Anko layout</h1><h2 id="创建简单布局"><a href="#创建简单布局" class="headerlink" title="创建简单布局"></a>创建简单布局</h2><p>使用Anko创建布局很简单：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        verticalLayout &#123;</span><br><span class="line">            padding = dip(<span class="number">30</span>)</span><br><span class="line">            editText &#123;</span><br><span class="line">                hint = <span class="string">"Name"</span></span><br><span class="line">                textSize = <span class="number">24f</span></span><br><span class="line">            &#125;</span><br><span class="line">            editText &#123;</span><br><span class="line">                hint = <span class="string">"Password"</span></span><br><span class="line">                textSize = <span class="number">24f</span></span><br><span class="line">            &#125;</span><br><span class="line">            button(<span class="string">"登录"</span>) &#123;</span><br><span class="line">                textSize = <span class="number">26f</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你只需要在Activity中写入DSL代码就能使用它。</p>
+<h2 id="AnkoComponent"><a href="#AnkoComponent" class="headerlink" title="AnkoComponent"></a>AnkoComponent</h2><p>尽管我们现在可以直接在Activity中写入DSL代码，但是我们还是觉得把代码和布局文件放在一起不太好，希望把Activity和DSl代码放到两个不同的类里面，所以AnkoComponent就出来了。<br>代码如下</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        MainActivityUI().setContentView(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivityUI</span> : <span class="type">AnkoComponent</span>&lt;<span class="type">MainActivity</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">createView</span><span class="params">(ui: <span class="type">AnkoContext</span>&lt;<span class="type">MainActivity</span>&gt;)</span></span> = with(ui) &#123;</span><br><span class="line">        verticalLayout &#123;</span><br><span class="line">            padding = dip(<span class="number">30</span>)</span><br><span class="line">            editText &#123;</span><br><span class="line">                hint = <span class="string">"Name"</span></span><br><span class="line">                textSize = <span class="number">24f</span></span><br><span class="line">            &#125;</span><br><span class="line">            editText &#123;</span><br><span class="line">                hint = <span class="string">"Password"</span></span><br><span class="line">                textSize = <span class="number">24f</span></span><br><span class="line">            &#125;</span><br><span class="line">            button(<span class="string">"登录"</span>) &#123;</span><br><span class="line">                textSize = <span class="number">26f</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h2><p>在Anko如果你想设置Theme需要使用<code>themeable</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">verticalLayout &#123;</span><br><span class="line">    padding = dip(<span class="number">30</span>)</span><br><span class="line">    themedButton(<span class="string">"登陆"</span>, theme = R.style.Base_TextAppearance_AppCompat_Button)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LayoutParams"><a href="#LayoutParams" class="headerlink" title="LayoutParams"></a>LayoutParams</h2><p>在Anko中也可以使用<code>LayoutParams</code>。
+比方说我现在要显示一个button，下面显示一个图片。</p>
+<p>如果使用XML:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"Hello World!"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:gravity</span>=<span class="string">center</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:textSize</span>=<span class="string">"20sp"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">"@color/colorAccent"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>但是使用Anko:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">verticalLayout &#123;</span><br><span class="line">    textView (<span class="string">"Hello World!"</span>) &#123;</span><br><span class="line">        textSize = sp(<span class="number">12</span>).toFloat()</span><br><span class="line">    &#125;.lparams(height = wrapContent, width = wrapContent) &#123;</span><br><span class="line">        horizontalGravity = Gravity.CENTER_HORIZONTAL</span><br><span class="line">    &#125;</span><br><span class="line">    imageView &#123;</span><br><span class="line">        backgroundColor = Color.BLUE</span><br><span class="line">    &#125;.lparams(height = matchParent, width = matchParent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li><code>horizontalMargin</code> 同时设置 left 和 right margins</li>
+<li><code>verticalMargin</code> 同时设置 top 和 bottom</li>
+<li><code>margin</code> 同时设置4个方向的 margins</li>
+</ul>
+<h2 id="Listeners"><a href="#Listeners" class="headerlink" title="Listeners"></a>Listeners</h2><p>在Anko中设置<code>Listeners</code>非常简单，我下面以<code>Button</code>的<code>OnClick</code>举例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">button(<span class="string">"登录"</span>) &#123;</span><br><span class="line">    id = buttonLogin</span><br><span class="line">    textSize = <span class="number">26f</span></span><br><span class="line">    onClick &#123; toast(<span class="string">"OnClickLoginButton"</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用Fragment加载"><a href="#使用Fragment加载" class="headerlink" title="使用Fragment加载"></a>使用Fragment加载</h2><p>先创建一个<code>Activity</code>，把<code>Fragment</code>加进去</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnkoFragmentActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        linearLayout &#123;</span><br><span class="line">            id = R.id.fragment_id</span><br><span class="line">            supportFragmentManager.beginTransaction().replace(id, AnkoFragment.newInstance()).commit()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在<code>Fragment</code>的<code>onCreateView()</code>中加入DSL代码，然后返回<code>View</code>即可</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnkoFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(inflater: <span class="type">LayoutInflater</span>, container: <span class="type">ViewGroup</span>?, savedInstanceState: <span class="type">Bundle</span>?)</span></span>: View? &#123;</span><br><span class="line">        <span class="comment">// return inflater.inflate(R.layout.fragment_anko, container, false)</span></span><br><span class="line">        <span class="keyword">return</span> UI &#123;</span><br><span class="line">            verticalLayout &#123;</span><br><span class="line">                editText()</span><br><span class="line">                button(<span class="string">"OK"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.view</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">newInstance</span><span class="params">()</span></span>: AnkoFragment &#123;</span><br><span class="line">            <span class="keyword">return</span> AnkoFragment()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h2><p>AnkoLayout确实挺好的，因为他把UI代码集成到了代码文件中，不用再像以前一样写一个点击事件还得先<code>findViewBuId</code>，然后再<code>setOnClickListeners</code>。代码能非常简洁。</p>
+<p>但是AnkoLayout还是不够完美，感觉写起来还是没有XML那个顺手（可能是我写惯了XML，刚开始用Anko还不够熟练），而且Anko还有很多控件都不支持。<br>最重要的是，<strong>他没有实时预览</strong>！！！</p>
+<blockquote>
+<p>Android Studio里面有一个叫<code>Anko Support</code>的插件，可以实现anko的预览，但是他必须是先将项目构建了再预览的，不算是实时预览</p>
+</blockquote>
+
       
     </div>
 
@@ -478,9 +538,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
             <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
         </div>
       
@@ -687,7 +747,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kotlin-Anko入门"><span class="nav-number">1.</span> <span class="nav-text">Kotlin Anko入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简洁"><span class="nav-number">2.</span> <span class="nav-text">简洁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#导入Anko"><span class="nav-number">3.</span> <span class="nav-text">导入Anko</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kotlin-Anko入门"><span class="nav-number">1.</span> <span class="nav-text">Kotlin Anko入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简洁"><span class="nav-number">2.</span> <span class="nav-text">简洁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#导入Anko"><span class="nav-number">3.</span> <span class="nav-text">导入Anko</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Anko-layout"><span class="nav-number">4.</span> <span class="nav-text">使用Anko layout</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建简单布局"><span class="nav-number">4.1.</span> <span class="nav-text">创建简单布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AnkoComponent"><span class="nav-number">4.2.</span> <span class="nav-text">AnkoComponent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Theme"><span class="nav-number">4.3.</span> <span class="nav-text">Theme</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LayoutParams"><span class="nav-number">4.4.</span> <span class="nav-text">LayoutParams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Listeners"><span class="nav-number">4.5.</span> <span class="nav-text">Listeners</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Fragment加载"><span class="nav-number">4.6.</span> <span class="nav-text">使用Fragment加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不足"><span class="nav-number">4.7.</span> <span class="nav-text">不足</span></a></li></ol></li></ol></div>
             
 
           </div>
