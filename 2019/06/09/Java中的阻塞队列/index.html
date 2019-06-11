@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="littlecrogi的小站">
 <meta property="og:description" content="阻塞队列前言在谈论阻塞队列之前我们先看下操作系统多线程部分一个经典的例子——生产者和消费者问题：  现在有两个进程，一个是生产者一个是消费者，还有一个线程缓冲区。生产者主要作用就是向缓冲区中添加数据，消费者就是从缓冲区中取出数据。这个问题的核心就是如何确保生产者不会在缓冲区满了的时候还往其中添加元素，消费者不会在缓冲区空了的时候还要求取出数据。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-09T05:40:09.000Z">
+<meta property="og:updated_time" content="2019-06-11T14:09:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的阻塞队列">
 <meta name="twitter:description" content="阻塞队列前言在谈论阻塞队列之前我们先看下操作系统多线程部分一个经典的例子——生产者和消费者问题：  现在有两个进程，一个是生产者一个是消费者，还有一个线程缓冲区。生产者主要作用就是向缓冲区中添加数据，消费者就是从缓冲区中取出数据。这个问题的核心就是如何确保生产者不会在缓冲区满了的时候还往其中添加元素，消费者不会在缓冲区空了的时候还要求取出数据。">
@@ -367,12 +367,24 @@
                 
               
 
-              <time title="创建时间：2019-06-09 13:39:10 / 修改时间：13:40:09" itemprop="dateCreated datePublished" datetime="2019-06-09T13:39:10+08:00">2019-06-09</time>
+              <time title="创建时间：2019-06-09 13:39:10" itemprop="dateCreated datePublished" datetime="2019-06-09T13:39:10+08:00">2019-06-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-11 22:09:44" itemprop="dateModified" datetime="2019-06-11T22:09:44+08:00">2019-06-11</time>
               
             
           </span>
@@ -400,9 +412,33 @@
           
             
             
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/09/Java中的阻塞队列/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/09/Java中的阻塞队列/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
+          
+            <span id="/2019/06/09/Java中的阻塞队列/" class="leancloud_visitors" data-flag-title="Java中的阻塞队列">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
 
           
@@ -594,6 +630,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/06/11/Next配置备份/" rel="prev" title="Next配置备份">
+                Next配置备份 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -616,7 +656,6 @@
 
   
     <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDUzNC8yMTA2NQ=="></div>
     </div>
 
   
@@ -668,7 +707,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -691,7 +730,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -718,7 +759,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -936,22 +979,37 @@
   
 
   
-
-
   
-    <script>
-  window.livereOptions = {
-    refer: '2019/06/09/Java中的阻塞队列/'
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'nF5a5kxmNMeIjBsNRjTRf7XC-gzGzoHsz# your leancloud application appid',
+    appKey: 'WNksxvK6nRsDExWmFIMITafq# your leancloud application appkey',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn'
+  });
 </script>
+
+
+
 
   
 

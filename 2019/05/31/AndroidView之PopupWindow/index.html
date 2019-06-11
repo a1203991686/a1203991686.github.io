@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="littlecrogi的小站">
 <meta property="og:description" content="AndroidView之PopupWindow因为项目中有很多地方都需要使用PopupWindow，所以特别查了一下，做了一个简单的总结，过两天就加到项目中去。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-31T15:49:42.000Z">
+<meta property="og:updated_time" content="2019-06-11T14:06:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AndroidView之PopupWindow">
 <meta name="twitter:description" content="AndroidView之PopupWindow因为项目中有很多地方都需要使用PopupWindow，所以特别查了一下，做了一个简单的总结，过两天就加到项目中去。">
@@ -367,12 +367,24 @@
                 
               
 
-              <time title="创建时间：2019-05-31 19:21:15 / 修改时间：23:49:42" itemprop="dateCreated datePublished" datetime="2019-05-31T19:21:15+08:00">2019-05-31</time>
+              <time title="创建时间：2019-05-31 19:21:15" itemprop="dateCreated datePublished" datetime="2019-05-31T19:21:15+08:00">2019-05-31</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-11 22:06:41" itemprop="dateModified" datetime="2019-06-11T22:06:41+08:00">2019-06-11</time>
               
             
           </span>
@@ -400,9 +412,33 @@
           
             
             
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/05/31/AndroidView之PopupWindow/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/31/AndroidView之PopupWindow/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
+          
+            <span id="/2019/05/31/AndroidView之PopupWindow/" class="leancloud_visitors" data-flag-title="AndroidView之PopupWindow">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
 
           
@@ -531,7 +567,6 @@
 
   
     <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDUzNC8yMTA2NQ=="></div>
     </div>
 
   
@@ -583,7 +618,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -606,7 +641,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -633,7 +670,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -851,22 +890,37 @@
   
 
   
-
-
   
-    <script>
-  window.livereOptions = {
-    refer: '2019/05/31/AndroidView之PopupWindow/'
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'nF5a5kxmNMeIjBsNRjTRf7XC-gzGzoHsz# your leancloud application appid',
+    appKey: 'WNksxvK6nRsDExWmFIMITafq# your leancloud application appkey',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn'
+  });
 </script>
+
+
+
 
   
 
