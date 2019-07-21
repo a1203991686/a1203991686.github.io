@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="大家可以看下我使用幕布软件画的思维导图，如果大家想使用幕布可以通过我的邀请链接注册，可免费获得一个月高级会员https://mubu.com/inv/477598">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统2--进程的描述和控制">
+<meta property="og:url" content="https://a1203991686.github.io/posts/2e847144.html">
+<meta property="og:site_name" content="littlecrogi的小站">
+<meta property="og:description" content="大家可以看下我使用幕布软件画的思维导图，如果大家想使用幕布可以通过我的邀请链接注册，可免费获得一个月高级会员https://mubu.com/inv/477598">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190721220951823.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjAzOTkxNjg2,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190721221008969.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjAzOTkxNjg2,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019072122090332.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190721220913684.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjAzOTkxNjg2,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190721220924334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjAzOTkxNjg2,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-07-21T14:20:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统2--进程的描述和控制">
+<meta name="twitter:description" content="大家可以看下我使用幕布软件画的思维导图，如果大家想使用幕布可以通过我的邀请链接注册，可免费获得一个月高级会员https://mubu.com/inv/477598">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190721220951823.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjAzOTkxNjg2,size_16,color_FFFFFF,t_70">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://a1203991686.github.io/posts/2e847144">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>操作系统2--进程的描述和控制 | littlecrogi的小站</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">littlecrogi的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/2e847144.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="littlecorgi">
+      <meta itemprop="description" content="兴趣使然的个人小站，不定时分享Android等技术博客">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="littlecrogi的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作系统2--进程的描述和控制
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-21 22:12:36 / 修改时间：22:20:52" itemprop="dateCreated datePublished" datetime="2019-07-21T22:12:36+08:00">2019-07-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/posts/2e847144.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/2e847144.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/posts/2e847144.html" class="leancloud_visitors" data-flag-title="操作系统2--进程的描述和控制">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>大家可以看下我使用幕布软件画的<a href="https://mubu.com/doc/3Pf0zwzrgw" target="_blank" rel="noopener">思维导图</a>，如果大家想使用幕布可以通过我的邀请链接注册，可免费获得一个月高级会员<a href="https://mubu.com/inv/477598" target="_blank" rel="noopener">https://mubu.com/inv/477598</a></p>
+</blockquote>
+<a id="more"></a>
+<p>[TOC]</p>
+<h1 id="2-1-进程的描述"><a href="#2-1-进程的描述" class="headerlink" title="2.1 进程的描述"></a>2.1 进程的描述</h1><h2 id="2-1-1-进程的定义和特征"><a href="#2-1-1-进程的定义和特征" class="headerlink" title="2.1.1 进程的定义和特征"></a>2.1.1 进程的定义和特征</h2><h3 id="2-1-1-1-进程的定义"><a href="#2-1-1-1-进程的定义" class="headerlink" title="2.1.1.1 进程的定义"></a>2.1.1.1 进程的定义</h3><p>为了能够使程序并发执行，并且可以对并发执行的程序加以描述和控制，人们引入了“进程”的概念。<br>为了使参与并发执行的每个程序都能独立地运行，操作系统必须为之配置一个专门的数据结构，称为<strong>进程数据块（PCB）</strong>。他用来纪录进程的各种属性，描述进程的动态变化过程。主要包含有进程的描述信息（进程标识符，进程名，用户标识符，进程组关系等）、进程控制信息（当前状态，优先级，代码执行入口地址，保存的磁盘地址等等）、所拥有的资源和使用情况（虚拟地址空间的状态，文件打开列表等）和CPU现场信息等内容。PCB是系统感知进程存在的唯一标志。<br>所以一般情况下，我们把进程实体就简称为进程，创建进程，实质上是创建进程实体中的PCB；撤销进程，实质上是撤销进程的PCB。<br>对于进程的定义，比较典型的有：</p>
+<ol>
+<li>进程是程序的一次执行</li>
+<li>进程是一个程序及其数据在处理机上顺序执行时所发生的活动</li>
+<li>进程是具有独立功能的程序在一个数据集合上运行的过程，它是系统进行资源分配和调度的一个独立单位</li>
+</ol>
+<h3 id="2-1-1-2-进程的特征"><a href="#2-1-1-2-进程的特征" class="headerlink" title="2.1.1.2 进程的特征"></a>2.1.1.2 进程的特征</h3><ol>
+<li>结构性<br>进程实体是由程序段、数据段及进程控制快三部分组成。</li>
+<li>动态性<br>进程的实质是进程实体的执行过程，而且进程“由创建而产生，由调度而执行，由撤销而消亡”。</li>
+<li>并发性<br>多个进程实体同存于内存中，且能在一段时间内同时运行。</li>
+<li>独立性<br>进程实体是一个能独立运行、独立获得资源和独立接收调度的基本单位。</li>
+<li>异步性<br>进程是按异步方式运行的。</li>
+</ol>
+<h2 id="2-1-2-进程的基本状态及转换"><a href="#2-1-2-进程的基本状态及转换" class="headerlink" title="2.1.2 进程的基本状态及转换"></a>2.1.2 进程的基本状态及转换</h2><h3 id="2-1-2-1-进程的三种基本状态"><a href="#2-1-2-1-进程的三种基本状态" class="headerlink" title="2.1.2.1 进程的三种基本状态"></a>2.1.2.1 进程的三种基本状态</h3><p>进程主要分为三种基本状态：</p>
+<ol>
+<li>运行态<br>指进程已经获得了CPU，他正在CPU上执行。</li>
+<li>就绪态<br>指进程已经准备就绪，准备好了被CPU执行的状态。如果系统中有很多处于就绪态的进程，通常把他们按一定的策略排成一个队列，这个队列称为就绪队列。</li>
+<li>等待态<br>指正在运行的进程由于发生某事件（如I/O请求、申请缓冲区失败等问题）暂时无法继续执行时的状态。此时引起进程调度，OS把处理机分配给就绪中的进程，让受阻的进程处于阻塞状态。</li>
+</ol>
+<h3 id="2-1-2-2-三种状态的转换"><a href="#2-1-2-2-三种状态的转换" class="headerlink" title="2.1.2.2 三种状态的转换"></a>2.1.2.2 三种状态的转换</h3><p><img src="https://img-blog.csdnimg.cn/20190721220951823.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjAzOTkxNjg2,size_16,color_FFFFFF,t_70" alt="三种状态的转换"></p>
+<h3 id="2-1-2-3-创建状态和终止状态"><a href="#2-1-2-3-创建状态和终止状态" class="headerlink" title="2.1.2.3 创建状态和终止状态"></a>2.1.2.3 创建状态和终止状态</h3><p>为了满足进程控制块对数据及操作的完整性要求以及增强管理的灵活性，通常在系统中又为进程引入了两种常见的状态：创建状态和终止状态。<br><img src="https://img-blog.csdnimg.cn/20190721221008969.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjAzOTkxNjg2,size_16,color_FFFFFF,t_70" alt="五种状态转换"></p>
+<h2 id="2-1-3-进程管理中的数据结构"><a href="#2-1-3-进程管理中的数据结构" class="headerlink" title="2.1.3 进程管理中的数据结构"></a>2.1.3 进程管理中的数据结构</h2><p>在最开始我已经经提到了进程控制块PCB这个东西，现在我们就进一步来了解他。</p>
+<h3 id="2-1-3-1-进程控制块中的作用"><a href="#2-1-3-1-进程控制块中的作用" class="headerlink" title="2.1.3.1 进程控制块中的作用"></a>2.1.3.1 进程控制块中的作用</h3><p>PCB的作用主要就是使一个在多道程序环境下不能独立运行的程序称为一个能独立运行的基本单位，一个能与其它进程并发执行的进程。</p>
+<ol>
+<li>作为独立运行基本单位的标志。<br> 当一个程序配置了PCB之后，就表示他已是一个能在多道程序环境下独立运行的、合法的基本单位，也就具有取得OS服务的权利。当系统创建一个新的进程的时候，就为他创建了一个PCB，进程结束后收回PCB。</li>
+<li>能实现间断性运行方式。<br> 在多道程序运行环境下，由于存在时间片或者有等待I/O请求的情况，所以进程一般都是出于走走停停的状态，当一个进程被阻塞的时候，他应该有一种能保存当前运行状态的能力也就是保护现场机制，方便在此被调度执行时恢复阻塞前的状态。所以就需要在PCB里面提供一个数据结构来保存该进程被中断时的一些信息。</li>
+<li>提供进程管理所需要的信息。<br> 这个就不用多说吧。</li>
+<li>提供进程调度所需要的信息。<br> 只有处于就绪状态的进程才能被调度执行，而在PCB中就提供了进程处于何种状态的信息。</li>
+<li>实现与其它进程的同步与通信。</li>
+</ol>
+<h3 id="2-1-3-2-进程控制块中的信息"><a href="#2-1-3-2-进程控制块中的信息" class="headerlink" title="2.1.3.2 进程控制块中的信息"></a>2.1.3.2 进程控制块中的信息</h3><p>根据上面进程控制块作用的描述，对应的进程控制块中就需要包含以下信息。</p>
+<ol>
+<li>进程标识符<br> 进程标识符用于唯一地标识一个进程。一个进程通常具有两种标识符：<ol>
+<li>外部标识符<br> 为了方便用户（进程）对进程的访问，进程需要提供一个用于用户（进程）访问的标识符。</li>
+<li>内部标识符<br> 为了方便系统对进程的使用，在OS中又为进程设置了内部标识符。通常是一个进程的序号。</li>
+</ol>
+</li>
+<li>处理机状态<br> 处理机状态信息也称为处理机的上下文，主要是由处理机的各种寄存器中的内容组成的。这些寄存器信息包括通用寄存器、指令寄存器、程序状态字PSW和用户栈指针。</li>
+<li>进程调度信息<br> 在OS进行调度的时候，必须了解进程的状态及有关进程调度的信息，这些信息包括：进程状态、进程优先级、进程调度所需其他信息（与所采用的的调度算法有关）和事件（阻塞原因）。</li>
+<li>进程控制信息<br> 用于进程控制所必须的信息，包括：程序和数据的地址、进程同步和通信机制、资源清单和链接指针。</li>
+</ol>
+<h3 id="2-1-3-3-进程控制块的组织方式"><a href="#2-1-3-3-进程控制块的组织方式" class="headerlink" title="2.1.3.3 进程控制块的组织方式"></a>2.1.3.3 进程控制块的组织方式</h3><p>一个系统中有很多个PCB，为了对他们进行有效的管理，应该用适当的方式将这些PCB组织起来，常用的组织方式有三种</p>
+<ol>
+<li><p>线性方式<br>直接将所有PCB放在一张线性表中，优点是简单，开销小，但是每次查找起来很麻烦。<br><img src="https://img-blog.csdnimg.cn/2019072122090332.jpg" alt="linedPCB"></p>
+</li>
+<li><p>链接方式<br>把具有相同状态的PCB分别通过PCB中的链接字链接成一个队列。<br><img src="https://img-blog.csdnimg.cn/20190721220913684.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjAzOTkxNjg2,size_16,color_FFFFFF,t_70" alt="linkedPCB"></p>
+</li>
+<li><p>索引方式<br>根据所有进程状态的不同建立几张索引表，并把个索引表在内存的首地址纪录在内存的一些专用单元中。<br><img src="https://img-blog.csdnimg.cn/20190721220924334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjAzOTkxNjg2,size_16,color_FFFFFF,t_70" alt="indexPCB"></p>
+</li>
+</ol>
+<h1 id="2-2-进程控制"><a href="#2-2-进程控制" class="headerlink" title="2.2 进程控制"></a>2.2 进程控制</h1><h2 id="2-2-1-进程的层次结构"><a href="#2-2-1-进程的层次结构" class="headerlink" title="2.2.1 进程的层次结构"></a>2.2.1 进程的层次结构</h2><p>在OS中，允许一个进程创建另一个进程，通常把创建进程的进程称为父进程，被创建的进程称为子进程。然后子进程可以作为父进程继续去创建子进程，进而形成一个进程家族。</p>
+<h2 id="2-2-2-进程的创建"><a href="#2-2-2-进程的创建" class="headerlink" title="2.2.2 进程的创建"></a>2.2.2 进程的创建</h2><p>每当出现了创建新进程的请求后，OS便调用进程创建原语Creat按下述步骤创建新进程：</p>
+<ol>
+<li>申请空白PCB，为新进程申请获得唯一的数字标识符，并从PCB集合中索取一个空白PCB。</li>
+<li>为新进程分配其运行所需的资源，包括各种物理和逻辑资源。</li>
+<li>初始化进程控制块PCB。</li>
+<li>如果进程就绪队列能够接纳新进程，便将新进程插入就绪队列。</li>
+</ol>
+<h2 id="2-2-3-进程的终止"><a href="#2-2-3-进程的终止" class="headerlink" title="2.2.3 进程的终止"></a>2.2.3 进程的终止</h2><ol>
+<li>根据被终止进程的标识符，从PCB集合中检索出进程的PCB，从中读出该进程的状态。</li>
+<li>若被终止进程正处于执行状态，应立即终止该进程的执行，并置调度标志位真，用于指示该进程被终止后应重新进行调度。</li>
+<li>若该进程还有子孙进程，还应将其所有子孙进程也都予以终止，以防它们称为不可控的进程。</li>
+<li>将被终止进程所拥有的的全部资源或者归还给其父进程，或者归还给系统。</li>
+<li>将被终止进程（PCB）从所在队列（或链表）中移出，等待其他程序来搜集信息。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/62248b34.html" rel="next" title="操作系统1--操作系统概述">
+                <i class="fa fa-chevron-left"></i> 操作系统1--操作系统概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="littlecorgi">
+            
+              <p class="site-author-name" itemprop="name">littlecorgi</p>
+              <div class="site-description motion-element" itemprop="description">兴趣使然的个人小站，不定时分享Android等技术博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/a1203991686" title="GitHub &rarr; https://github.com/a1203991686" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:a1203991686@126.com" title="E-Mail &rarr; mailto:a1203991686@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-1-进程的描述"><span class="nav-number">1.</span> <span class="nav-text">2.1 进程的描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-1-进程的定义和特征"><span class="nav-number">1.1.</span> <span class="nav-text">2.1.1 进程的定义和特征</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-1-进程的定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.1.1.1 进程的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-2-进程的特征"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.1.1.2 进程的特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-2-进程的基本状态及转换"><span class="nav-number">1.2.</span> <span class="nav-text">2.1.2 进程的基本状态及转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-1-进程的三种基本状态"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1.2.1 进程的三种基本状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-2-三种状态的转换"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.1.2.2 三种状态的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-3-创建状态和终止状态"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.1.2.3 创建状态和终止状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-3-进程管理中的数据结构"><span class="nav-number">1.3.</span> <span class="nav-text">2.1.3 进程管理中的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-1-进程控制块中的作用"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1.3.1 进程控制块中的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-2-进程控制块中的信息"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.1.3.2 进程控制块中的信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-3-进程控制块的组织方式"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.1.3.3 进程控制块的组织方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-2-进程控制"><span class="nav-number">2.</span> <span class="nav-text">2.2 进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-1-进程的层次结构"><span class="nav-number">2.1.</span> <span class="nav-text">2.2.1 进程的层次结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-2-进程的创建"><span class="nav-number">2.2.</span> <span class="nav-text">2.2.2 进程的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-3-进程的终止"><span class="nav-number">2.3.</span> <span class="nav-text">2.2.3 进程的终止</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">littlecorgi</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'nF5a5kxmNMeIjBsNRjTRf7XC-gzGzoHsz',
+    appKey: 'WNksxvK6nRsDExWmFIMITafq',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
