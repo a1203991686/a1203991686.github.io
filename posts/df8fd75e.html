@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文大篇幅参考此篇文章，大家可以结合两篇文章看一下  1. Volley简介在很早以前，如果Android开发者想使用网络请求的话，必须自己通过HttpClient或者HttpURLConnection编写代码来访问。但是他两的用法还是很复杂的，如果不适当的封装的话，就会有很多多余代码甚至效率降低。所以当时出现了很多第三方网络通信框架，但是都是第三方的，而谷歌官方一直没有作为。最终在2013年，">
+<meta name="keywords" content="Android,kotlin,Volley,源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android网络请求2--解析Volley源码">
+<meta property="og:url" content="https://a1203991686.github.io/posts/df8fd75e.html">
+<meta property="og:site_name" content="littlecrogi的小站">
+<meta property="og:description" content="本文大篇幅参考此篇文章，大家可以结合两篇文章看一下  1. Volley简介在很早以前，如果Android开发者想使用网络请求的话，必须自己通过HttpClient或者HttpURLConnection编写代码来访问。但是他两的用法还是很复杂的，如果不适当的封装的话，就会有很多多余代码甚至效率降低。所以当时出现了很多第三方网络通信框架，但是都是第三方的，而谷歌官方一直没有作为。最终在2013年，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://blog-1255876459.cos.ap-chengdu.myqcloud.com/2019/07/23/VolleyRequestProcess.jpg">
+<meta property="og:updated_time" content="2019-07-26T09:28:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android网络请求2--解析Volley源码">
+<meta name="twitter:description" content="本文大篇幅参考此篇文章，大家可以结合两篇文章看一下  1. Volley简介在很早以前，如果Android开发者想使用网络请求的话，必须自己通过HttpClient或者HttpURLConnection编写代码来访问。但是他两的用法还是很复杂的，如果不适当的封装的话，就会有很多多余代码甚至效率降低。所以当时出现了很多第三方网络通信框架，但是都是第三方的，而谷歌官方一直没有作为。最终在2013年，">
+<meta name="twitter:image" content="https://blog-1255876459.cos.ap-chengdu.myqcloud.com/2019/07/23/VolleyRequestProcess.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://a1203991686.github.io/posts/df8fd75e">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Android网络请求2--解析Volley源码 | littlecrogi的小站</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">littlecrogi的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/df8fd75e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="littlecorgi">
+      <meta itemprop="description" content="兴趣使然的个人小站，不定时分享Android等技术博客">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="littlecrogi的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android网络请求2--解析Volley源码
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-25 17:24:14" itemprop="dateCreated datePublished" datetime="2019-07-25T17:24:14+08:00">2019-07-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-26 17:28:40" itemprop="dateModified" datetime="2019-07-26T17:28:40+08:00">2019-07-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/posts/df8fd75e.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/df8fd75e.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/posts/df8fd75e.html" class="leancloud_visitors" data-flag-title="Android网络请求2--解析Volley源码">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文大篇幅参考<a href="https://www.jianshu.com/p/d8500e377f3e" target="_blank" rel="noopener">此篇文章</a>，大家可以结合两篇文章看一下</p>
+</blockquote>
+<h1 id="1-Volley简介"><a href="#1-Volley简介" class="headerlink" title="1. Volley简介"></a>1. Volley简介</h1><p>在很早以前，如果Android开发者想使用网络请求的话，必须自己通过<code>HttpClient</code>或者<code>HttpURLConnection</code>编写代码来访问。但是他两的用法还是很复杂的，如果不适当的封装的话，就会有很多多余代码甚至效率降低。所以当时出现了很多第三方网络通信框架，但是都是第三方的，而谷歌官方一直没有作为。<br>最终在2013年，谷歌终于意识到了问题，于是他们推出了一个官方的全新的网络框架——Volley。Volley它又能非常简单的进行HTTP通信，又能轻松加载网络上的图片。他的设计目的就是应对数据量不大但是频发的网络操作，但是对于下载等需要大数据量的网络操作，他就不太适合。</p>
+<a id="more"></a>
+
+<h1 id="2-源码解析"><a href="#2-源码解析" class="headerlink" title="2. 源码解析"></a>2. 源码解析</h1><h2 id="2-1-从RequestQueue入手"><a href="#2-1-从RequestQueue入手" class="headerlink" title="2.1 从RequestQueue入手"></a>2.1 从RequestQueue入手</h2><p>如果你使用Volley的话，就会发现Volley不管进行什么操作，首先第一步就是先创建RequestQueue对象。<br>所以我们就可以认定他为Volley的入口。<br>创建RequestQueue的方法是<code>RequestQueue mQueue = Volley.newRequestQueue(getApplicationContext());</code>,我们就看看<code>newRequestQueue</code>干了什么：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RequestQueue <span class="title">newRequestQueue</span><span class="params">(Context context, BaseHttpStack stack)</span> </span>&#123;</span><br><span class="line">    BasicNetwork network;</span><br><span class="line">    <span class="keyword">if</span> (stack == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">9</span>) &#123;</span><br><span class="line">            network = <span class="keyword">new</span> BasicNetwork(<span class="keyword">new</span> HurlStack());</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 在Android 2.3之前，HttpURLConnection是不可靠的。</span></span><br><span class="line">            <span class="comment">// 请参阅：http://android-developers.blogspot.com/2011/09/androids-http-clients.html</span></span><br><span class="line">            <span class="comment">// 在将来的某个时候，我们将把minsdkversion移到Android 2.2之上，</span></span><br><span class="line">            <span class="comment">// 并可以删除这个回退（连同所有ApacheHTTP代码）。            </span></span><br><span class="line">            String userAgent = <span class="string">"volley/0"</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                String packageName = context.getPackageName();</span><br><span class="line">                PackageInfo info =</span><br><span class="line">             context.getPackageManager().getPackageInfo(packageName, <span class="comment">/* flags= */</span> <span class="number">0</span>);</span><br><span class="line">                    userAgent = packageName + <span class="string">"/"</span> + info.versionCode;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (NameNotFoundException e) &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        network =</span><br><span class="line">                <span class="keyword">new</span> BasicNetwork(</span><br><span class="line">                        <span class="keyword">new</span> HttpClientStack(AndroidHttpClient.newInstance(userAgent)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        network = <span class="keyword">new</span> BasicNetwork(stack);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newRequestQueue(context, network);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用方法后，先查看Android版本是否大于等于2.3，如果大于则调用基于<code>HttpURLConnection</code>的<code>HurlStack</code>，否则调用基于<code>HttpClient</code>的<code>HttpClientStack</code>。接下来创建<code>BasicNetwork</code>并调用<code>newRequestQueue(context, network)</code>方，我们再来看看这个<code>newRequestQueue()</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> RequestQueue <span class="title">newRequestQueue</span><span class="params">(Context context, Network network)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Context appContext = context.getApplicationContext();</span><br><span class="line">    <span class="comment">// 对缓存目录使用惰性供应商，以便可以在主线程上调用newRequestQueue（），</span></span><br><span class="line">    <span class="comment">// 而不会导致严格的模式冲突。    </span></span><br><span class="line">    DiskBasedCache.FileSupplier cacheSupplier =</span><br><span class="line">            <span class="keyword">new</span> DiskBasedCache.FileSupplier() &#123;</span><br><span class="line">                <span class="keyword">private</span> File cacheDir = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> File <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (cacheDir == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        cacheDir = <span class="keyword">new</span> File(appContext.getCacheDir(), DEFAULT_CACHE_DIR);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> cacheDir;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">    RequestQueue queue = <span class="keyword">new</span> RequestQueue(<span class="keyword">new</span> DiskBasedCache(cacheSupplier), network);</span><br><span class="line">    queue.start();</span><br><span class="line">    <span class="keyword">return</span> queue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这个方法主要为Volley创建了一个硬盘缓存<code>DiskBasedCache</code>，然后通过这个磁盘缓存和<code>Network</code>创建了一个<code>RequestQueue</code>对象，并调用了<code>start()</code>方法，接下来我们看下<code>start()</code>方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    stop(); </span><br><span class="line">    <span class="comment">// 确保当前运行的所有调度程序都已停止。</span></span><br><span class="line">    <span class="comment">// 创建缓存调度器并开始它。</span></span><br><span class="line">    mCacheDispatcher = <span class="keyword">new</span> CacheDispatcher(mCacheQueue, mNetworkQueue, mCache, mDelivery);</span><br><span class="line">    mCacheDispatcher.start();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建达到池大小的网络调度程序（和相应的线程）。</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mDispatchers.length; i++) &#123;</span><br><span class="line">        NetworkDispatcher networkDispatcher =</span><br><span class="line">                    <span class="keyword">new</span> NetworkDispatcher(mNetworkQueue, mNetwork, mCache, mDelivery);</span><br><span class="line">        mDispatchers[i] = networkDispatcher;</span><br><span class="line">        networkDispatcher.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>CacheDispatcher</code>是一个缓存调度线程，并调用了<code>start()</code>方法。在循环中调用<code>NetworkDispatcher</code>的<code>start()</code>方法。<code>NetworkDispatcher</code>是网络调度线程，默认情况下<code>mDispatchers.length</code>为4，默认开启了4个调度线程，外加1个缓存调度线程，总共5个线程。<br>接下来Volley会创建各种<code>Request</code>，并调用<code>RequestQueue</code>的<code>add()</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">Request&lt;T&gt; <span class="title">add</span><span class="params">(Request&lt;T&gt; request)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 将请求标记为属于此队列，并将其添加到当前请求集。</span></span><br><span class="line">    request.setRequestQueue(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">synchronized</span> (mCurrentRequests) &#123;</span><br><span class="line">        <span class="comment">//mCurrentRequests是一个HashSet</span></span><br><span class="line">        mCurrentRequests.add(request);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按添加的顺序处理请求。</span></span><br><span class="line">    request.setSequence(getSequenceNumber());</span><br><span class="line">    request.addMarker(<span class="string">"add-to-queue"</span>);</span><br><span class="line">    sendRequestEvent(request, RequestEvent.REQUEST_QUEUED);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果请求是不可执行的，跳过缓存队列，然后直接进入网络。</span></span><br><span class="line">    <span class="keyword">if</span> (!request.shouldCache()) &#123;</span><br><span class="line">        mNetworkQueue.add(request);</span><br><span class="line">        <span class="keyword">return</span> request;</span><br><span class="line">    &#125;</span><br><span class="line">    mCacheQueue.add(request);</span><br><span class="line">    <span class="keyword">return</span> request;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这块地方的代码就很简单了，就是根据<code>request</code>的<code>shouldCache()</code>方法来返回<code>request</code>的<code>mShouldCache</code>属性来判断是否可以缓存，默认是可以的。如果能缓存，将此请求加入<code>mCacheQueue</code>队列，不再重复请求；不可以的话就将请求加入网络请求队列<code>mNetworkQueue</code>。</p>
+<h2 id="2-2-CacheDispatcher缓存调度线程"><a href="#2-2-CacheDispatcher缓存调度线程" class="headerlink" title="2.2 CacheDispatcher缓存调度线程"></a>2.2 CacheDispatcher缓存调度线程</h2><p><code>RequestQueue</code>的<code>add()</code>方法并没有请求网络或者对缓存进行操作。当将请求添加到网络请求队 列或者缓存队列时，在后台的网络调度线程和缓存调度线程轮询各自的请求队列，若发现有请求任务则开 始执行。下面先看看缓存调度线程。</p>
+<p>首先先来看看<code>CacheDispatcher</code>的<code>add()</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (DEBUG) </span><br><span class="line">        VolleyLog.v(<span class="string">"start new dispatcher"</span>);</span><br><span class="line">    Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);</span><br><span class="line">    <span class="comment">// Process.THREAD_PRIORITY_BACKGROUND默认值为10</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 进行阻塞调用以初始化缓存。</span></span><br><span class="line">    mCache.initialize();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            processRequest();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="comment">// 可能被打断了，因为是时候要退出了。</span></span><br><span class="line">            <span class="keyword">if</span> (mQuit) &#123;</span><br><span class="line">                Thread.currentThread().interrupt();</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            VolleyLog.e(</span><br><span class="line">                    <span class="string">"Ignoring spurious interrupt of CacheDispatcher thread; "</span></span><br><span class="line">                            + <span class="string">"use quit() to terminate it"</span>);</span><br><span class="line">            <span class="comment">// 忽略cachedispatcher线程的假中断；</span></span><br><span class="line">            <span class="comment">// 使用quit（）终止它</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这块可以看出主要就是初始化了缓存队列，然后开了个死循环，一直调用<code>processRequest()</code>，我们来看看这个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processRequest</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// 从CacheQueue中取出一个可用的request</span></span><br><span class="line">    <span class="keyword">final</span> Request&lt;?&gt; request = mCacheQueue.take();</span><br><span class="line">    processRequest(request);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@VisibleForTesting</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processRequest</span><span class="params">(<span class="keyword">final</span> Request&lt;?&gt; request)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    request.addMarker(<span class="string">"cache-queue-take"</span>);</span><br><span class="line">    request.sendEvent(RequestQueue.RequestEvent.REQUEST_CACHE_LOOKUP_STARTED);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//request如果被取消了，就直接返回</span></span><br><span class="line">        <span class="keyword">if</span> (request.isCanceled()) &#123;</span><br><span class="line">            request.finish(<span class="string">"cache-discard-canceled"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Cache.Entry entry = mCache.get(request.getCacheKey());</span><br><span class="line">        <span class="comment">// 没有缓存就把request添加到NetworkQueue中</span></span><br><span class="line">        <span class="keyword">if</span> (entry == <span class="keyword">null</span>) &#123;</span><br><span class="line">            request.addMarker(<span class="string">"cache-miss"</span>);</span><br><span class="line">            <span class="comment">// 没有缓存，并且等待队列中也没有此request，那么就直接加入到NetworkQueue中</span></span><br><span class="line">            <span class="keyword">if</span> (!mWaitingRequestManager.maybeAddToWaitingRequests(request)) &#123;</span><br><span class="line">                mNetworkQueue.put(request);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果缓存过期了，也是一样把request添加到NetworkQueue中</span></span><br><span class="line">        <span class="keyword">if</span> (entry.isExpired()) &#123;</span><br><span class="line">            request.addMarker(<span class="string">"cache-hit-expired"</span>);</span><br><span class="line">            request.setCacheEntry(entry);</span><br><span class="line">            <span class="keyword">if</span> (!mWaitingRequestManager.maybeAddToWaitingRequests(request)) &#123;</span><br><span class="line">                mNetworkQueue.put(request);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 有缓存并且没有过期</span></span><br><span class="line">        request.addMarker(<span class="string">"cache-hit"</span>);</span><br><span class="line">        <span class="comment">// 根据缓存的内容解析</span></span><br><span class="line">        Response&lt;?&gt; response =</span><br><span class="line">                request.parseNetworkResponse(</span><br><span class="line">                        <span class="keyword">new</span> NetworkResponse(entry.data, entry.responseHeaders));</span><br><span class="line">        request.addMarker(<span class="string">"cache-hit-parsed"</span>);</span><br><span class="line">        <span class="comment">// 是否需要更新</span></span><br><span class="line">        <span class="keyword">if</span> (!entry.refreshNeeded()) &#123;</span><br><span class="line">            <span class="comment">// 不需要更新，直接将结果调度到主线程</span></span><br><span class="line">            mDelivery.postResponse(request, response);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            request.addMarker(<span class="string">"cache-hit-refresh-needed"</span>);</span><br><span class="line">            request.setCacheEntry(entry);</span><br><span class="line">            response.intermediate = <span class="keyword">true</span>;</span><br><span class="line">            <span class="comment">// 判断是否有相同缓存键的任务在执行</span></span><br><span class="line">            <span class="keyword">if</span> (!mWaitingRequestManager.maybeAddToWaitingRequests(request)) &#123;</span><br><span class="line">                <span class="comment">// 需要更新结果，先将结果调度到主线程，然后执行new runnable()&#123;&#125;</span></span><br><span class="line">                <span class="comment">// runnable中就是将request添加到NetworkQueue中，更新一下内容</span></span><br><span class="line">                mDelivery.postResponse(</span><br><span class="line">                        request,</span><br><span class="line">                        response,</span><br><span class="line">                        <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                            <span class="meta">@Override</span></span><br><span class="line">                            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                                <span class="keyword">try</span> &#123;</span><br><span class="line">                                    mNetworkQueue.put(request);</span><br><span class="line">                                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                                    <span class="comment">// Restore the interrupted status</span></span><br><span class="line">                                    Thread.currentThread().interrupt();</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// request已经加入到mWaitingRequests中</span></span><br><span class="line">                <span class="comment">// 直接把结果调度到主线程</span></span><br><span class="line">                mDelivery.postResponse(request, response);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        request.sendEvent(RequestQueue.RequestEvent.REQUEST_CACHE_LOOKUP_FINISHED);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在<code>processRequest</code>中可以看到有一个方法经常出现，那就是<code>mWaitingRequestManager.maybeAddToWaitingRequests(request)</code>，它的作用是判断当前这个<code>request</code>是否有存在相同缓存键的请求已经处于运行状态，如果有，那么就将这个<code>request</code>加入到一个等待队列中，等到相同缓存键的请求完成。</p>
+<p>总结一下<code>CacheDispatcher</code>主要步骤：</p>
+<ul>
+<li>从<code>CacheQueue</code>中循环取出<code>request</code>；</li>
+<li>如果缓存丢失，加入到<code>NetworkQueue</code>中；</li>
+<li>如果缓存过期，加入到<code>NetworkQueue</code>中；</li>
+<li>将缓存中的数据解析成<code>Response</code>对象；</li>
+<li>如果不需要更新，直接将结果回调到主线程，回调操作等介绍完<code>NetworkDispatcher</code>之后一起深入剖析；</li>
+<li>如果需要更新，先将结果回调到主线程，然后再将<code>request</code>加入到<code>NetworkQueue</code>中。</li>
+</ul>
+<p>下面来看看网络调度线程。</p>
+<h2 id="2-3-NetWorkDispatcher网络调度线程"><a href="#2-3-NetWorkDispatcher网络调度线程" class="headerlink" title="2.3 NetWorkDispatcher网络调度线程"></a>2.3 NetWorkDispatcher网络调度线程</h2><p>NetworkDispatcher的run方法代码如下所示:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            processRequest();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="comment">// 我们可能被打断了，因为是时候退出了。</span></span><br><span class="line">            <span class="keyword">if</span> (mQuit) &#123;</span><br><span class="line">                Thread.currentThread().interrupt();</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            VolleyLog.e(</span><br><span class="line">                    <span class="string">"Ignoring spurious interrupt of NetworkDispatcher thread; "</span></span><br><span class="line">                            + <span class="string">"use quit() to terminate it"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由此可以看出，<code>NetWordDispatch</code>和<code>CacheDispatch</code>非常类似。<br>他的<code>run()</code>方法和<code>CacheDispatch</code>的方法基本一样，这就不多做介绍，下面来看看他的<code>processRequest()</code>方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processRequest</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// 从NetworkQueue中取出request</span></span><br><span class="line">    Request&lt;?&gt; request = mQueue.take();</span><br><span class="line">    processRequest(request);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@VisibleForTesting</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processRequest</span><span class="params">(Request&lt;?&gt; request)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> startTimeMs = SystemClock.elapsedRealtime();</span><br><span class="line">    request.sendEvent(RequestQueue.RequestEvent.REQUEST_NETWORK_DISPATCH_STARTED);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        request.addMarker(<span class="string">"network-queue-take"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果request被取消了，那么就不执行此request</span></span><br><span class="line">        <span class="keyword">if</span> (request.isCanceled()) &#123;</span><br><span class="line">            request.finish(<span class="string">"network-discard-cancelled"</span>);</span><br><span class="line">            request.notifyListenerResponseNotUsable();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        addTrafficStatsTag(request);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 还记得这个mNetwork么，它就是Volley.newRequestQueue()方法里的BasicNetwork对象，一会我们来看看mNetwork.performRequest()方法是如何得到NetworkResponse的</span></span><br><span class="line">        NetworkResponse networkResponse = mNetwork.performRequest(request);</span><br><span class="line">        request.addMarker(<span class="string">"network-http-complete"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// notModified是服务端返回304，hasHadResponseDelivered()是request已经回调过了</span></span><br><span class="line">        <span class="keyword">if</span> (networkResponse.notModified &amp;&amp; request.hasHadResponseDelivered()) &#123;</span><br><span class="line">            request.finish(<span class="string">"not-modified"</span>);</span><br><span class="line">            request.notifyListenerResponseNotUsable();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将NetworkResponse解析成Response对象，在子线程中执行</span></span><br><span class="line">        Response&lt;?&gt; response = request.parseNetworkResponse(networkResponse);</span><br><span class="line">        request.addMarker(<span class="string">"network-parse-complete"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将request写入缓存</span></span><br><span class="line">        <span class="keyword">if</span> (request.shouldCache() &amp;&amp; response.cacheEntry != <span class="keyword">null</span>) &#123;</span><br><span class="line">            mCache.put(request.getCacheKey(), response.cacheEntry);</span><br><span class="line">            request.addMarker(<span class="string">"network-cache-written"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        request.markDelivered();</span><br><span class="line">        <span class="comment">// 回调结果至主线程</span></span><br><span class="line">        mDelivery.postResponse(request, response);</span><br><span class="line">        request.notifyListenerResponseReceived(response);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// 以下都是处理异常错误，然后也需要回调至主线程</span></span><br><span class="line">    <span class="keyword">catch</span> (VolleyError volleyError) &#123;</span><br><span class="line">        volleyError.setNetworkTimeMs(SystemClock.elapsedRealtime() - startTimeMs);</span><br><span class="line">        parseAndDeliverNetworkError(request, volleyError);</span><br><span class="line">        request.notifyListenerResponseNotUsable();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        VolleyLog.e(e, <span class="string">"Unhandled exception %s"</span>, e.toString());</span><br><span class="line">        VolleyError volleyError = <span class="keyword">new</span> VolleyError(e);</span><br><span class="line">        volleyError.setNetworkTimeMs(SystemClock.elapsedRealtime() - startTimeMs);</span><br><span class="line">        mDelivery.postError(request, volleyError);</span><br><span class="line">        request.notifyListenerResponseNotUsable();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        request.sendEvent(RequestQueue.RequestEvent.REQUEST_NETWORK_DISPATCH_FINISHED);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>NetworkDispatcher.processRequest()</code>方法可以发现，主要分为以下几步：</p>
+<ul>
+<li>通过<code>BasicNetwork.performRequest(request)</code>得到<code>NetworkResponse</code>对象；</li>
+<li>通过<code>request.parseNetworkResponse(networkResponse)</code>解析得到<code>Response</code>对象；</li>
+<li>通过<code>mDelivery</code>将成功结果或者失败结果回调到主线程。</li>
+</ul>
+<p>现在我们依次来分析这三步：</p>
+<ul>
+<li>请求网络，得到<code>NetworkResponse</code><br>  我们看看<code>BasicNetwork</code>的<code>performRequest()</code>方法：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> NetworkResponse <span class="title">performRequest</span><span class="params">(Request&lt;?&gt; request)</span> <span class="keyword">throws</span> VolleyError </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> requestStart = SystemClock.elapsedRealtime();</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        HttpResponse httpResponse = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">byte</span>[] responseContents = <span class="keyword">null</span>;</span><br><span class="line">        List&lt;Header&gt; responseHeaders = Collections.emptyList();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// Gather headers.</span></span><br><span class="line">            Map&lt;String, String&gt; additionalRequestHeaders =</span><br><span class="line">                    getCacheHeaders(request.getCacheEntry());</span><br><span class="line">            httpResponse = mBaseHttpStack.executeRequest(request, additionalRequestHeaders);</span><br><span class="line">            <span class="keyword">int</span> statusCode = httpResponse.getStatusCode();</span><br><span class="line"></span><br><span class="line">            responseHeaders = httpResponse.getHeaders();</span><br><span class="line">            <span class="comment">// Handle cache validation.</span></span><br><span class="line">            <span class="keyword">if</span> (statusCode == HttpURLConnection.HTTP_NOT_MODIFIED) &#123;</span><br><span class="line">                Entry entry = request.getCacheEntry();</span><br><span class="line">                <span class="keyword">if</span> (entry == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> NetworkResponse(</span><br><span class="line">                            HttpURLConnection.HTTP_NOT_MODIFIED,</span><br><span class="line">                            <span class="comment">/* data= */</span> <span class="keyword">null</span>,</span><br><span class="line">                            <span class="comment">/* notModified= */</span> <span class="keyword">true</span>,</span><br><span class="line">                            SystemClock.elapsedRealtime() - requestStart,</span><br><span class="line">                            responseHeaders);</span><br><span class="line">            &#125;</span><br><span class="line">                    …………省略</span><br></pre></td></tr></table></figure>
+
+<p>通过上面源码可以看出，<code>BasicNetwork</code>就是封装了一下<code>NetworkResponse</code>，并没有涉及到网络请求，我们继续深入到<code>BaseHttpStack.executeRequest(request, additionalRequestHeaders)</code>源码中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> HttpResponse <span class="title">executeRequest</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        Request&lt;?&gt; request, Map&lt;String, String&gt; additionalHeaders)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> IOException, AuthFailureError</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这时发现这个<code>BaseHttpStack</code>就是一个抽象类，而这个<code>executeRequest()</code>也就是一个抽象方法。我当时就卡在这了，调用了一个抽象类的抽象方法，这咋操作嘛。然后我就好好再看了一遍，找到<code>BasicNetwork</code>的构造函数中对<code>mBaseHttpStck</code>定义的地方，发现这个是构造函数传进来的，然后就想到了在调用<code>Volley.newRequestQueue()</code>时，是根据Android版本传入了不同的<code>Stack</code>，那我们就来看看<code>HurlStack.executeRequest()</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> HttpResponse <span class="title">executeRequest</span><span class="params">(Request&lt;?&gt; request, Map&lt;String, String&gt; additionalHeaders)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> IOException, AuthFailureError </span>&#123;</span><br><span class="line">    String url = request.getUrl();</span><br><span class="line">    HashMap&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    map.putAll(additionalHeaders);</span><br><span class="line">    <span class="comment">// request.getheaders（）优先于给定的附加（缓存）头.</span></span><br><span class="line">    map.putAll(request.getHeaders());</span><br><span class="line">    <span class="keyword">if</span> (mUrlRewriter != <span class="keyword">null</span>) &#123;</span><br><span class="line">        String rewritten = mUrlRewriter.rewriteUrl(url);</span><br><span class="line">        <span class="keyword">if</span> (rewritten == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"URL blocked by rewriter: "</span> + url);</span><br><span class="line">        &#125;</span><br><span class="line">        url = rewritten;</span><br><span class="line">    &#125;</span><br><span class="line">    URL parsedUrl = <span class="keyword">new</span> URL(url);</span><br><span class="line">    HttpURLConnection connection = openConnection(parsedUrl, request);</span><br><span class="line">    <span class="keyword">boolean</span> keepConnectionOpen = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (String headerName : map.keySet()) &#123;</span><br><span class="line">            connection.setRequestProperty(headerName, map.get(headerName));</span><br><span class="line">        &#125;</span><br><span class="line">        setConnectionParametersForRequest(connection, request);</span><br><span class="line">        <span class="comment">// 使用来自httpurlConnection的数据初始化httpResponse。</span></span><br><span class="line">        <span class="keyword">int</span> responseCode = connection.getResponseCode();</span><br><span class="line">        <span class="keyword">if</span> (responseCode == -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果无法检索响应代码，getResponseCode（）将返回-1。</span></span><br><span class="line">            <span class="comment">// 向呼叫者发出信号，说明连接有问题。</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Could not retrieve response code from HttpUrlConnection."</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!hasResponseBody(request.getMethod(), responseCode)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> HttpResponse(responseCode, convertHeaders(connection.getHeaderFields()));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 需要保持连接打开，直到调用方使用流。包装流，以便close（）将断开连接。</span></span><br><span class="line">        keepConnectionOpen = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HttpResponse(</span><br><span class="line">                responseCode,</span><br><span class="line">                convertHeaders(connection.getHeaderFields()),</span><br><span class="line">                connection.getContentLength(),</span><br><span class="line">                <span class="keyword">new</span> UrlConnectionInputStream(connection));</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!keepConnectionOpen) &#123;</span><br><span class="line">            connection.disconnect();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，主要就是借助了<code>HttpURLConnection</code>对象来请求网络，并根据不同的条件返回不同的<code>HttpResponse</code>对象。</p>
+<ul>
+<li>解析<code>NetworkResponse</code>, 得到<code>Response</code>：
+解析过程是定义在<code>Request</code>类中，但是他是一个抽象类，不同的Request都有自己的实现，我们现在就以JsonRequest为例看看：<br>然后发现他又是一个抽象类，那我们就看看<code>JsonRequest</code>其中一个实现类<code>JsonObjectRequest</code>的<code>parseNetworkResponse()</code>方法：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> Response&lt;JSONObject&gt; <span class="title">parseNetworkResponse</span><span class="params">(NetworkResponse response)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        String jsonString =</span><br><span class="line">                <span class="keyword">new</span> String(</span><br><span class="line">                        response.data,</span><br><span class="line">                        HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));</span><br><span class="line">        <span class="keyword">return</span> Response.success(</span><br><span class="line">                <span class="keyword">new</span> JSONObject(jsonString), HttpHeaderParser.parseCacheHeaders(response));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">        <span class="keyword">return</span> Response.error(<span class="keyword">new</span> ParseError(e));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (JSONException je) &#123;</span><br><span class="line">        <span class="keyword">return</span> Response.error(<span class="keyword">new</span> ParseError(je));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个就不用多说了，根据返回来的<code>response</code>建了一个<code>String</code>然后把这个<code>String</code>放到<code>Response</code>里面去然后再返回去。</p>
+<ul>
+<li>回调主线程<br>回调主要是通过<code>Delivery</code>的<code>postResponse()</code>方法实现的，我们来看看这个方法,找过去又找到了一个<code>ResponseDelivery</code>抽象类，然后又得找他的实现类，这时大家应该记得<code>RequestQueue()</code>的时候初始化了一个<code>Delivery</code>：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">RequestQueue</span><span class="params">(Cache cache, Network network, <span class="keyword">int</span> threadPoolSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(</span><br><span class="line">            cache,</span><br><span class="line">            network,</span><br><span class="line">            threadPoolSize,</span><br><span class="line">            <span class="keyword">new</span> ExecutorDelivery(<span class="keyword">new</span> Handler(Looper.getMainLooper())));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>他返回了一个<code>ExecutorDelivery</code>，我们来看看这个类，然后就惊喜的发现，我们终于找到我们需要的东西了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Creates a new response delivery interface.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> handler &#123;<span class="doctag">@link</span> Handler&#125; to post responses on</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorDelivery</span><span class="params">(<span class="keyword">final</span> Handler handler)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Make an Executor that just wraps the handler.</span></span><br><span class="line">    mResponsePoster =</span><br><span class="line">            <span class="keyword">new</span> Executor() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span> </span>&#123;</span><br><span class="line">                        handler.post(command);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>知道了它的初始化，我们再来看看它是如何实现回调的：</p>
+<p><code>Volley</code>中回调是通过<code>postResponse()</code>方法的 :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postResponse</span><span class="params">(Request&lt;?&gt; request, Response&lt;?&gt; response)</span> </span>&#123;</span><br><span class="line">    postResponse(request, response, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postResponse</span><span class="params">(Request&lt;?&gt; request, Response&lt;?&gt; response, Runnable runnable)</span> </span>&#123;</span><br><span class="line">    request.markDelivered();</span><br><span class="line">    request.addMarker(<span class="string">"post-response"</span>);</span><br><span class="line">    mResponsePoster.execute(<span class="keyword">new</span> ResponseDeliveryRunnable(request, response, runnable));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>postResponse()</code>最终会调用<code>mResponsePoster</code>对象的<code>execute()</code>方法，传入了一个<code>ResponseDeliveryRunnable</code>对象，它实现了<code>Runnable</code>接口，<code>execute()</code>方法会通过<code>Handler.post(runnable)</code>将<code>ResponseDeliveryRunnable</code>放入消息队列。最后我们来看看这个<code>ResponseDeliveryRunnable</code>的<code>run()</code>方法在主线程中做了什么操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If this request has canceled, finish it and don't deliver.</span></span><br><span class="line">    <span class="keyword">if</span> (mRequest.isCanceled()) &#123;</span><br><span class="line">        mRequest.finish(<span class="string">"canceled-at-delivery"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (mResponse.isSuccess()) &#123;</span><br><span class="line">        <span class="comment">// 执行成功的回调，在具体的Request实现类中，比如StringRequest就会调用listener.onResponse(string)回调</span></span><br><span class="line">        mRequest.deliverResponse(mResponse.result);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 执行失败的回调，在request中，直接回调了listener.onErrorResponse(error)</span></span><br><span class="line">        mRequest.deliverError(mResponse.error);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// intermediate默认为false，但是在CacheDispatcher的run()中，如果需要更新缓存，那么就会置为true</span></span><br><span class="line">    <span class="keyword">if</span> (mResponse.intermediate) &#123;</span><br><span class="line">        mRequest.addMarker(<span class="string">"intermediate-response"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        mRequest.finish(<span class="string">"done"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果传入了runnable不为空，那就就执行runnable.run()方法</span></span><br><span class="line">    <span class="comment">// 回忆下在CacheDispatcher的run()方法中，如果request有缓存，但是需要更新缓存的时候，mDelivery是不是调用的带runnable的方法</span></span><br><span class="line">    <span class="keyword">if</span> (mRunnable != <span class="keyword">null</span>) &#123;</span><br><span class="line">        mRunnable.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-请求流程图"><a href="#3-请求流程图" class="headerlink" title="3 请求流程图"></a>3 请求流程图</h1><p>最后附上Volley的请求流程图<br><img src="https://blog-1255876459.cos.ap-chengdu.myqcloud.com/2019/07/23/VolleyRequestProcess.jpg" alt="VolleyRequestProcess"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/kotlin/" rel="tag"># kotlin</a>
+          
+            <a href="/tags/Volley/" rel="tag"># Volley</a>
+          
+            <a href="/tags/源码/" rel="tag"># 源码</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/2e847144.html" rel="next" title="操作系统2--进程的描述和控制">
+                <i class="fa fa-chevron-left"></i> 操作系统2--进程的描述和控制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/151ac78a.html" rel="prev" title="Android网络请求3--解析OkHttp源码">
+                Android网络请求3--解析OkHttp源码 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="littlecorgi">
+            
+              <p class="site-author-name" itemprop="name">littlecorgi</p>
+              <div class="site-description motion-element" itemprop="description">兴趣使然的个人小站，不定时分享Android等技术博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/a1203991686" title="GitHub &rarr; https://github.com/a1203991686" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:a1203991686@126.com" title="E-Mail &rarr; mailto:a1203991686@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Volley简介"><span class="nav-number">1.</span> <span class="nav-text">1. Volley简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-源码解析"><span class="nav-number">2.</span> <span class="nav-text">2. 源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-从RequestQueue入手"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 从RequestQueue入手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-CacheDispatcher缓存调度线程"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 CacheDispatcher缓存调度线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-NetWorkDispatcher网络调度线程"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 NetWorkDispatcher网络调度线程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-请求流程图"><span class="nav-number">3.</span> <span class="nav-text">3 请求流程图</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">littlecorgi</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'nF5a5kxmNMeIjBsNRjTRf7XC-gzGzoHsz',
+    appKey: 'WNksxvK6nRsDExWmFIMITafq',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
