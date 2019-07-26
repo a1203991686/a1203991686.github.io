@@ -59,10 +59,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=7.1.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=7.1.1">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
@@ -113,7 +113,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://blog-1255876459.cos.ap-chengdu.myqcloud.com/2019/07/26/OkHttpSync.jpg">
 <meta property="og:image" content="https://blog-1255876459.cos.ap-chengdu.myqcloud.com/2019/07/26/OkHttpAsync.jpg">
-<meta property="og:updated_time" content="2019-07-26T09:26:42.000Z">
+<meta property="og:updated_time" content="2019-07-26T13:47:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android网络请求3--解析OkHttp源码">
 <meta name="twitter:description" content="1. OkHttp简介okhttp是一个第三方类库，用于android中请求网络。 这是一个开源项目,是安卓端最火热的轻量级框架,由移动支付Square公司贡献。用于替代因移除了HttpClient而导致没用的Volley。 目前更多人选择了Retrofit。">
@@ -423,7 +423,7 @@
                 
               
 
-              <time title="创建时间：2019-07-26 17:11:17 / 修改时间：17:26:42" itemprop="dateCreated datePublished" datetime="2019-07-26T17:11:17+08:00">2019-07-26</time>
+              <time title="创建时间：2019-07-26 17:11:17 / 修改时间：21:47:55" itemprop="dateCreated datePublished" datetime="2019-07-26T17:11:17+08:00">2019-07-26</time>
             
 
             
@@ -600,6 +600,16 @@
     
     
 
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
     
 
     
@@ -608,6 +618,41 @@
     
 
     
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/posts/151ac78a.html">Android网络请求3--解析OkHttp源码</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 littlecorgi 的个人博客">littlecorgi</a></p>
+  <p><span>发布时间:</span>2019年07月26日 - 17:11</p>
+  <p><span>最后更新:</span>2019年07月26日 - 21:47</p>
+  <p><span>原始链接:</span><a href="/posts/151ac78a.html" title="Android网络请求3--解析OkHttp源码">https://a1203991686.github.io/posts/151ac78a.html</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/151ac78a.html" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+    </div>
 
     <footer class="post-footer">
       
@@ -823,6 +868,28 @@
                   <a href="mailto:a1203991686@126.com" title="E-Mail &rarr; mailto:a1203991686@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                 </span>
               
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/a1203991686" title="CSDN &rarr; https://blog.csdn.net/a1203991686" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.littlecorgi.top:8080" title="blog &rarr; https://www.littlecorgi.top:8080" rel="noopener" target="_blank"><i class="fa fa-fw fa-blog"></i>blog</a>
+                </span>
+              
             </div>
           
 
@@ -913,6 +980,8 @@
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
 
@@ -948,7 +1017,7 @@
     
     
   
-  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script color="0,0,255" opacity="0.8" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
 
@@ -1393,3 +1462,9 @@
 
 </body>
 </html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
