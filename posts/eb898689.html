@@ -109,18 +109,18 @@
 
 
 
-  <meta name="description" content="Koltin入门Kotlin简介 科特林岛(Котлин)是一座俄罗斯的岛屿,位于圣彼得堡以西约30公里处,形状狭长,东西长度约14公里,南北宽度约2公里,面积有16平方公里,扼守俄国进入芬兰湾的水道。科特林岛上建有喀琅施塔得市,为圣彼得堡下辖的城市。  而我们虽说的kotlin，就是一门根据它命名的一种现代程序设计语言。Kotlin 是一个用于现代多平台应用的静态编程语言，由 JetBrains">
-<meta name="keywords" content="Kotlin,语言基础">
+  <meta name="description" content="在早期的时候，Android上还没有像Volley、OkHttp、Retrofit这些优秀的开源库，如果想要使用网络请求的话，就只能自己封装HttpClient和HttpURLConnection。现在我们就来看下Apache的这两个类。">
+<meta name="keywords" content="Android,kotlin,源码,Volley">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kotlin入门1:Kotlin和Java区别基础篇">
-<meta property="og:url" content="https://a1203991686.github.io/posts/343b01ae.html">
+<meta property="og:title" content="Android网络请求1--HttpClient与HttpURLConnection">
+<meta property="og:url" content="https://a1203991686.github.io/posts/eb898689.html">
 <meta property="og:site_name" content="littlecrogi的小站">
-<meta property="og:description" content="Koltin入门Kotlin简介 科特林岛(Котлин)是一座俄罗斯的岛屿,位于圣彼得堡以西约30公里处,形状狭长,东西长度约14公里,南北宽度约2公里,面积有16平方公里,扼守俄国进入芬兰湾的水道。科特林岛上建有喀琅施塔得市,为圣彼得堡下辖的城市。  而我们虽说的kotlin，就是一门根据它命名的一种现代程序设计语言。Kotlin 是一个用于现代多平台应用的静态编程语言，由 JetBrains">
+<meta property="og:description" content="在早期的时候，Android上还没有像Volley、OkHttp、Retrofit这些优秀的开源库，如果想要使用网络请求的话，就只能自己封装HttpClient和HttpURLConnection。现在我们就来看下Apache的这两个类。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-26T13:48:05.000Z">
+<meta property="og:updated_time" content="2019-08-06T11:53:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kotlin入门1:Kotlin和Java区别基础篇">
-<meta name="twitter:description" content="Koltin入门Kotlin简介 科特林岛(Котлин)是一座俄罗斯的岛屿,位于圣彼得堡以西约30公里处,形状狭长,东西长度约14公里,南北宽度约2公里,面积有16平方公里,扼守俄国进入芬兰湾的水道。科特林岛上建有喀琅施塔得市,为圣彼得堡下辖的城市。  而我们虽说的kotlin，就是一门根据它命名的一种现代程序设计语言。Kotlin 是一个用于现代多平台应用的静态编程语言，由 JetBrains">
+<meta name="twitter:title" content="Android网络请求1--HttpClient与HttpURLConnection">
+<meta name="twitter:description" content="在早期的时候，Android上还没有像Volley、OkHttp、Retrofit这些优秀的开源库，如果想要使用网络请求的话，就只能自己封装HttpClient和HttpURLConnection。现在我们就来看下Apache的这两个类。">
 
 
 
@@ -128,7 +128,7 @@
 
   
   
-  <link rel="canonical" href="https://a1203991686.github.io/posts/343b01ae">
+  <link rel="canonical" href="https://a1203991686.github.io/posts/eb898689">
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>Kotlin入门1:Kotlin和Java区别基础篇 | littlecrogi的小站</title>
+  <title>Android网络请求1--HttpClient与HttpURLConnection | littlecrogi的小站</title>
   
 
 
@@ -385,7 +385,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/343b01ae.html">
+    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/eb898689.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="littlecorgi">
@@ -402,7 +402,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kotlin入门1:Kotlin和Java区别基础篇
+          <h1 class="post-title" itemprop="name headline">Android网络请求1--HttpClient与HttpURLConnection
 
               
             
@@ -428,24 +428,12 @@
                 
               
 
-              <time title="创建时间：2019-06-02 17:16:17" itemprop="dateCreated datePublished" datetime="2019-06-02T17:16:17+08:00">2019-06-02</time>
+              <time title="创建时间：2019-08-06 19:51:46 / 修改时间：19:53:35" itemprop="dateCreated datePublished" datetime="2019-08-06T19:51:46+08:00">2019-08-06</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-26 21:48:05" itemprop="dateModified" datetime="2019-07-26T21:48:05+08:00">2019-07-26</time>
               
             
           </span>
@@ -462,7 +450,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kotlin/" itemprop="url" rel="index"><span itemprop="name">Kotlin</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
 
                 
                 
@@ -481,8 +469,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/posts/343b01ae.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/posts/343b01ae.html" itemprop="commentCount"></span>
+                <a href="/posts/eb898689.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/eb898689.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -490,7 +478,7 @@
 
           
           
-            <span id="/posts/343b01ae.html" class="leancloud_visitors" data-flag-title="Kotlin入门1:Kotlin和Java区别基础篇">
+            <span id="/posts/eb898689.html" class="leancloud_visitors" data-flag-title="Android网络请求1--HttpClient与HttpURLConnection">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -528,88 +516,39 @@
       
 
       
-        <h1 id="Koltin入门"><a href="#Koltin入门" class="headerlink" title="Koltin入门"></a>Koltin入门</h1><h1 id="Kotlin简介"><a href="#Kotlin简介" class="headerlink" title="Kotlin简介"></a>Kotlin简介</h1><blockquote>
-<p>科特林岛(Котлин)是一座俄罗斯的岛屿,位于圣彼得堡以西约30公里处,形状狭长,东西长度约14公里,南北宽度约2公里,面积有16平方公里,扼守俄国进入芬兰湾的水道。科特林岛上建有喀琅施塔得市,为圣彼得堡下辖的城市。</p>
-</blockquote>
-<p>而我们虽说的kotlin，就是一门根据它命名的一种现代程序设计语言。Kotlin 是一个用于现代多平台应用的静态编程语言，由 JetBrains 开发。Kotlin可以编译成Java字节码，也可以编译JavaScript，方便在没有JVM的设备上运行。Kotlin已正式成为Android官方支持开发语言。</p>
+        <p>在早期的时候，Android上还没有像<code>Volley</code>、<code>OkHttp</code>、<code>Retrofit</code>这些优秀的开源库，如果想要使用网络请求的话，就只能自己封装<code>HttpClient</code>和<code>HttpURLConnection</code>。现在我们就来看下<code>Apache</code>的这两个类。</p>
 <a id="more"></a>
-<hr>
-<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>kotlin和Java的最基本的区别就是kotlin中<strong>万物皆对象</strong>，Java中还存在着int、float等基本类型，但是在kotlin中，它把这些都定义成了对象，类似于Java中的封装类</p>
-<h2 id="变量的声明"><a href="#变量的声明" class="headerlink" title="变量的声明"></a>变量的声明</h2><p>上面说了，kotlin万物皆对象，所以所有的变量也都是对象。<br>在kotlin定义对象和Java有点小区别。<br>kotlin定义对象的格式为</p>
-<blockquote>
-<p> 声明类型 变量名： 变量类型</p>
-</blockquote>
-<p>其中：</p>
-<ul>
-<li>声明类型分为<code>val</code>和<code>var</code>。<code>val</code>是不可变类型，类似于const，定义时必须赋值，赋值后不能被修改。<code>var</code>是可变类型。</li>
-<li>变量名就是你定义的这个变量的名称。</li>
-<li>变量类型就是你这个变量对应的类的名字。</li>
-</ul>
-<h2 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h2><h3 id="省去变量类型"><a href="#省去变量类型" class="headerlink" title="省去变量类型"></a>省去变量类型</h3><p>kotlin里面类似c++的<code>auto</code>类型，对于基本类型，你可以不写变量类型，kotlin会自动帮你判断。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5</span></span><br><span class="line">println(a <span class="keyword">is</span> <span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = “<span class="number">123</span></span><br><span class="line">println(b <span class="keyword">is</span> String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1.3</span></span><br><span class="line">println(c <span class="keyword">is</span> <span class="built_in">Float</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> d = <span class="literal">true</span></span><br><span class="line">println(d <span class="keyword">is</span> <span class="built_in">Boolean</span>)</span><br></pre></td></tr></table></figure>
 
-<h3 id="is关键字"><a href="#is关键字" class="headerlink" title="is关键字"></a><code>is</code>关键字</h3><p><code>is</code>顾名思义，就是判断这个变量是不是这个类型的实例。<br>例子见上。</p>
-<h2 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h2><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>宽度(bit)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Byte</td>
-<td>8</td>
-</tr>
-<tr>
-<td>Short</td>
-<td>16</td>
-</tr>
-<tr>
-<td>Int</td>
-<td>32</td>
-</tr>
-<tr>
-<td>Long</td>
-<td>64</td>
-</tr>
-<tr>
-<td>Float</td>
-<td>32</td>
-</tr>
-<tr>
-<td>Double</td>
-<td>64</td>
-</tr>
-</tbody></table>
-<p>这些类型都继承自<code>Number</code>和<code>Comparable</code>类。</p>
-<h3 id="字面常量值"><a href="#字面常量值" class="headerlink" title="字面常量值"></a>字面常量值</h3><ul>
-<li>十进制：<code>123</code></li>
-<li>十六进制：<code>0x0f</code></li>
-<li>二进制：<code>0b0010</code></li>
-<li>Long类型：<code>123L</code></li>
-<li>double类型：123.4</li>
-<li>Float类型：<code>123.4f</code>或者<code>123.4F</code></li>
-</ul>
-<p>我们也可以使用下划线<code>_</code>来方便我们阅读</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1_000_000</span> <span class="comment">// 1000000</span></span><br><span class="line"><span class="number">0xFF_EC</span> <span class="comment">// 0xFFEC</span></span><br></pre></td></tr></table></figure>
+<h1 id="1-HttpClient"><a href="#1-HttpClient" class="headerlink" title="1. HttpClient"></a>1. HttpClient</h1><h2 id="2-1-导入HttpClient"><a href="#2-1-导入HttpClient" class="headerlink" title="2.1 导入HttpClient"></a>2.1 导入HttpClient</h2><p>由于从Android 6.0 开始，谷歌就将HttpClient从Android中删除了，所以若现在想使用他，还得导入依赖：<br>在项目的<code>build.gradle</code>的<code>Android</code>代码块下加入依赖，示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    useLibrary <span class="string">'org.apache.http.legacy'</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="显示转换"><a href="#显示转换" class="headerlink" title="显示转换"></a>显示转换</h3><p>kotlin中不可隐式转换<br>比如Java 中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">long</span> b = a;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-HttpClient的Get"><a href="#2-2-HttpClient的Get" class="headerlink" title="2.2 HttpClient的Get"></a>2.2 HttpClient的Get</h2><p>首先通过<code>DefaultHttpClient</code>来实例化一个<code>HttpClient</code>，并配置好参数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//创建HttpClient</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> HttpClient <span class="title">createHttpClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    HttpParams mDefaultHttpParams = <span class="keyword">new</span> BasicHttpParams();</span><br><span class="line">    <span class="comment">//设置连接超时</span></span><br><span class="line">    HttpConnectionParams.setConnectionTimeout(mDefaultHttpParams, <span class="number">15000</span>);</span><br><span class="line">    <span class="comment">//设置请求超时</span></span><br><span class="line">    HttpConnectionParams.setSoTimeout(mDefaultHttpParams, <span class="number">15000</span>);</span><br><span class="line">    HttpConnectionParams.setTcpNoDelay(mDefaultHttpParams, <span class="keyword">true</span>);</span><br><span class="line">    HttpProtocolParams.setVersion(mDefaultHttpParams, HttpVersion.HTTP_1_1);</span><br><span class="line">    HttpProtocolParams.setContentCharset(mDefaultHttpParams, HTTP.UTF_8);</span><br><span class="line">    <span class="comment">//持续握手</span></span><br><span class="line">    HttpProtocolParams.setUseExpectContinue(mDefaultHttpParams, <span class="keyword">true</span>);</span><br><span class="line">    HttpClient mHttpClient = <span class="keyword">new</span> DefaultHttpClient(mDefaultHttpParams);</span><br><span class="line">    <span class="keyword">return</span> mHttpClient;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>但是在kotlin中</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a : <span class="built_in">Int</span>? = <span class="number">2</span></span><br><span class="line"><span class="keyword">var</span> b : <span class="built_in">Long</span>? = a; <span class="comment">// error</span></span><br><span class="line"><span class="keyword">var</span> b : <span class="built_in">Long</span>? = a.toLong()</span><br></pre></td></tr></table></figure>
+<p>接着创建<code>HttpGet</code>和<code>HttpClient</code>，请求网络并得到<code>HttpResponse</code>，并对<code>HttpResponse</code>进行处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">useHttpClientGet</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">    HttpGet mHttpGet = <span class="keyword">new</span> HttpGet(url);</span><br><span class="line">    mHttpGet.addHeader(<span class="string">"Connection"</span>, <span class="string">"Keep-Alive"</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        HttpClient mHttpClient = createHttpClient();</span><br><span class="line">        HttpResponse mHttpResponse = mHttpClient.execute(mHttpGet);</span><br><span class="line">        HttpEntity mHttpEntity = mHttpResponse.getEntity();</span><br><span class="line">        <span class="keyword">int</span> code = mHttpResponse.getStatusLine().getStatusCode();</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != mHttpEntity) &#123;</span><br><span class="line">            InputStream mInputStream = mHttpEntity.getContent();</span><br><span class="line">            String respose = converStreamToString(mInputStream);</span><br><span class="line">            Log.i(<span class="string">"wangshu"</span>, <span class="string">"请求状态码:"</span> + code + <span class="string">"\n请求结果:\n"</span> + respose);</span><br><span class="line">            mInputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Char类型"><a href="#Char类型" class="headerlink" title="Char类型"></a>Char类型</h2><p>kotlin中的<code>Char</code>表示字符。但是和Java不同，他不能直接当ASCII码值。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">check</span><span class="params">(c : <span class="type">Char</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="number">1</span>) &#123; <span class="comment">// error </span></span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>converStreamToString()</code>方法将请求结果转换成<code>String</code>类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">converStreamToString</span><span class="params">(InputStream is)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line">    StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">    String line = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">while</span> ((line = reader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">        sb.append(line + <span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    String respose = sb.toString();</span><br><span class="line">    <span class="keyword">return</span> respose;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a>Boolean类型</h2><p>kotlin中的布尔类型用<code>Boolean</code>来表示，他有两个值<code>true</code>和<code>false</code>。用法和Java一样。</p>
-<h2 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h2><p>和Java一样，kotlin中的字符串也是<code>String</code>。但是kotlin中<code>String</code>是不可变的。所以kotlin中<code>String</code>必须是<code>val</code>类型。同时，<code>String</code>是<code>final</code>不可继承的。</p>
-<h2 id="Array类型"><a href="#Array类型" class="headerlink" title="Array类型"></a>Array类型</h2><p>kotlin中数组必须使用<code>Array</code>表示。<br>基本写法</p>
-<blockquote>
-<p>val array: Array&lt;类型&gt; = arrayOf(..)</p>
-</blockquote>
-<p>例如</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**整型Int的数组*/</span></span><br><span class="line"><span class="keyword">val</span> arrayOfInt: IntArray = intArrayOf(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>)</span><br><span class="line"><span class="comment">/**字符Char类型的数组*/</span></span><br><span class="line"><span class="keyword">val</span> arrayOfChar: CharArray = charArrayOf(<span class="string">'H'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>,<span class="string">'W'</span>,<span class="string">'o'</span>,<span class="string">'r'</span>,<span class="string">'l'</span>,<span class="string">'d'</span>)</span><br><span class="line"><span class="comment">/**字符串String数组*/</span></span><br><span class="line"><span class="keyword">val</span> arrayOfString: Array&lt;String&gt; = arrayOf(<span class="string">"Hello"</span>,<span class="string">"World"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="comment">//查看有多少个元素</span></span><br><span class="line">    println(arrayOfInt.size)</span><br><span class="line">    <span class="comment">//遍历数组</span></span><br><span class="line">    <span class="keyword">for</span> (char <span class="keyword">in</span> arrayOfChar)&#123;</span><br><span class="line">        println(char)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据所引获取数据,数组是从0开始的，现在获取第二个东京大学</span></span><br><span class="line">    println(arrayOfUniversity[<span class="number">1</span>])</span><br><span class="line">    <span class="comment">//重新给数组赋值，早稻田大学</span></span><br><span class="line">    arrayOfUniversity[<span class="number">1</span>] = University(<span class="string">"早稻田大学"</span>)</span><br><span class="line">    println(arrayOfUniversity[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将char连接成一个字符串,默认是自动由逗号","分割的，输出H, e, l, l, o, W, o, r, l, d</span></span><br><span class="line">    println(arrayOfChar.joinToString())</span><br><span class="line">    <span class="comment">//如果想要连成HelloWorld</span></span><br><span class="line">    println(arrayOfChar.joinToString (<span class="string">""</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//数组的切片,输出3，5,结尾需要arrayOfInt-1，不然会报索引越界异常</span></span><br><span class="line">    println(arrayOfInt.slice(<span class="number">1</span>..<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    println(arrayOfInt.size)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后开启线程访问:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        useHttpClientGet(<span class="string">"http://www.baidu.com"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-HttpClient的POST"><a href="#1-3-HttpClient的POST" class="headerlink" title="1.3 HttpClient的POST"></a>1.3 HttpClient的POST</h2><p>和GET差不多，只需要修改传递的参数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">useHttpClientPost</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">    HttpPost mHttpPost = <span class="keyword">new</span> HttpPost(url);</span><br><span class="line">    mHttpPost.addHeader(<span class="string">"Connection"</span>, <span class="string">"Keep-Alive"</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        HttpClient mHttpClient = createHttpClient();</span><br><span class="line">        List&lt;NameValuePair&gt; postParams = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">//要传递的参数</span></span><br><span class="line">        postParams.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"username"</span>, <span class="string">"moon"</span>));</span><br><span class="line">        postParams.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"password"</span>, <span class="string">"123"</span>));</span><br><span class="line">        mHttpPost.setEntity(<span class="keyword">new</span> UrlEncodedFormEntity(postParams));</span><br><span class="line">        HttpResponse mHttpResponse = mHttpClient.execute(mHttpPost);</span><br><span class="line">        HttpEntity mHttpEntity = mHttpResponse.getEntity();</span><br><span class="line">        <span class="keyword">int</span> code = mHttpResponse.getStatusLine().getStatusCode();</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != mHttpEntity) &#123;</span><br><span class="line">            InputStream mInputStream = mHttpEntity.getContent();</span><br><span class="line">            String respose = converStreamToString(mInputStream);</span><br><span class="line">            Log.i(<span class="string">"wangshu"</span>, <span class="string">"请求状态码:"</span> + code + <span class="string">"\n请求结果:\n"</span> + respose);</span><br><span class="line">            mInputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-HttpURLConnection"><a href="#2-HttpURLConnection" class="headerlink" title="2. HttpURLConnection"></a>2. HttpURLConnection</h1><p><code>HttpURLConnection</code>较<code>HttpClient</code>来说更轻量，而且他<code>API</code>也比<code>HttpClient</code>简单。特别是<code>Android 6.0</code>将<code>HttpClient</code>移除之后，现在只能使用<code>HttpURLConnection</code>。</p>
+<h2 id="2-1-HttpURLConnection的POST请求"><a href="#2-1-HttpURLConnection的POST请求" class="headerlink" title="2.1 HttpURLConnection的POST请求"></a>2.1 HttpURLConnection的POST请求</h2><p>首先我们创建一个UrlConnManager类，然后里面提供getHttpURLConnection()方法用于配置默认的参数并返回HttpURLConnection：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpURLConnection <span class="title">getHttpURLConnection</span><span class="params">(String url)</span></span>&#123;</span><br><span class="line">    HttpURLConnection mHttpURLConnection=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        URL mUrl=<span class="keyword">new</span> URL(url);</span><br><span class="line">        mHttpURLConnection=(HttpURLConnection)mUrl.openConnection();</span><br><span class="line">        <span class="comment">//设置链接超时时间</span></span><br><span class="line">        mHttpURLConnection.setConnectTimeout(<span class="number">15000</span>);</span><br><span class="line">        <span class="comment">//设置读取超时时间</span></span><br><span class="line">        mHttpURLConnection.setReadTimeout(<span class="number">15000</span>);</span><br><span class="line">        <span class="comment">//设置请求参数</span></span><br><span class="line">        mHttpURLConnection.setRequestMethod(<span class="string">"POST"</span>);</span><br><span class="line">        <span class="comment">//添加Header</span></span><br><span class="line">        mHttpURLConnection.setRequestProperty(<span class="string">"Connection"</span>,<span class="string">"Keep-Alive"</span>);</span><br><span class="line">        <span class="comment">//接收输入流</span></span><br><span class="line">        mHttpURLConnection.setDoInput(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//传递参数时需要开启</span></span><br><span class="line">        mHttpURLConnection.setDoOutput(<span class="keyword">true</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mHttpURLConnection ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为我们要发送POST请求，所以在UrlConnManager类中再写一个postParams()方法用来组织一下请求参数并将请求参数写入到输出流中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">postParams</span><span class="params">(OutputStream output,List&lt;NameValuePair&gt;paramsList)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">    StringBuilder mStringBuilder=<span class="keyword">new</span> StringBuilder();</span><br><span class="line">    <span class="keyword">for</span> (NameValuePair pair:paramsList)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!TextUtils.isEmpty(mStringBuilder))&#123;</span><br><span class="line">            mStringBuilder.append(<span class="string">"&amp;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        mStringBuilder.append(URLEncoder.encode(pair.getName(),<span class="string">"UTF-8"</span>));</span><br><span class="line">        mStringBuilder.append(<span class="string">"="</span>);</span><br><span class="line">        mStringBuilder.append(URLEncoder.encode(pair.getValue(),<span class="string">"UTF-8"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    BufferedWriter writer=<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(output,<span class="string">"UTF-8"</span>));</span><br><span class="line">    writer.write(mStringBuilder.toString());</span><br><span class="line">    writer.flush();</span><br><span class="line">    writer.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们添加请求参数，调用postParams()方法将请求的参数组织好传给HttpURLConnection的输出流，请求连接并处理返回的结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">useHttpUrlConnectionPost</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">    InputStream mInputStream = <span class="keyword">null</span>;</span><br><span class="line">    HttpURLConnection mHttpURLConnection = UrlConnManager.getHttpURLConnection(url);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        List&lt;NameValuePair&gt; postParams = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">//要传递的参数</span></span><br><span class="line">        postParams.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"username"</span>, <span class="string">"moon"</span>));</span><br><span class="line">        postParams.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"password"</span>, <span class="string">"123"</span>));</span><br><span class="line">        UrlConnManager.postParams(mHttpURLConnection.getOutputStream(), postParams);</span><br><span class="line">        mHttpURLConnection.connect();</span><br><span class="line">        mInputStream = mHttpURLConnection.getInputStream();</span><br><span class="line">        <span class="keyword">int</span> code = mHttpURLConnection.getResponseCode();</span><br><span class="line">        String respose = converStreamToString(mInputStream);</span><br><span class="line">        Log.i(<span class="string">"wangshu"</span>, <span class="string">"请求状态码:"</span> + code + <span class="string">"\n请求结果:\n"</span> + respose);</span><br><span class="line">        mInputStream.close();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后开启线程请求网络：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">useHttpUrlConnectionGetThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            useHttpUrlConnectionPost(<span class="string">"http://www.baidu.com"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -680,12 +619,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/posts/343b01ae.html">Kotlin入门1:Kotlin和Java区别基础篇</a></p>
+  <p><span>本文标题:</span><a href="/posts/eb898689.html">Android网络请求1--HttpClient与HttpURLConnection</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 littlecorgi 的个人博客">littlecorgi</a></p>
-  <p><span>发布时间:</span>2019年06月02日 - 17:16</p>
-  <p><span>最后更新:</span>2019年07月26日 - 21:48</p>
-  <p><span>原始链接:</span><a href="/posts/343b01ae.html" title="Kotlin入门1:Kotlin和Java区别基础篇">https://a1203991686.github.io/posts/343b01ae.html</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/343b01ae.html" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年08月06日 - 19:51</p>
+  <p><span>最后更新:</span>2019年08月06日 - 19:53</p>
+  <p><span>原始链接:</span><a href="/posts/eb898689.html" title="Android网络请求1--HttpClient与HttpURLConnection">https://a1203991686.github.io/posts/eb898689.html</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/eb898689.html" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -710,9 +649,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/语言基础/" rel="tag"># 语言基础</a>
+            <a href="/tags/kotlin/" rel="tag"># kotlin</a>
+          
+            <a href="/tags/源码/" rel="tag"># 源码</a>
+          
+            <a href="/tags/Volley/" rel="tag"># Volley</a>
           
         </div>
       
@@ -725,8 +668,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/62bb1dd7.html" rel="next" title="Kotlin Anko入门">
-                <i class="fa fa-chevron-left"></i> Kotlin Anko入门
+              <a href="/posts/d61d5542.html" rel="next" title="ijkPlayer编译-Android">
+                <i class="fa fa-chevron-left"></i> ijkPlayer编译-Android
               </a>
             
           </div>
@@ -734,10 +677,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/63ab42b7.html" rel="prev" title="Android多线程1--Java中的阻塞队列">
-                Android多线程1--Java中的阻塞队列 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -978,7 +917,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Koltin入门"><span class="nav-number">1.</span> <span class="nav-text">Koltin入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kotlin简介"><span class="nav-number">2.</span> <span class="nav-text">Kotlin简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量的声明"><span class="nav-number">3.1.</span> <span class="nav-text">变量的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型推断"><span class="nav-number">3.2.</span> <span class="nav-text">类型推断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#省去变量类型"><span class="nav-number">3.2.1.</span> <span class="nav-text">省去变量类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#is关键字"><span class="nav-number">3.2.2.</span> <span class="nav-text">is关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字类型"><span class="nav-number">3.3.</span> <span class="nav-text">数字类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字面常量值"><span class="nav-number">3.3.1.</span> <span class="nav-text">字面常量值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示转换"><span class="nav-number">3.3.2.</span> <span class="nav-text">显示转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Char类型"><span class="nav-number">3.4.</span> <span class="nav-text">Char类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean类型"><span class="nav-number">3.5.</span> <span class="nav-text">Boolean类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类型"><span class="nav-number">3.6.</span> <span class="nav-text">String类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array类型"><span class="nav-number">3.7.</span> <span class="nav-text">Array类型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-HttpClient"><span class="nav-number">1.</span> <span class="nav-text">1. HttpClient</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-导入HttpClient"><span class="nav-number">1.1.</span> <span class="nav-text">2.1 导入HttpClient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-HttpClient的Get"><span class="nav-number">1.2.</span> <span class="nav-text">2.2 HttpClient的Get</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-HttpClient的POST"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 HttpClient的POST</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-HttpURLConnection"><span class="nav-number">2.</span> <span class="nav-text">2. HttpURLConnection</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-HttpURLConnection的POST请求"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 HttpURLConnection的POST请求</span></a></li></ol></li></ol></div>
             
 
           </div>
