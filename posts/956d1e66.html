@@ -109,18 +109,27 @@
 
 
 
-  <meta name="description" content="Koltin入门Kotlin简介 科特林岛(Котлин)是一座俄罗斯的岛屿,位于圣彼得堡以西约30公里处,形状狭长,东西长度约14公里,南北宽度约2公里,面积有16平方公里,扼守俄国进入芬兰湾的水道。科特林岛上建有喀琅施塔得市,为圣彼得堡下辖的城市。  而我们虽说的kotlin，就是一门根据它命名的一种现代程序设计语言。Kotlin 是一个用于现代多平台应用的静态编程语言，由 JetBrains">
-<meta name="keywords" content="Kotlin,语言基础">
+  <meta name="description" content="本文样例都是使用的AndroidStudio，如果你使用Xcode或者vscode，代码都是一样的，只是IDE创建项目的方式以及运行按键位置不同而已。">
+<meta name="keywords" content="Android,Flutter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kotlin入门1:Kotlin和Java区别基础篇">
-<meta property="og:url" content="https://a1203991686.github.io/posts/343b01ae.html">
+<meta property="og:title" content="Flutter入门并开发天气预报APP(2)——Flutter计数器Demo">
+<meta property="og:url" content="https://a1203991686.github.io/posts/956d1e66.html">
 <meta property="og:site_name" content="littlecrogi的小站">
-<meta property="og:description" content="Koltin入门Kotlin简介 科特林岛(Котлин)是一座俄罗斯的岛屿,位于圣彼得堡以西约30公里处,形状狭长,东西长度约14公里,南北宽度约2公里,面积有16平方公里,扼守俄国进入芬兰湾的水道。科特林岛上建有喀琅施塔得市,为圣彼得堡下辖的城市。  而我们虽说的kotlin，就是一门根据它命名的一种现代程序设计语言。Kotlin 是一个用于现代多平台应用的静态编程语言，由 JetBrains">
+<meta property="og:description" content="本文样例都是使用的AndroidStudio，如果你使用Xcode或者vscode，代码都是一样的，只是IDE创建项目的方式以及运行按键位置不同而已。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-26T13:48:05.000Z">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-09/%E8%AE%A1%E6%95%B0%E5%99%A8%E8%BF%90%E8%A1%8CDemo.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-09/AndroidStudio%E7%95%8C%E9%9D%A2.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-09/%E6%8E%A7%E5%88%B6%E5%8C%BA.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-09/Run%E8%BF%90%E8%A1%8C%E5%8C%BA.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-09/Flutter%20Outline.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-09/Flutter%20Inspector.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-09/Flutter%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-09/%E6%9C%AA%E5%91%BD%E5%90%8D%20-2-.gif">
+<meta property="og:updated_time" content="2019-10-09T02:55:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kotlin入门1:Kotlin和Java区别基础篇">
-<meta name="twitter:description" content="Koltin入门Kotlin简介 科特林岛(Котлин)是一座俄罗斯的岛屿,位于圣彼得堡以西约30公里处,形状狭长,东西长度约14公里,南北宽度约2公里,面积有16平方公里,扼守俄国进入芬兰湾的水道。科特林岛上建有喀琅施塔得市,为圣彼得堡下辖的城市。  而我们虽说的kotlin，就是一门根据它命名的一种现代程序设计语言。Kotlin 是一个用于现代多平台应用的静态编程语言，由 JetBrains">
+<meta name="twitter:title" content="Flutter入门并开发天气预报APP(2)——Flutter计数器Demo">
+<meta name="twitter:description" content="本文样例都是使用的AndroidStudio，如果你使用Xcode或者vscode，代码都是一样的，只是IDE创建项目的方式以及运行按键位置不同而已。">
+<meta name="twitter:image" content="http://cdn.littlecorgi.top/mweb/2019-10-09/%E8%AE%A1%E6%95%B0%E5%99%A8%E8%BF%90%E8%A1%8CDemo.png">
 
 
 
@@ -128,7 +137,7 @@
 
   
   
-  <link rel="canonical" href="https://a1203991686.github.io/posts/343b01ae">
+  <link rel="canonical" href="https://a1203991686.github.io/posts/956d1e66">
 
 
 
@@ -138,7 +147,7 @@
   };
 </script>
 
-  <title>Kotlin入门1:Kotlin和Java区别基础篇 | littlecrogi的小站</title>
+  <title>Flutter入门并开发天气预报APP(2)——Flutter计数器Demo | littlecrogi的小站</title>
   
 
 
@@ -385,7 +394,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/343b01ae.html">
+    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/956d1e66.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="littlecorgi">
@@ -402,7 +411,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kotlin入门1:Kotlin和Java区别基础篇
+          <h1 class="post-title" itemprop="name headline">Flutter入门并开发天气预报APP(2)——Flutter计数器Demo
 
               
             
@@ -428,24 +437,12 @@
                 
               
 
-              <time title="创建时间：2019-06-02 17:16:17" itemprop="dateCreated datePublished" datetime="2019-06-02T17:16:17+08:00">2019-06-02</time>
+              <time title="创建时间：2019-10-09 10:53:57 / 修改时间：10:55:45" itemprop="dateCreated datePublished" datetime="2019-10-09T10:53:57+08:00">2019-10-09</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-26 21:48:05" itemprop="dateModified" datetime="2019-07-26T21:48:05+08:00">2019-07-26</time>
               
             
           </span>
@@ -462,7 +459,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kotlin/" itemprop="url" rel="index"><span itemprop="name">Kotlin</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
 
                 
                 
@@ -481,8 +478,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/posts/343b01ae.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/posts/343b01ae.html" itemprop="commentCount"></span>
+                <a href="/posts/956d1e66.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/956d1e66.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -490,7 +487,7 @@
 
           
           
-            <span id="/posts/343b01ae.html" class="leancloud_visitors" data-flag-title="Kotlin入门1:Kotlin和Java区别基础篇">
+            <span id="/posts/956d1e66.html" class="leancloud_visitors" data-flag-title="Flutter入门并开发天气预报APP(2)——Flutter计数器Demo">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -528,88 +525,80 @@
       
 
       
-        <h1 id="Koltin入门"><a href="#Koltin入门" class="headerlink" title="Koltin入门"></a>Koltin入门</h1><h1 id="Kotlin简介"><a href="#Kotlin简介" class="headerlink" title="Kotlin简介"></a>Kotlin简介</h1><blockquote>
-<p>科特林岛(Котлин)是一座俄罗斯的岛屿,位于圣彼得堡以西约30公里处,形状狭长,东西长度约14公里,南北宽度约2公里,面积有16平方公里,扼守俄国进入芬兰湾的水道。科特林岛上建有喀琅施塔得市,为圣彼得堡下辖的城市。</p>
-</blockquote>
-<p>而我们虽说的kotlin，就是一门根据它命名的一种现代程序设计语言。Kotlin 是一个用于现代多平台应用的静态编程语言，由 JetBrains 开发。Kotlin可以编译成Java字节码，也可以编译JavaScript，方便在没有JVM的设备上运行。Kotlin已正式成为Android官方支持开发语言。</p>
+        <p>本文样例都是使用的AndroidStudio，如果你使用Xcode或者vscode，代码都是一样的，只是IDE创建项目的方式以及运行按键位置不同而已。</p>
 <a id="more"></a>
-<hr>
-<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>kotlin和Java的最基本的区别就是kotlin中<strong>万物皆对象</strong>，Java中还存在着int、float等基本类型，但是在kotlin中，它把这些都定义成了对象，类似于Java中的封装类</p>
-<h2 id="变量的声明"><a href="#变量的声明" class="headerlink" title="变量的声明"></a>变量的声明</h2><p>上面说了，kotlin万物皆对象，所以所有的变量也都是对象。<br>在kotlin定义对象和Java有点小区别。<br>kotlin定义对象的格式为</p>
-<blockquote>
-<p> 声明类型 变量名： 变量类型</p>
-</blockquote>
-<p>其中：</p>
+
+<h1 id="创建Flutter项目"><a href="#创建Flutter项目" class="headerlink" title="创建Flutter项目"></a>创建Flutter项目</h1><p>AndroidStudio中选择<code>File</code>-&gt;<code>New</code>-&gt;<code>New Flutter Project</code>-&gt;<code>Flutter Application</code>-&gt;<code>NEXT</code>。接着填写你的项目名称等一系列信息后就创建成功了，我们就会看到AndroidStudio已经为我们创建好了一个Demo，接着连上你的手机或者打开你的虚拟机，按下AndroidStudio的运行键，不一会儿，你就会惊喜的发现你的手机上就有一个Flutter计数器Demo了。<br><img src="http://cdn.littlecorgi.top/mweb/2019-10-09/%E8%AE%A1%E6%95%B0%E5%99%A8%E8%BF%90%E8%A1%8CDemo.png" alt="计数器运行Demo"></p>
+<h1 id="介绍下AndroidStudio界面"><a href="#介绍下AndroidStudio界面" class="headerlink" title="介绍下AndroidStudio界面"></a>介绍下AndroidStudio界面</h1><p><img src="http://cdn.littlecorgi.top/mweb/2019-10-09/AndroidStudio%E7%95%8C%E9%9D%A2.png" alt="AndroidStudio界面"><br>这是我的AndroidStudio界面，接下来我分三个部分介绍下AndroidStudio的大致界面。</p>
+<h2 id="控制区"><a href="#控制区" class="headerlink" title="控制区"></a>控制区</h2><p><img src="http://cdn.littlecorgi.top/mweb/2019-10-09/%E6%8E%A7%E5%88%B6%E5%8C%BA.png" alt="控制区"></p>
+<p>一次介绍每一个按钮的功能。</p>
+<ol>
+<li>第一个是用来选择运行设备的，比方说我现在就选的是我的虚拟机，然后我按下运行后就可以将项目运行到我的虚拟机上而不会运行到连着我的电脑的手机上去；</li>
+<li>第二个是选择运行哪个Flutter module，如果你同一个项目里面有多个module，你就可以在此选择你想要运行的module；</li>
+<li>第三个灰色的选项框我也没弄懂她是干嘛的，我至今都没能选择过，一直都是灰的；</li>
+<li>绿色的三角形，大家熟知，运行键；</li>
+<li>红色的瓢虫，大家熟知，debug键；</li>
+<li>不知道干嘛的；</li>
+<li>FlutterAPP的性能监视器；</li>
+<li>闪电，这个是重点，也是Flutter的一大特性，热重载键，他能做到不需要重新编译代码就能将你修改的代码的效果在你的APP上显示出来；</li>
+<li>不知道干嘛的；</li>
+<li>红色的正方形，停止运行按钮。</li>
+</ol>
+<h2 id="Run运行区"><a href="#Run运行区" class="headerlink" title="Run运行区"></a>Run运行区</h2><p><img src="http://cdn.littlecorgi.top/mweb/2019-10-09/Run%E8%BF%90%E8%A1%8C%E5%8C%BA.png" alt="Run运行区"><br>就是Flutter的信息显示区，类似于AndroidStudio的Logcat，能显示FlutterAPP运行中的一些信息。</p>
+<h2 id="Flutter-Outline-Flutter-Inspector区"><a href="#Flutter-Outline-Flutter-Inspector区" class="headerlink" title="Flutter Outline/Flutter Inspector区"></a>Flutter Outline/Flutter Inspector区</h2><p><img src="http://cdn.littlecorgi.top/mweb/2019-10-09/Flutter%20Outline.png" alt="Flutter Outline"><br><img src="http://cdn.littlecorgi.top/mweb/2019-10-09/Flutter%20Inspector.png" alt="Flutter Inspecto"><br>用于显示当前界面的一些构建信息。</p>
+<h1 id="Flutter项目结构"><a href="#Flutter项目结构" class="headerlink" title="Flutter项目结构"></a>Flutter项目结构</h1><p><img src="http://cdn.littlecorgi.top/mweb/2019-10-09/Flutter%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png" alt="Flutter项目结构"></p>
+<p>我们挑一些重要的说一下：</p>
+<ol>
+<li>.idea文件夹，AndroidStudio识别项目的必备文件夹，不用管；</li>
+<li>Android文件夹，存放Flutter构建的Android项目的文件夹；</li>
+<li>ios文件夹，存放Flutter构建的iOS项目的文件夹；</li>
+<li>lib文件夹，存放Flutter项目和资源的文件夹；</li>
+<li>pubspec.yaml文件，存放Flutter项目相关信息，如项目名称、版本、依赖等等，类似于Android项目的build.gradle文件。</li>
+</ol>
+<h1 id="main-dart文件"><a href="#main-dart文件" class="headerlink" title="main.dart文件"></a>main.dart文件</h1><p>我们通过讲这个文件来给大家大致介绍下Flutter项目代码结构。</p>
+<p>全部源代码在此</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() =&gt; runApp(MyApp());</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">'Flutter Demo'</span>,</span><br><span class="line">      theme: ThemeData(</span><br><span class="line">        primarySwatch: Colors.blue,</span><br><span class="line">      ),</span><br><span class="line">      home: MyHomePage(title: <span class="string">'Flutter Demo Home Page'</span>),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHomePage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  MyHomePage(&#123;Key key, <span class="keyword">this</span>.title&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> title;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _MyHomePageState createState() =&gt; _MyHomePageState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MyHomePageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MyHomePage</span>&gt; </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> _counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> _incrementCounter() &#123;</span><br><span class="line">    setState(() &#123;</span><br><span class="line">      _counter++;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Scaffold(</span><br><span class="line">      appBar: AppBar(</span><br><span class="line">        title: Text(widget.title),</span><br><span class="line">      ),</span><br><span class="line">      body: Center(</span><br><span class="line">        child: Column(</span><br><span class="line">          mainAxisAlignment: MainAxisAlignment.center,</span><br><span class="line">          children: &lt;Widget&gt;[</span><br><span class="line">            Text(</span><br><span class="line">              <span class="string">'You have pushed the button this many times:'</span>,</span><br><span class="line">            ),</span><br><span class="line">            Text(</span><br><span class="line">              <span class="string">'<span class="subst">$_counter</span>'</span>,</span><br><span class="line">              style: Theme.of(context).textTheme.display1,</span><br><span class="line">            ),</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">      floatingActionButton: FloatingActionButton(</span><br><span class="line">        onPressed: _incrementCounter,</span><br><span class="line">        tooltip: <span class="string">'Increment'</span>,</span><br><span class="line">        child: Icon(Icons.add),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="import"><a href="#import" class="headerlink" title="import"></a>import</h2><p>首先我们看最开始的<code>import</code>区。</p>
+<p>这块相当于C/C++的<code>include</code>，反而不像java的<code>import</code>。我为什么这么说呢，你想一下，你写java程序的时候，你是需要哪个类就直接在代码中输入类名，然后IDE会自动给你显示有这个类的所有的包，然后让你选包去导入；而写dart是需要你先导入包，才能在代码中写这个包中的类，如果你没有先导入包而直接到下面写的话，IDE是不会提示你这个类可能会在哪个包中，而是直接报错，这点和C/C++比较类似。</p>
+<p>那我们为什么导入的是<code>flutter/material.dart</code>这个包呢？我在第一节里面说过，Flutter他内置了Android的Material Design风格和iOS的Cupertino风格的UI；所以这块就是导入Material Design风格UI文件，而如果你要使用Cupertino风格UI文件的话，把它改成Cupertino就行了。</p>
+<h2 id="main"><a href="#main" class="headerlink" title="main()"></a>main()</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() =&gt; runApp(MyApp());</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">'Flutter Demo'</span>,</span><br><span class="line">      theme: ThemeData(</span><br><span class="line">        primarySwatch: Colors.blue,</span><br><span class="line">      ), </span><br><span class="line">      home: MyHomePage(title: <span class="string">'Flutter Demo Home Page'</span>),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>声明类型分为<code>val</code>和<code>var</code>。<code>val</code>是不可变类型，类似于const，定义时必须赋值，赋值后不能被修改。<code>var</code>是可变类型。</li>
-<li>变量名就是你定义的这个变量的名称。</li>
-<li>变量类型就是你这个变量对应的类的名字。</li>
+<li><p>第一行，指明项目的入口就是<code>MyApp()</code>。固定格式，可以不用管。</p>
+</li>
+<li><p>第二行就定义了一个类<code>MyApp</code>继承自<code>StatelessWidget</code>，并重写了父类的<code>build()</code>方法。<code>Widget</code>可以看成Flutter中的页面，只要是Flutter中的页面，都必须继承自<code>Widget</code>。他有点类似于Android中的<code>View</code>，但是不同于<code>View</code>的是，Flutter中的<code>padding</code>、<code>align</code>、<code>layout</code>等居然也是<code>Widget</code>。</p>
+</li>
+<li><p>如果是<code>StatelessWidget</code>，则代表她是一个“状态少”的<code>Widget</code>，我的理解就是状态相当于<code>Widget</code>的一些数值，比方说页面要显示计数器的计数<code>count</code>，那么这个<code>count</code>就是一个状态，只要有状态就使用<code>StatefulWidget</code>。像<code>MyApp</code>它没有状态，于是就用<code>StatelessWidget</code>。</p>
+</li>
+<li><p>继承自<code>StatelessWidget</code>的类必须实现<code>build()</code>方法，相当于这个类是一个死页面，只需要展示固定的内容，也就是不需要状态，所以直接通过<code>build()</code>直接写入界面就行。</p>
+</li>
+<li><p><code>build()</code>方法必须同样返回一个<code>Widget</code>，所以我们就使用<code>MaterialApp</code>，其中我们给他的<code>title</code>、<code>theme</code>、<code>home</code>进行了赋值，同学们应该都能大致读懂啥意思，首页<code>home</code>则给了<code>MyHomePage</code>.</p>
+</li>
 </ul>
-<h2 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h2><h3 id="省去变量类型"><a href="#省去变量类型" class="headerlink" title="省去变量类型"></a>省去变量类型</h3><p>kotlin里面类似c++的<code>auto</code>类型，对于基本类型，你可以不写变量类型，kotlin会自动帮你判断。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5</span></span><br><span class="line">println(a <span class="keyword">is</span> <span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = “<span class="number">123</span></span><br><span class="line">println(b <span class="keyword">is</span> String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1.3</span></span><br><span class="line">println(c <span class="keyword">is</span> <span class="built_in">Float</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> d = <span class="literal">true</span></span><br><span class="line">println(d <span class="keyword">is</span> <span class="built_in">Boolean</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="MyHomePage"><a href="#MyHomePage" class="headerlink" title="MyHomePage"></a>MyHomePage</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHomePage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  MyHomePage(&#123;Key key, <span class="keyword">this</span>.title&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> title;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _MyHomePageState createState() =&gt; _MyHomePageState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MyHomePageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MyHomePage</span>&gt; </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> _counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> _incrementCounter() &#123;</span><br><span class="line">    setState(() &#123;</span><br><span class="line">      _counter++;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Scaffold(</span><br><span class="line">      appBar: AppBar(</span><br><span class="line">        title: Text(widget.title),</span><br><span class="line">      ),</span><br><span class="line">      body: Center(</span><br><span class="line">        child: Column(</span><br><span class="line">          mainAxisAlignment: MainAxisAlignment.center,</span><br><span class="line">          children: &lt;Widget&gt;[</span><br><span class="line">            Text(</span><br><span class="line">              <span class="string">'You have pushed the button this many times:'</span>,</span><br><span class="line">            ),</span><br><span class="line">            Text(</span><br><span class="line">              <span class="string">'<span class="subst">$_counter</span>'</span>,</span><br><span class="line">              style: Theme.of(context).textTheme.display1,</span><br><span class="line">            ),</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">      floatingActionButton: FloatingActionButton(</span><br><span class="line">        onPressed: _incrementCounter,</span><br><span class="line">        tooltip: <span class="string">'Increment'</span>,</span><br><span class="line">        child: Icon(Icons.add),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="is关键字"><a href="#is关键字" class="headerlink" title="is关键字"></a><code>is</code>关键字</h3><p><code>is</code>顾名思义，就是判断这个变量是不是这个类型的实例。<br>例子见上。</p>
-<h2 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h2><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>宽度(bit)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Byte</td>
-<td>8</td>
-</tr>
-<tr>
-<td>Short</td>
-<td>16</td>
-</tr>
-<tr>
-<td>Int</td>
-<td>32</td>
-</tr>
-<tr>
-<td>Long</td>
-<td>64</td>
-</tr>
-<tr>
-<td>Float</td>
-<td>32</td>
-</tr>
-<tr>
-<td>Double</td>
-<td>64</td>
-</tr>
-</tbody></table>
-<p>这些类型都继承自<code>Number</code>和<code>Comparable</code>类。</p>
-<h3 id="字面常量值"><a href="#字面常量值" class="headerlink" title="字面常量值"></a>字面常量值</h3><ul>
-<li>十进制：<code>123</code></li>
-<li>十六进制：<code>0x0f</code></li>
-<li>二进制：<code>0b0010</code></li>
-<li>Long类型：<code>123L</code></li>
-<li>double类型：123.4</li>
-<li>Float类型：<code>123.4f</code>或者<code>123.4F</code></li>
+<h3 id="MyHomePage-1"><a href="#MyHomePage-1" class="headerlink" title="MyHomePage"></a>MyHomePage</h3><p>我们在前面说过，如果一个页面有数据也就是“状态”的话，那么他就得继承自<code>StatefulWidget</code>。</p>
+<p>如果一个类继承自<code>StatefulWidget</code>，那这个类会很简单，只需要创建一个构造方法，构造方法中写入<code>key</code>以及该<code>Widget</code>需要的数据。然后重写<code>createState()</code>方法。</p>
+<h3 id="MyHomePageState"><a href="#MyHomePageState" class="headerlink" title="MyHomePageState"></a>MyHomePageState</h3><p>如果一个类继承自<code>StatefulWIdget</code>，那么一定会有一个他的<code>State</code>类并继承自<code>State&lt;该类&gt;</code>，就像<code>class _MyHomePageState extends State&lt;MyHomePage&gt;</code>一样。</p>
+<p>那我们来看看State类里面有些啥东西:</p>
+<p>首先先定义“状态”：由于我们这个APP主要的功能是用来计数，所以必须定义一个int型变量来计数：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> _counter = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>接着如果我们这个_counter变量变了，那就得通知flutter说状态变了，需要更新UI：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> _incrementCounter() &#123;</span><br><span class="line">  setState(() &#123;</span><br><span class="line">     _counter++;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>setState()</code>方法就是用来通知<code>Flutter</code>这个状态改变了，要去更新UI的。</p>
+<p>最后重写<code>build()</code>方法来写入界面：</p>
+<ul>
+<li><code>Scaffold</code>是一个组件，它提供了默认的导航栏、标题和包含主屏幕<code>widget</code>树（后同“组件树”或“部件树”）的<code>body</code>属性。</li>
+<li><code>body</code>后面是一个<code>Center</code>组件，它的作用是将它的子<code>Widget</code>定位到父<code>Widget</code>的中间。</li>
+<li><code>Center</code>后面是一个<code>Column</code>组件，这个组件类似于Android中的<code>LinearLayout</code>的<code>orientation: Vertical</code>，也就是垂直向的线性布局。同时Flutter也提供了<code>Row</code>这个水平向的线性布局。他们的子<code>Widget</code>是<code>children</code>属性，也就是可以写多个<code>Widget</code>。</li>
+<li><code>Column</code>里面是两个<code>Text</code>，这个没啥讲的</li>
+<li>接下来是一个<code>FloatingActionButton</code>，这就是一个浮动按钮，Android里面有这个控件，核心是他的<code>onPressed</code>属性，这个就相当于<code>onClick()</code>，用于处理点击事件。</li>
 </ul>
-<p>我们也可以使用下划线<code>_</code>来方便我们阅读</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1_000_000</span> <span class="comment">// 1000000</span></span><br><span class="line"><span class="number">0xFF_EC</span> <span class="comment">// 0xFFEC</span></span><br></pre></td></tr></table></figure>
+<h1 id="体验热重启"><a href="#体验热重启" class="headerlink" title="体验热重启"></a>体验热重启</h1><p>首先先让项目在虚拟机或者手机上运行着，然后我们把页面Text中的”You have pushed the button this many times:”改为”You have clicked the button this many times:”，然后按热重启键（macOS版AndroidStudio默认是commond+s键），接着你就能里面在虚拟机或者手机上看到修改之后的结果。<br><img src="http://cdn.littlecorgi.top/mweb/2019-10-09/%E6%9C%AA%E5%91%BD%E5%90%8D%20-2-.gif" alt="flutter热重启"></p>
 
-<h3 id="显示转换"><a href="#显示转换" class="headerlink" title="显示转换"></a>显示转换</h3><p>kotlin中不可隐式转换<br>比如Java 中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">long</span> b = a;</span><br></pre></td></tr></table></figure>
-
-<p>但是在kotlin中</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a : <span class="built_in">Int</span>? = <span class="number">2</span></span><br><span class="line"><span class="keyword">var</span> b : <span class="built_in">Long</span>? = a; <span class="comment">// error</span></span><br><span class="line"><span class="keyword">var</span> b : <span class="built_in">Long</span>? = a.toLong()</span><br></pre></td></tr></table></figure>
-
-<h2 id="Char类型"><a href="#Char类型" class="headerlink" title="Char类型"></a>Char类型</h2><p>kotlin中的<code>Char</code>表示字符。但是和Java不同，他不能直接当ASCII码值。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">check</span><span class="params">(c : <span class="type">Char</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="number">1</span>) &#123; <span class="comment">// error </span></span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a>Boolean类型</h2><p>kotlin中的布尔类型用<code>Boolean</code>来表示，他有两个值<code>true</code>和<code>false</code>。用法和Java一样。</p>
-<h2 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h2><p>和Java一样，kotlin中的字符串也是<code>String</code>。但是kotlin中<code>String</code>是不可变的。所以kotlin中<code>String</code>必须是<code>val</code>类型。同时，<code>String</code>是<code>final</code>不可继承的。</p>
-<h2 id="Array类型"><a href="#Array类型" class="headerlink" title="Array类型"></a>Array类型</h2><p>kotlin中数组必须使用<code>Array</code>表示。<br>基本写法</p>
-<blockquote>
-<p>val array: Array&lt;类型&gt; = arrayOf(..)</p>
-</blockquote>
-<p>例如</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**整型Int的数组*/</span></span><br><span class="line"><span class="keyword">val</span> arrayOfInt: IntArray = intArrayOf(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>)</span><br><span class="line"><span class="comment">/**字符Char类型的数组*/</span></span><br><span class="line"><span class="keyword">val</span> arrayOfChar: CharArray = charArrayOf(<span class="string">'H'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>,<span class="string">'W'</span>,<span class="string">'o'</span>,<span class="string">'r'</span>,<span class="string">'l'</span>,<span class="string">'d'</span>)</span><br><span class="line"><span class="comment">/**字符串String数组*/</span></span><br><span class="line"><span class="keyword">val</span> arrayOfString: Array&lt;String&gt; = arrayOf(<span class="string">"Hello"</span>,<span class="string">"World"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="comment">//查看有多少个元素</span></span><br><span class="line">    println(arrayOfInt.size)</span><br><span class="line">    <span class="comment">//遍历数组</span></span><br><span class="line">    <span class="keyword">for</span> (char <span class="keyword">in</span> arrayOfChar)&#123;</span><br><span class="line">        println(char)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据所引获取数据,数组是从0开始的，现在获取第二个东京大学</span></span><br><span class="line">    println(arrayOfUniversity[<span class="number">1</span>])</span><br><span class="line">    <span class="comment">//重新给数组赋值，早稻田大学</span></span><br><span class="line">    arrayOfUniversity[<span class="number">1</span>] = University(<span class="string">"早稻田大学"</span>)</span><br><span class="line">    println(arrayOfUniversity[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将char连接成一个字符串,默认是自动由逗号","分割的，输出H, e, l, l, o, W, o, r, l, d</span></span><br><span class="line">    println(arrayOfChar.joinToString())</span><br><span class="line">    <span class="comment">//如果想要连成HelloWorld</span></span><br><span class="line">    println(arrayOfChar.joinToString (<span class="string">""</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//数组的切片,输出3，5,结尾需要arrayOfInt-1，不然会报索引越界异常</span></span><br><span class="line">    println(arrayOfInt.slice(<span class="number">1</span>..<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    println(arrayOfInt.size)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -680,12 +669,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/posts/343b01ae.html">Kotlin入门1:Kotlin和Java区别基础篇</a></p>
+  <p><span>本文标题:</span><a href="/posts/956d1e66.html">Flutter入门并开发天气预报APP(2)——Flutter计数器Demo</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 littlecorgi 的个人博客">littlecorgi</a></p>
-  <p><span>发布时间:</span>2019年06月02日 - 17:16</p>
-  <p><span>最后更新:</span>2019年07月26日 - 21:48</p>
-  <p><span>原始链接:</span><a href="/posts/343b01ae.html" title="Kotlin入门1:Kotlin和Java区别基础篇">https://a1203991686.github.io/posts/343b01ae.html</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/343b01ae.html" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年10月09日 - 10:53</p>
+  <p><span>最后更新:</span>2019年10月09日 - 10:55</p>
+  <p><span>原始链接:</span><a href="/posts/956d1e66.html" title="Flutter入门并开发天气预报APP(2)——Flutter计数器Demo">https://a1203991686.github.io/posts/956d1e66.html</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/956d1e66.html" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -710,9 +699,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/语言基础/" rel="tag"># 语言基础</a>
+            <a href="/tags/Flutter/" rel="tag"># Flutter</a>
           
         </div>
       
@@ -725,8 +714,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/62bb1dd7.html" rel="next" title="Kotlin Anko入门">
-                <i class="fa fa-chevron-left"></i> Kotlin Anko入门
+              <a href="/posts/4bf666bf.html" rel="next" title="Flutter入门并开发天气预报APP(1)——Flutter安装">
+                <i class="fa fa-chevron-left"></i> Flutter入门并开发天气预报APP(1)——Flutter安装
               </a>
             
           </div>
@@ -734,10 +723,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/63ab42b7.html" rel="prev" title="Android多线程1--Java中的阻塞队列">
-                Android多线程1--Java中的阻塞队列 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -982,7 +967,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Koltin入门"><span class="nav-number">1.</span> <span class="nav-text">Koltin入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kotlin简介"><span class="nav-number">2.</span> <span class="nav-text">Kotlin简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量的声明"><span class="nav-number">3.1.</span> <span class="nav-text">变量的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型推断"><span class="nav-number">3.2.</span> <span class="nav-text">类型推断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#省去变量类型"><span class="nav-number">3.2.1.</span> <span class="nav-text">省去变量类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#is关键字"><span class="nav-number">3.2.2.</span> <span class="nav-text">is关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字类型"><span class="nav-number">3.3.</span> <span class="nav-text">数字类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字面常量值"><span class="nav-number">3.3.1.</span> <span class="nav-text">字面常量值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示转换"><span class="nav-number">3.3.2.</span> <span class="nav-text">显示转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Char类型"><span class="nav-number">3.4.</span> <span class="nav-text">Char类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean类型"><span class="nav-number">3.5.</span> <span class="nav-text">Boolean类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类型"><span class="nav-number">3.6.</span> <span class="nav-text">String类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array类型"><span class="nav-number">3.7.</span> <span class="nav-text">Array类型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建Flutter项目"><span class="nav-number">1.</span> <span class="nav-text">创建Flutter项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍下AndroidStudio界面"><span class="nav-number">2.</span> <span class="nav-text">介绍下AndroidStudio界面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#控制区"><span class="nav-number">2.1.</span> <span class="nav-text">控制区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run运行区"><span class="nav-number">2.2.</span> <span class="nav-text">Run运行区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flutter-Outline-Flutter-Inspector区"><span class="nav-number">2.3.</span> <span class="nav-text">Flutter Outline/Flutter Inspector区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flutter项目结构"><span class="nav-number">3.</span> <span class="nav-text">Flutter项目结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#main-dart文件"><span class="nav-number">4.</span> <span class="nav-text">main.dart文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#import"><span class="nav-number">4.1.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main"><span class="nav-number">4.2.</span> <span class="nav-text">main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyHomePage"><span class="nav-number">4.3.</span> <span class="nav-text">MyHomePage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MyHomePage-1"><span class="nav-number">4.3.1.</span> <span class="nav-text">MyHomePage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyHomePageState"><span class="nav-number">4.3.2.</span> <span class="nav-text">MyHomePageState</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#体验热重启"><span class="nav-number">5.</span> <span class="nav-text">体验热重启</span></a></li></ol></div>
             
 
           </div>
