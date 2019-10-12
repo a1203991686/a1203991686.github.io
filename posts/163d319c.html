@@ -109,18 +109,24 @@
 
 
 
-  <meta name="description" content="AndroidView之PopupWindow因为项目中有很多地方都需要使用PopupWindow，所以特别查了一下，做了一个简单的总结，过两天就加到项目中去。">
-<meta name="keywords" content="Android,View">
+  <meta name="description" content="相关Demo源码可见Github a1203991686/CoolWeather_Flutter">
+<meta name="keywords" content="Android,Flutter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AndroidView之PopupWindow">
-<meta property="og:url" content="https://a1203991686.github.io/posts/1900f7eb.html">
+<meta property="og:title" content="Flutter入门并开发天气预报APP(7)——Http网络请求、Json转Dart实体类及异步更新UI">
+<meta property="og:url" content="https://a1203991686.github.io/posts/163d319c.html">
 <meta property="og:site_name" content="littlecrogi的小站">
-<meta property="og:description" content="AndroidView之PopupWindow因为项目中有很多地方都需要使用PopupWindow，所以特别查了一下，做了一个简单的总结，过两天就加到项目中去。">
+<meta property="og:description" content="相关Demo源码可见Github a1203991686/CoolWeather_Flutter">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-26T13:47:57.000Z">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-12/json2dart.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-12/Province.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-12/dart%E5%AE%9E%E4%BD%93%E7%B1%BB.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-12/%E8%BD%ACdart.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-12/dart.g.dart.png">
+<meta property="og:updated_time" content="2019-10-12T14:14:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AndroidView之PopupWindow">
-<meta name="twitter:description" content="AndroidView之PopupWindow因为项目中有很多地方都需要使用PopupWindow，所以特别查了一下，做了一个简单的总结，过两天就加到项目中去。">
+<meta name="twitter:title" content="Flutter入门并开发天气预报APP(7)——Http网络请求、Json转Dart实体类及异步更新UI">
+<meta name="twitter:description" content="相关Demo源码可见Github a1203991686/CoolWeather_Flutter">
+<meta name="twitter:image" content="http://cdn.littlecorgi.top/mweb/2019-10-12/json2dart.png">
 
 
 
@@ -128,7 +134,7 @@
 
   
   
-  <link rel="canonical" href="https://a1203991686.github.io/posts/1900f7eb">
+  <link rel="canonical" href="https://a1203991686.github.io/posts/163d319c">
 
 
 
@@ -138,7 +144,7 @@
   };
 </script>
 
-  <title>AndroidView之PopupWindow | littlecrogi的小站</title>
+  <title>Flutter入门并开发天气预报APP(7)——Http网络请求、Json转Dart实体类及异步更新UI | littlecrogi的小站</title>
   
 
 
@@ -385,7 +391,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/1900f7eb.html">
+    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/163d319c.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="littlecorgi">
@@ -402,7 +408,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AndroidView之PopupWindow
+          <h1 class="post-title" itemprop="name headline">Flutter入门并开发天气预报APP(7)——Http网络请求、Json转Dart实体类及异步更新UI
 
               
             
@@ -428,24 +434,12 @@
                 
               
 
-              <time title="创建时间：2019-05-31 19:21:15" itemprop="dateCreated datePublished" datetime="2019-05-31T19:21:15+08:00">2019-05-31</time>
+              <time title="创建时间：2019-10-12 22:13:21 / 修改时间：22:14:14" itemprop="dateCreated datePublished" datetime="2019-10-12T22:13:21+08:00">2019-10-12</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-26 21:47:57" itemprop="dateModified" datetime="2019-07-26T21:47:57+08:00">2019-07-26</time>
               
             
           </span>
@@ -462,7 +456,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
 
                 
                 
@@ -481,8 +475,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/posts/1900f7eb.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/posts/1900f7eb.html" itemprop="commentCount"></span>
+                <a href="/posts/163d319c.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/163d319c.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -490,7 +484,7 @@
 
           
           
-            <span id="/posts/1900f7eb.html" class="leancloud_visitors" data-flag-title="AndroidView之PopupWindow">
+            <span id="/posts/163d319c.html" class="leancloud_visitors" data-flag-title="Flutter入门并开发天气预报APP(7)——Http网络请求、Json转Dart实体类及异步更新UI">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -528,44 +522,93 @@
       
 
       
-        <h1 id="AndroidView之PopupWindow"><a href="#AndroidView之PopupWindow" class="headerlink" title="AndroidView之PopupWindow"></a>AndroidView之PopupWindow</h1><p>因为项目中有很多地方都需要使用PopupWindow，所以特别查了一下，做了一个简单的总结，过两天就加到项目中去。</p>
+        <blockquote>
+<p>相关Demo源码可见Github <a href="https://github.com/a1203991686/CoolWeather_Flutter" target="_blank" rel="noopener">a1203991686/CoolWeather_Flutter</a></p>
+</blockquote>
 <a id="more"></a>
+<h1 id="Flutter-Http-网络请求"><a href="#Flutter-Http-网络请求" class="headerlink" title="Flutter Http 网络请求"></a>Flutter Http 网络请求</h1><p>Flutter网络请求可分为两种方式，一种为<code>Dart:IO</code>库中为我们提供的<code>HttpClient</code>，另一种为Dart第三方库<code>Dio</code>。</p>
+<h2 id="HttpClient"><a href="#HttpClient" class="headerlink" title="HttpClient"></a>HttpClient</h2><p><code>HttpClient</code>是<code>Dart:IO</code>库自带的一个类，通过他来实现网络请求最底层、也可以完完全全的自定义设置，但是相对于其他人封装好的第三方库来说显得复杂。</p>
+<h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>导入<code>Dart:IO</code>库：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'dart:io'</span>;</span><br></pre></td></tr></table></figure>
 
-<h1 id="PopupWindow"><a href="#PopupWindow" class="headerlink" title="PopupWindow"></a>PopupWindow</h1><p>PopupWindow，顾名思义，就是一个用来显示弹窗的组件。</p>
-<h1 id="创建步骤"><a href="#创建步骤" class="headerlink" title="创建步骤"></a>创建步骤</h1><ol>
-<li>创建PopupWindow实例</li>
-<li>设置一些基本参数</li>
-<li>显示PopupWindow<h1 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h1></li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PopupWindow window = <span class="keyword">new</span> PopupWindow(View contentView, <span class="keyword">int</span> width, <span class="keyword">int</span> height, <span class="keyword">boolean</span> focusable);</span><br></pre></td></tr></table></figure>
+<h3 id="创建一个HttpClient"><a href="#创建一个HttpClient" class="headerlink" title="创建一个HttpClient:"></a>创建一个HttpClient:</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = <span class="keyword">new</span> HttpClient();</span><br></pre></td></tr></table></figure>
 
-<p>这个方法有四个参数，第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点。</p>
-<p>示例代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">View contentView = LayoutInflater.from(MainActivity.<span class="keyword">this</span>).inflate(R.layout.popuplayout, <span class="keyword">null</span>);</span><br><span class="line">PopupWindwo window = PopupWindow (contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="创建一个Uri"><a href="#创建一个Uri" class="headerlink" title="创建一个Uri"></a>创建一个Uri</h3><p>如果你是<code>Http</code>请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> uri = <span class="keyword">new</span> Uri.http(</span><br><span class="line">    host,</span><br><span class="line">    queryParameters: &#123;</span><br><span class="line">        <span class="string">"xx"</span>:<span class="string">"xx"</span>,</span><br><span class="line">        <span class="string">"yy"</span>:<span class="string">"dd"</span></span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
-<h1 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h1><ul>
-<li>window.setBackgroundDrawable(Drawable background); 设置PopupWindow的背景</li>
-<li>window.setOutsideTouchable(boolean touchable); 设置PopupWindow是否能响应外部点击事件</li>
-<li>window.setTouchable(boolean touchable); 设置PopupWindow是否能响应点击事件<br>只有同时设置PopupWindow的背景和可以响应外部点击事件，它才能“真正”响应外部点击事件。</li>
-</ul>
-<h1 id="显示PopupWindow"><a href="#显示PopupWindow" class="headerlink" title="显示PopupWindow"></a>显示PopupWindow</h1><ul>
-<li>window.showAtLocation(View parent, int gravity, int x, int y); 第一个参数是PopupWindow的父View，第二个参数是PopupWindow相对父View的位置，第三和第四个参数分别是PopupWindow相对父View的x、y偏移</li>
-<li>window.showAsDropDown(View anchor, int xoff, int yoff, int gravity); 第一个参数是PopupWindow的锚点，第二和第三个参数分别是PopupWindow相对锚点的x、y偏移</li>
-</ul>
-<h1 id="为PopupWindow添加动画"><a href="#为PopupWindow添加动画" class="headerlink" title="为PopupWindow添加动画"></a>为PopupWindow添加动画</h1><ul>
-<li>进入时动画：(context_menu_enter.xml)</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;set xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span><br><span class="line">    &lt;translate</span><br><span class="line">        android:duration=<span class="string">"@android:integer/config_shortAnimTime"</span></span><br><span class="line">        android:fromXDelta=<span class="string">"0"</span></span><br><span class="line">        android:fromYDelta=<span class="string">"100%p"</span></span><br><span class="line">        android:interpolator=<span class="string">"@android:anim/accelerate_decelerate_interpolator"</span></span><br><span class="line">        android:toXDelta=<span class="string">"0"</span></span><br><span class="line">        android:toYDelta=<span class="string">"0"</span>/&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure>
+<p>如果你是<code>Https</code>请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> uri = <span class="keyword">new</span> Uri.https(</span><br><span class="line">    host,</span><br><span class="line">    queryParameters: &#123;</span><br><span class="line">        <span class="string">"xx"</span>:<span class="string">"xx"</span>,</span><br><span class="line">        <span class="string">"yy"</span>:<span class="string">"dd"</span></span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据uri获取返回数据"><a href="#根据uri获取返回数据" class="headerlink" title="根据uri获取返回数据"></a>根据uri获取返回数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HttpClientRequest request = await httpClient.getUrl(uri);</span><br><span class="line">HttpClientResponse response = await request.close();</span><br></pre></td></tr></table></figure>
+
+<h3 id="读取内容"><a href="#读取内容" class="headerlink" title="读取内容"></a>读取内容</h3><p>进行这一步得导入<code>dart:convert</code>库：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'dart:convert'</span>;</span><br><span class="line"></span><br><span class="line">... <span class="comment">//省略中间代码 </span></span><br><span class="line"></span><br><span class="line">String responseBody = await response.transform(Utf8Decoder()).join();</span><br><span class="line"></span><br><span class="line">print(respinseBody)</span><br></pre></td></tr></table></figure>
+
+<h3 id="最后关闭Client"><a href="#最后关闭Client" class="headerlink" title="最后关闭Client"></a>最后关闭Client</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpClient.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Dio"><a href="#Dio" class="headerlink" title="Dio"></a>Dio</h2><p><code>Dio</code>是Dart社区上别人上传的第三方库，他封装了<code>HttpClient</code>，相较来说更为简单、方便。</p>
+<h3 id="引入-1"><a href="#引入-1" class="headerlink" title="引入"></a>引入</h3><p>在项目的<code>pubspec.yaml</code>文件的<code>dependencies</code>中导入<code>Dio</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies:</span><br><span class="line">  dio: </span><br><span class="line">  <span class="comment">// 如果冒号后面不带具体版本信息则表示自动下载最新版</span></span><br></pre></td></tr></table></figure>
+
+<p>接着在需要使用的代码文件里面，<code>import</code>导入他：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:dio/dio.dart'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>接着我们就可以使用<code>Dio</code>了。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>首先得创建一个<code>Dio</code>对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Dio dio =  Dio();</span><br></pre></td></tr></table></figure>
+
+<p>发起<code>GET</code>请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Response response;</span><br><span class="line">response=await dio.get(uri)</span><br><span class="line">print(response.data.toString());</span><br></pre></td></tr></table></figure>
+
+<p>发起<code>POST</code>请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response=await dio.post(uri);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Json转Dart"><a href="#Json转Dart" class="headerlink" title="Json转Dart"></a>Json转Dart</h1><h2 id="手动生成Dart实体类"><a href="#手动生成Dart实体类" class="headerlink" title="手动生成Dart实体类"></a>手动生成Dart实体类</h2><p>首先得大家安利一个网站，因为Dart实体类比Java实体类多了几个方法，所以相对来说麻烦，通过这个网站就可以自动生成json数据对应的实体类:<br><a href="https://caijinglong.github.io/json2dart/" target="_blank" rel="noopener">https://caijinglong.github.io/json2dart/</a></p>
+<p><img src="http://cdn.littlecorgi.top/mweb/2019-10-12/json2dart.png" alt="json2dart"></p>
+<p>比方说我们使用这个链接(<a href="http://guolin.tech/api/china)，并让他自动转dart：" target="_blank" rel="noopener">http://guolin.tech/api/china)，并让他自动转dart：</a><br><img src="http://cdn.littlecorgi.top/mweb/2019-10-12/Province.png" alt="Province"></p>
+<p>接下来只需要创建dart文件，然后再把代码复制进去就行了。</p>
+<p>不出意外，代码肯定会报错。<br><img src="http://cdn.littlecorgi.top/mweb/2019-10-12/dart%E5%AE%9E%E4%BD%93%E7%B1%BB.png" alt="dart实体类"></p>
+<p>报错信息为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">error: Target of URI hasn<span class="string">'t been generated: '</span>province.g.dart<span class="string">'. (uri_has_not_been_generated at [cool_weather] lib/bean/province.dart:3)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">error: The method '_$ProvinceFromJson' isn't defined for the class 'Province'. (undefined_method at [cool_weather] lib/bean/province.dart:31)</span><br><span class="line"></span><br><span class="line">error: The method <span class="string">'_$ProvinceToJson'</span> isn<span class="string">'t defined for the class '</span>Province<span class="string">'. (undefined_method at [cool_weather] lib/bean/province.dart:33)</span></span><br></pre></td></tr></table></figure>
+
+<p>这是因为我们项目下还没有<code>province.g.dart</code>这个文件，这个文件是根据dart实体类自动生成的，那么我们该怎么生成他呢？</p>
+<p>这个时候我们需要在<code>pubspec.yaml</code>文件中导入三个依赖包：<br><img src="http://cdn.littlecorgi.top/mweb/2019-10-12/%E8%BD%ACdart.png" alt="转dart"><br>我们重点只需要管三个写着需要导入的。输入之后点击<code>pubspec.yaml</code>文件右上角的<code>packages get</code>，就会自动下载包了。</p>
+<p>然后在终端中，转到项目根目录下，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter packages pub run build_runner build</span><br></pre></td></tr></table></figure>
+
+<p>接着你就会惊喜的发现，在你的dart实体类下面多了一个文件，也就是你所缺失的~.g.dart文件，并且实体类中那些报错也都没了。<br><img src="http://cdn.littlecorgi.top/mweb/2019-10-12/dart.g.dart.png" alt="dart.g.dart"></p>
+<h2 id="将请求回来的Response转为Dart实体类"><a href="#将请求回来的Response转为Dart实体类" class="headerlink" title="将请求回来的Response转为Dart实体类"></a>将请求回来的Response转为Dart实体类</h2><p>接着HttpClient返回来的responseBody或者Dio返回的response</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Province&gt; provinceList;</span><br><span class="line">provinceList = ProvinceList.getProvinceList(jsonResponse);</span><br></pre></td></tr></table></figure>
+
+<p>provinceList就是返回来的数据转成的实体类的对象了。</p>
+<h1 id="异步更新UI"><a href="#异步更新UI" class="headerlink" title="异步更新UI"></a>异步更新UI</h1><p>在此处介绍两种方法，第一种是我自己想出来的沙雕方法，第二种是通过Flutter提供的专门用于异步更新UI的组件FutureBuilder。</p>
+<h2 id="沙雕方法"><a href="#沙雕方法" class="headerlink" title="沙雕方法"></a>沙雕方法</h2><p>在此说一下我这个方法的想法。</p>
+<p>大家可以回顾下我之前讲Widget的时候说过，Widget有一个方法initState可以用来加载UI，以及一个setState方法可用来提醒Flutter重新加载UI。</p>
+<p>说到这很多同学一定想到了，我们可以在获取到数据之后通过setState方法来更新UI。</p>
+<h3 id="获取到数据"><a href="#获取到数据" class="headerlink" title="获取到数据"></a>获取到数据</h3><p>这个不同多说，上面讲的全都是获取数据。</p>
+<h3 id="设置一个空的实体类"><a href="#设置一个空的实体类" class="headerlink" title="设置一个空的实体类"></a>设置一个空的实体类</h3><p>此处我还是拿上面的Province.dart来做例子。我们正常情况下获取到的数据转成的实体类的对象是<code>List&lt;Province&gt; provinceList</code>。所以我们此处先设置一个空的对象:<code>List&lt;Province&gt; _provinceList</code>。</p>
+<p>接着在initState里面调用网络请求的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@override</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    getProvince();</span><br><span class="line">    <span class="keyword">super</span>.initState();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在getProvince方法里面获取数据，并将数据provinceList传给_provinceList：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getProvince</span><span class="params">()</span> async </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> response = <span class="function">await <span class="title">Dio</span><span class="params">()</span>.<span class="title">get</span><span class="params">(<span class="string">"http://guolin.tech/api/china"</span>)</span></span>;</span><br><span class="line">    provinceList = ProvinceList.getProvinceList(response);</span><br><span class="line">    setState(() &#123;</span><br><span class="line">        _provinces = provinceList;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以当获取到数据的时候就通知Flutter更新状态了。这个时候有的同学可能会问我，你这个也只是获取到数据的时候才更新啊，那当还没获取到数据的时候呢？</p>
+<p>这块就体现到了为什么我们要设置一个_provinces了。</p>
+<p>我们完全可以在build方法设置下，判断下_provinces为不为空:如果为空，就证明没数据，就加载其它页面；如果不为空，就证明有数据了，那就加载数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">body: _provinces == <span class="keyword">null</span></span><br><span class="line">          ? <span class="keyword">new</span> Text(<span class="string">"正在请求"</span>)</span><br><span class="line">          : <span class="keyword">new</span> ListView.builder(</span><br><span class="line">          ... <span class="comment">//省去代码，总的来说就是将_provinces的数据加载ListView里面，一个ListView的基本构造方法</span></span><br><span class="line">          )</span><br></pre></td></tr></table></figure>
+
+<h2 id="FutureBuilder"><a href="#FutureBuilder" class="headerlink" title="FutureBuilder"></a>FutureBuilder</h2><p>回归正题，我上面那个方法真的是有够沙雕的。</p>
+<p>那我们来看看这个名正言顺的Flutter亲生儿子FutureBuilder。</p>
+<p>首先我们看下定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FutureBuilder(&#123;</span><br><span class="line">  <span class="keyword">this</span>.future,</span><br><span class="line">  <span class="keyword">this</span>.initialData,</span><br><span class="line">  <span class="meta">@required</span> <span class="keyword">this</span>.builder,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>退出时动画：(context_menu_exit.xml)</li>
+<li>future：异步任务；</li>
+<li>initialData：初始化数据；</li>
+<li>builder：builder方法。</li>
 </ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;set xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span> &gt;</span><br><span class="line"> </span><br><span class="line">    &lt;translate</span><br><span class="line">        android:duration=<span class="string">"@android:integer/config_shortAnimTime"</span></span><br><span class="line">        android:fromXDelta=<span class="string">"0"</span></span><br><span class="line">        android:fromYDelta=<span class="string">"0"</span></span><br><span class="line">        android:interpolator=<span class="string">"@android:anim/accelerate_decelerate_interpolator"</span></span><br><span class="line">        android:toXDelta=<span class="string">"0"</span></span><br><span class="line">        android:toYDelta=<span class="string">"100%p"</span> /&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>生成style</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;contextMenuAnim&quot; parent=&quot;@android:style/Animation.Activity&quot;&gt;</span><br><span class="line">    &lt;item name=&quot;android:windowEnterAnimation&quot;&gt;@anim/context_menu_enter&lt;/item&gt;</span><br><span class="line">    &lt;item name=&quot;android:windowExitAnimation&quot;&gt;@anim/context_menu_exit&lt;/item&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">body: FutureBuilder(</span><br><span class="line">    future: Dio().get(<span class="string">"http://guolin.tech/api/china"</span>),</span><br><span class="line">    builder: (BuildContext context, AsyncSnapshot snapshot) &#123;</span><br><span class="line">        <span class="keyword">if</span> (snapshot.connectionState == ConnectionState.done) &#123;</span><br><span class="line">            Response response = snapshot.data;</span><br><span class="line">            print(response.toString());</span><br><span class="line">            <span class="comment">//发生错误</span></span><br><span class="line">            <span class="keyword">if</span> (snapshot.hasError) &#123;</span><br><span class="line">                <span class="keyword">return</span> Text(snapshot.error.toString());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            provinceList = ProvinceList.fromJson(response.data);</span><br><span class="line">            <span class="comment">//请求成功，通过项目信息构建用于显示项目名称的ListView</span></span><br><span class="line">            <span class="keyword">return</span> ListView.builder(</span><br><span class="line">                itemCount: provinceList.provinces.length,</span><br><span class="line">                itemBuilder: (context, index) &#123;</span><br><span class="line">                    <span class="keyword">return</span> GestureDetector(</span><br><span class="line">                        child: ListTile(</span><br><span class="line">                            title: Text(<span class="string">"$&#123;provinceList.provinces[index].name&#125;"</span>),</span><br><span class="line">                        ),</span><br><span class="line">                        onTap: () &#123;</span><br><span class="line">                            Navigator.push(context,</span><br><span class="line">                                MaterialPageRoute(builder: (context) &#123;</span><br><span class="line">                                    <span class="keyword">return</span> CityPageWidget(</span><br><span class="line">                                        cityID: provinceList.provinces[index].id);</span><br><span class="line">                                &#125;));</span><br><span class="line">                        &#125;,</span><br><span class="line">                    );</span><br><span class="line">                &#125;,</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 请求未完成时弹出loading</span></span><br><span class="line">        <span class="keyword">return</span> CircularProgressIndicator();</span><br><span class="line">    &#125;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -636,12 +679,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/posts/1900f7eb.html">AndroidView之PopupWindow</a></p>
+  <p><span>本文标题:</span><a href="/posts/163d319c.html">Flutter入门并开发天气预报APP(7)——Http网络请求、Json转Dart实体类及异步更新UI</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 littlecorgi 的个人博客">littlecorgi</a></p>
-  <p><span>发布时间:</span>2019年05月31日 - 19:21</p>
-  <p><span>最后更新:</span>2019年07月26日 - 21:47</p>
-  <p><span>原始链接:</span><a href="/posts/1900f7eb.html" title="AndroidView之PopupWindow">https://a1203991686.github.io/posts/1900f7eb.html</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/1900f7eb.html" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年10月12日 - 22:13</p>
+  <p><span>最后更新:</span>2019年10月12日 - 22:14</p>
+  <p><span>原始链接:</span><a href="/posts/163d319c.html" title="Flutter入门并开发天气预报APP(7)——Http网络请求、Json转Dart实体类及异步更新UI">https://a1203991686.github.io/posts/163d319c.html</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/163d319c.html" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -668,7 +711,7 @@
           
             <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/View/" rel="tag"># View</a>
+            <a href="/tags/Flutter/" rel="tag"># Flutter</a>
           
         </div>
       
@@ -681,15 +724,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/posts/15395a84.html" rel="next" title="Flutter入门并开发天气预报APP(6)——天气预报第一步-界面">
+                <i class="fa fa-chevron-left"></i> Flutter入门并开发天气预报APP(6)——天气预报第一步-界面
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/8a47fe84.html" rel="prev" title="Android类之SharedPreferences">
-                Android类之SharedPreferences <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -934,7 +977,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AndroidView之PopupWindow"><span class="nav-number">1.</span> <span class="nav-text">AndroidView之PopupWindow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PopupWindow"><span class="nav-number">2.</span> <span class="nav-text">PopupWindow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建步骤"><span class="nav-number">3.</span> <span class="nav-text">创建步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造方法"><span class="nav-number">4.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本方法"><span class="nav-number">5.</span> <span class="nav-text">基本方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示PopupWindow"><span class="nav-number">6.</span> <span class="nav-text">显示PopupWindow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为PopupWindow添加动画"><span class="nav-number">7.</span> <span class="nav-text">为PopupWindow添加动画</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flutter-Http-网络请求"><span class="nav-number">1.</span> <span class="nav-text">Flutter Http 网络请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HttpClient"><span class="nav-number">1.1.</span> <span class="nav-text">HttpClient</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入"><span class="nav-number">1.1.1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个HttpClient"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建一个HttpClient:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个Uri"><span class="nav-number">1.1.3.</span> <span class="nav-text">创建一个Uri</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据uri获取返回数据"><span class="nav-number">1.1.4.</span> <span class="nav-text">根据uri获取返回数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取内容"><span class="nav-number">1.1.5.</span> <span class="nav-text">读取内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后关闭Client"><span class="nav-number">1.1.6.</span> <span class="nav-text">最后关闭Client</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dio"><span class="nav-number">1.2.</span> <span class="nav-text">Dio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.2.2.</span> <span class="nav-text">示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Json转Dart"><span class="nav-number">2.</span> <span class="nav-text">Json转Dart</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#手动生成Dart实体类"><span class="nav-number">2.1.</span> <span class="nav-text">手动生成Dart实体类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将请求回来的Response转为Dart实体类"><span class="nav-number">2.2.</span> <span class="nav-text">将请求回来的Response转为Dart实体类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异步更新UI"><span class="nav-number">3.</span> <span class="nav-text">异步更新UI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#沙雕方法"><span class="nav-number">3.1.</span> <span class="nav-text">沙雕方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取到数据"><span class="nav-number">3.1.1.</span> <span class="nav-text">获取到数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置一个空的实体类"><span class="nav-number">3.1.2.</span> <span class="nav-text">设置一个空的实体类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FutureBuilder"><span class="nav-number">3.2.</span> <span class="nav-text">FutureBuilder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">示例</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
