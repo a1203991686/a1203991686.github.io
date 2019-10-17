@@ -109,17 +109,18 @@
 
 
 
-  <meta name="description" content="兴趣使然的个人小站，不定时分享Android等技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="https://a1203991686.github.io/tags/index.html">
+  <meta name="description" content="OpenGL是什么？OpenGL ES又是什么？简介OpenGL是一个跨平台的软件接口语言，用于调用硬件的2D、3D图形处理器。 然而受限于现在的移动设备性能，如果将OpenGL直接用在他们上面将会特别卡，于是就出现了OpenGL ES。 OpenGL ES是OpenGL的分支，他专门作用于嵌入式设备，去掉了OpenGL很多不必要的功能。">
+<meta name="keywords" content="Android,OpenGL,图像处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL ES 2.0笔记1">
+<meta property="og:url" content="https://a1203991686.github.io/posts/a92b4a54.html">
 <meta property="og:site_name" content="littlecrogi的小站">
-<meta property="og:description" content="兴趣使然的个人小站，不定时分享Android等技术博客">
+<meta property="og:description" content="OpenGL是什么？OpenGL ES又是什么？简介OpenGL是一个跨平台的软件接口语言，用于调用硬件的2D、3D图形处理器。 然而受限于现在的移动设备性能，如果将OpenGL直接用在他们上面将会特别卡，于是就出现了OpenGL ES。 OpenGL ES是OpenGL的分支，他专门作用于嵌入式设备，去掉了OpenGL很多不必要的功能。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-31T11:31:40.000Z">
+<meta property="og:updated_time" content="2019-10-17T02:45:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标签">
-<meta name="twitter:description" content="兴趣使然的个人小站，不定时分享Android等技术博客">
+<meta name="twitter:title" content="OpenGL ES 2.0笔记1">
+<meta name="twitter:description" content="OpenGL是什么？OpenGL ES又是什么？简介OpenGL是一个跨平台的软件接口语言，用于调用硬件的2D、3D图形处理器。 然而受限于现在的移动设备性能，如果将OpenGL直接用在他们上面将会特别卡，于是就出现了OpenGL ES。 OpenGL ES是OpenGL的分支，他专门作用于嵌入式设备，去掉了OpenGL很多不必要的功能。">
 
 
 
@@ -127,7 +128,7 @@
 
   
   
-  <link rel="canonical" href="https://a1203991686.github.io/tags/">
+  <link rel="canonical" href="https://a1203991686.github.io/posts/a92b4a54">
 
 
 
@@ -137,7 +138,7 @@
   };
 </script>
 
-  <title>标签 | littlecrogi的小站</title>
+  <title>OpenGL ES 2.0笔记1 | littlecrogi的小站</title>
   
 
 
@@ -252,7 +253,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -364,170 +365,451 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/a92b4a54.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="littlecorgi">
+      <meta itemprop="description" content="兴趣使然的个人小站，不定时分享Android等技术博客">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="littlecrogi的小站">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">标签
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
+          <h1 class="post-title" itemprop="name headline">OpenGL ES 2.0笔记1
+
               
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-              目前共计 21 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              
-                <a href="/tags/Android/" style="font-size: 30px; color: #111">Android</a> <a href="/tags/Aria2/" style="font-size: 12px; color: #ccc">Aria2</a> <a href="/tags/Flutter/" style="font-size: 27px; color: #303030">Flutter</a> <a href="/tags/Hexo/" style="font-size: 12px; color: #ccc">Hexo</a> <a href="/tags/Java/" style="font-size: 15px; color: #adadad">Java</a> <a href="/tags/Kotlin/" style="font-size: 15px; color: #adadad">Kotlin</a> <a href="/tags/OkHttp/" style="font-size: 15px; color: #adadad">OkHttp</a> <a href="/tags/OpenGL/" style="font-size: 12px; color: #ccc">OpenGL</a> <a href="/tags/Retrofit/" style="font-size: 12px; color: #ccc">Retrofit</a> <a href="/tags/View/" style="font-size: 15px; color: #adadad">View</a> <a href="/tags/Volley/" style="font-size: 15px; color: #adadad">Volley</a> <a href="/tags/ijkplayer/" style="font-size: 12px; color: #ccc">ijkplayer</a> <a href="/tags/kotlin/" style="font-size: 18px; color: #8e8e8e">kotlin</a> <a href="/tags/uCrop/" style="font-size: 12px; color: #ccc">uCrop</a> <a href="/tags/图像处理/" style="font-size: 12px; color: #ccc">图像处理</a> <a href="/tags/图片处理/" style="font-size: 12px; color: #ccc">图片处理</a> <a href="/tags/多线程/" style="font-size: 15px; color: #adadad">多线程</a> <a href="/tags/操作系统/" style="font-size: 24px; color: #4f4f4f">操作系统</a> <a href="/tags/源码/" style="font-size: 21px; color: #6f6f6f">源码</a> <a href="/tags/语言基础/" style="font-size: 12px; color: #ccc">语言基础</a> <a href="/tags/音视频/" style="font-size: 12px; color: #ccc">音视频</a>
-              
-            </div>
-          </div>
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-17 10:43:11 / 修改时间：10:45:42" itemprop="dateCreated datePublished" datetime="2019-10-17T10:43:11+08:00">2019-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/posts/a92b4a54.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/a92b4a54.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/posts/a92b4a54.html" class="leancloud_visitors" data-flag-title="OpenGL ES 2.0笔记1">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="OpenGL是什么？OpenGL-ES又是什么？"><a href="#OpenGL是什么？OpenGL-ES又是什么？" class="headerlink" title="OpenGL是什么？OpenGL ES又是什么？"></a>OpenGL是什么？OpenGL ES又是什么？</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>OpenGL是一个跨平台的软件接口语言，用于调用硬件的2D、3D图形处理器。</p>
+<p>然而受限于现在的移动设备性能，如果将OpenGL直接用在他们上面将会特别卡，于是就出现了OpenGL ES。 OpenGL ES是OpenGL的分支，他专门作用于嵌入式设备，去掉了OpenGL很多不必要的功能。</p>
+<a id="more"></a>
+
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
+<li>游戏</li>
+<li>视频播放器</li>
+<li>视频编辑应用</li>
+<li>图片编辑应用</li>
+</ul>
+<p>等对图像处理的及时性要求较高的应用场景。</p>
+<h2 id="Android对OpenGL-ES-的支持"><a href="#Android对OpenGL-ES-的支持" class="headerlink" title="Android对OpenGL ES 的支持"></a>Android对OpenGL ES 的支持</h2><table>
+<thead>
+<tr>
+<th align="center">OpenGL ES 版本</th>
+<th align="center">基于OpenGL的版本</th>
+<th align="center">Android引入的版本</th>
+<th align="center">兼容性</th>
+<th align="center">功能、特色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1.0&amp;1.1</td>
+<td align="center">1.3&amp;1.5</td>
+<td align="center">Android 1.0</td>
+<td align="center">-</td>
+<td align="center">固定的图像管道，开发难度相比2.0低</td>
+</tr>
+<tr>
+<td align="center">2.0</td>
+<td align="center">2.0</td>
+<td align="center">Android 2.2</td>
+<td align="center">不兼容1.x</td>
+<td align="center">可编程的渲染管道，性能效率更高，开发难度更高</td>
+</tr>
+<tr>
+<td align="center">3.0</td>
+<td align="center">3.x</td>
+<td align="center">Android 4.3</td>
+<td align="center">兼容2.0</td>
+<td align="center">性能更高，支持ETC2格式的透明纹理压缩</td>
+</tr>
+<tr>
+<td align="center">3.1</td>
+<td align="center">4.x</td>
+<td align="center">Android 5.0</td>
+<td align="center">兼容2.0/3.0</td>
+<td align="center">新增计算着色器、单独的着色器对象等新特性</td>
+</tr>
+</tbody></table>
+<h2 id="版本的选择"><a href="#版本的选择" class="headerlink" title="版本的选择"></a>版本的选择</h2><p>由于此篇博客是学习阶段写的，而我在网上找到的大部分博客都是2.0，所以就以2.0为主。</p>
+<p>其实我觉得应该是3.0，2.0确实太老了，现在Android4.3的手机都较少见了，而3.1又太新了。</p>
+<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>首先你得在AndroidManifest.xml中加入<br><code>&lt;uses-feature android:glEsVersion=&quot;0x00020000&quot; android:required=&quot;true&quot; /&gt;</code></p>
+<p>其中不同版本对应值：</p>
+<table>
+<thead>
+<tr>
+<th align="center">OpenGL ES 版本</th>
+<th align="center">glEsVersion 版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">2.0</td>
+<td align="center">0x00020000</td>
+</tr>
+<tr>
+<td align="center">3.0</td>
+<td align="center">0x00030000</td>
+</tr>
+<tr>
+<td align="center">3.1</td>
+<td align="center">0x00030001</td>
+</tr>
+</tbody></table>
+<h1 id="基本框架"><a href="#基本框架" class="headerlink" title="基本框架"></a>基本框架</h1><p>Android框架里面提供了两个类来给你使用OpenGL ES API创建和操作图形：<code>GLSrufaceView</code>和<code>GLSurfaceView.Renderer</code>。</p>
+<h2 id="GLSrufaceView"><a href="#GLSrufaceView" class="headerlink" title="GLSrufaceView"></a>GLSrufaceView</h2><p>这是一个视图类，你可以通过OpenGL ES API来绘制和操作图形对象，他在功能上很类似与<code>SurfaceView</code>。你可以通过创建一个<code>SurfaceView</code>的实例并添加你的渲染器来使用这个类。</p>
+<p>他的常用方法有：</p>
+<ul>
+<li><code>setEGLContextClientVersion</code>：设置OpenGL ES版本，2.0则设置2</li>
+<li><code>onPause</code>：暂停渲染，最好是在<code>Activity</code>、<code>Fragment</code>的<code>onPause()</code>方法内调用，减少不必要的性能开销，避免不必要的崩溃</li>
+<li><code>onResume</code>：恢复渲染，用法类比<code>onPause()</code></li>
+<li><code>setRenderer</code>：设置渲染器</li>
+<li><code>setRenderMode</code>：设置渲染模式</li>
+<li><code>requestRender</code>: 请求渲染，由于是请求异步线程进行渲染，所以不是同步方法，调用后不会立刻就进行渲染。渲染会回调到<code>Renderer</code>接口的<code>onDrawFrame()</code>方法。</li>
+<li><code>queueEvent</code>：插入一个<code>Runnable</code>任务到后台渲染线程上执行。相应的，渲染线程中可以通过<code>Activity</code>的<code>runOnUIThread</code>的方法来传递事件给主线程去执行</li>
+</ul>
+<p>其中，GLSurfaceView的渲染模式有：</p>
+<ul>
+<li><code>RENDERMODE_CONTINUOUSLY</code>：不停地渲染</li>
+<li><code>RENDERMODE_WHEN_DIRTY</code>：只有调用了<code>requestRender()</code>之后才会触发渲染回调onDrawFrame方法</li>
+</ul>
+<h2 id="GLSurfaceView-Renderer"><a href="#GLSurfaceView-Renderer" class="headerlink" title="GLSurfaceView.Renderer"></a>GLSurfaceView.Renderer</h2><p>此接口定义了在GLSurfaceView中绘制图形所需的方法。必须将此接口的实现作为单独的类提供，并使用GLSurfaceView.setRenderer()将其添加到GLSurfaceView的实现类中。</p>
+<p>他的主要方法有三个：</p>
+<ul>
+<li><code>onSurfaceCreated(GL10 gl, EGLConfig config)</code>：GLSurfaceView内的Surface被创建时会被调用到</li>
+<li><code>onSurfaceChanged(GL10 gl, int width, int height)</code>：Surface尺寸改变时调用到</li>
+<li><code>onDrawFrame(GL10 gl)</code>：渲染绘制每一帧时调用到</li>
+</ul>
+<p>一般情况下，首次创建GLSurfaceView时，会顺序调用<code>onSurfaceCreated()</code> -&gt; <code>onSurfaceChanged()</code> -&gt; <code>onDrawFrame()</code>。然后每绘制一帧，都会不停地回调<code>onDrawFrame()</code>方法。</p>
+<h1 id="编写流程"><a href="#编写流程" class="headerlink" title="编写流程"></a>编写流程</h1><p>首先我们来写一个基本框架。</p>
+<p>创建一个Android项目，然后Activity选择EmptyActivity。</p>
+<p><strong>注意：本项目某些类或者方法通过AndroidStudio导入的时候会让你选择是从哪个包里面导入，一致选择<code>android.opengl.GLES20</code></strong></p>
+<h2 id="编写Activity"><a href="#编写Activity" class="headerlink" title="编写Activity"></a>编写Activity</h2><p>打开我们项目的MainActivity，你就能看到熟悉的onCreate方法，接下来我们要对这个Activity进行一些更改。</p>
+<p>首先，我们要创建一个GLSurfaceView的对象,并添加一个新的成员变量：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> GLSurfaceView glSurfaceView;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> rendererSet = <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>接下来将<code>setContentView()</code>移除，并对glSurfaceView进行初始化：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    glSurfaceView = <span class="keyword">new</span> GLSurfaceView(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于我们是在写OpenGL ES2.0的代码，所以我们需要检测当前运行APP的系统支不支持OpenGL ES2.0。我们将下面几行代码添加到onCreate()里面去:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);</span><br><span class="line"><span class="keyword">final</span> ConfigurationInfo configurationInfo = activityManager.deviceConfigurationInfo();</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">boolean</span> supportsEs2 = configurationInfo.reqGlEsVersion &gt;= <span class="number">0x20000</span>;</span><br></pre></td></tr></table></figure>
+
+<p>但是这段代码在模拟器上不能工作，因为GPU模拟部分有缺陷。为了使代码在模拟器上运行，我们要按如下代码修改检查条件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">boolean</span> supportsEs2 = configurationInfo.reqGlEsVersion &gt;= <span class="number">0x20000</span></span><br><span class="line">    || (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1</span><br><span class="line">    &amp;&amp; (Build.FINGERPRINT.startsWith(<span class="string">"generic"</span>)</span><br><span class="line">    || Build.FINGERPRINT.startsWith(<span class="string">"unknown"</span>)</span><br><span class="line">    || Build.MODEL.contains(<span class="string">"google_sdk"</span>)</span><br><span class="line">    || Build.MODEL.contains(<span class="string">"Emulator"</span>)</span><br><span class="line">    || Build.MODEL.contains(<span class="string">"Android SDK build for x86"</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>接下来就是配置渲染表面：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (supportsEs2) &#123;</span><br><span class="line">    <span class="comment">// 配置这个surface视图</span></span><br><span class="line">    glSurfaceView.setEGLContextClientVersion(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置Renderer</span></span><br><span class="line">    glSurfaceView.setRenderer(FirstOpenGLProjectRenderer());</span><br><span class="line">    rendererSet = <span class="keyword">true</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    Toast.makeText(<span class="keyword">this</span>, <span class="string">"This device does not support OpenGL ES 2.0"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setContentView(glSurfaceView);</span><br></pre></td></tr></table></figure>
+
+<p>最后我们还得处理下Activity的生命周期，也就是将GLSurfaceView的生命周期跟Activity的生命周期绑定起来：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onPause();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (rendererSet)</span><br><span class="line">        glSurfaceView.onPause();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onResume();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (rendererSet)</span><br><span class="line">        glSurfaceView.onResume();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编写Renderer"><a href="#编写Renderer" class="headerlink" title="编写Renderer"></a>编写Renderer</h2><p>创建一个新的文件，命名为FirstOpenGLProjectRenderer，让让这个类继承自GLSurfaceView.Renderer。</p>
+<p>接着就实现三个必备方法:</p>
+<ul>
+<li><code>onSurfaceCreate()</code>：创建时被调用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSurfaceCreated</span><span class="params">(GL10 glUnsed, EGLConfig config)</span> </span>&#123;</span><br><span class="line">    glClearColor(<span class="number">1.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>); <span class="comment">//设置一个清空屏幕用的颜色</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>onSurfaceChanged()</code>：创建后每当Surface尺寸改变时，都调用此方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSurfaceChanged</span><span class="params">(GL10 glUnsed, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123;</span><br><span class="line">    glViewport(<span class="number">0</span>, <span class="number">0</span>, width, height); <span class="comment">//设置视窗尺寸</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>onDrawFrame()</code>：绘制每一帧时调用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawFrame</span><span class="params">(GL10 glUnsed)</span> </span>&#123;</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT); <span class="comment">//清空屏幕</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以运行程序了，你就可以看到整个屏幕都成了红色，这是为啥呢？<br>因为我们在onSurfaceCreated方法里面设置了glClearColor(1.0f,0.0f,0.0f,0.0f)。这个方法的参数对应的是RGBA，然后我们又在onDrawFrame方法中设置了清屏，所以这样你就会看到的是红色了。</p>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="littlecorgi 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="littlecorgi 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/posts/a92b4a54.html">OpenGL ES 2.0笔记1</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 littlecorgi 的个人博客">littlecorgi</a></p>
+  <p><span>发布时间:</span>2019年10月17日 - 10:43</p>
+  <p><span>最后更新:</span>2019年10月17日 - 10:45</p>
+  <p><span>原始链接:</span><a href="/posts/a92b4a54.html" title="OpenGL ES 2.0笔记1">https://a1203991686.github.io/posts/a92b4a54.html</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/a92b4a54.html" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+            <a href="/tags/图像处理/" rel="tag"># 图像处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/f0e3723.html" rel="next" title="Flutter入门并开发天气预报APP(8)——天气预报第二步-选择省、市、区界面及网络请求">
+                <i class="fa fa-chevron-left"></i> Flutter入门并开发天气预报APP(8)——天气预报第二步-选择省、市、区界面及网络请求
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
 
         </div>
         
@@ -547,8 +829,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -730,6 +1021,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenGL是什么？OpenGL-ES又是什么？"><span class="nav-number">1.</span> <span class="nav-text">OpenGL是什么？OpenGL ES又是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android对OpenGL-ES-的支持"><span class="nav-number">1.3.</span> <span class="nav-text">Android对OpenGL ES 的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本的选择"><span class="nav-number">1.4.</span> <span class="nav-text">版本的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入"><span class="nav-number">1.5.</span> <span class="nav-text">导入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本框架"><span class="nav-number">2.</span> <span class="nav-text">基本框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GLSrufaceView"><span class="nav-number">2.1.</span> <span class="nav-text">GLSrufaceView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GLSurfaceView-Renderer"><span class="nav-number">2.2.</span> <span class="nav-text">GLSurfaceView.Renderer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写流程"><span class="nav-number">3.</span> <span class="nav-text">编写流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写Activity"><span class="nav-number">3.1.</span> <span class="nav-text">编写Activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写Renderer"><span class="nav-number">3.2.</span> <span class="nav-text">编写Renderer</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -946,6 +1254,8 @@
 
 
 
+
+  
 
 
   
