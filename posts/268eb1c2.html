@@ -120,7 +120,7 @@
 <meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/opengl_coordinate.png">
 <meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/%E5%9D%90%E6%A0%87.png">
 <meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/%E7%BA%BF%E6%AD%A3%E6%96%B9%E5%BD%A2%E5%9D%90%E6%A0%87.png">
-<meta property="og:updated_time" content="2019-10-18T13:09:30.000Z">
+<meta property="og:updated_time" content="2019-10-18T13:43:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL ES 2.0笔记2——顶点、坐标、图元">
 <meta name="twitter:description" content="上节我们对OpenGL做了一个大致的介绍，并写了一个基本框架，在这节中我们将会介绍顶点、坐标系和图元">
@@ -432,7 +432,7 @@
                 
               
 
-              <time title="创建时间：2019-10-18 21:06:38 / 修改时间：21:09:30" itemprop="dateCreated datePublished" datetime="2019-10-18T21:06:38+08:00">2019-10-18</time>
+              <time title="创建时间：2019-10-18 21:06:38 / 修改时间：21:43:00" itemprop="dateCreated datePublished" datetime="2019-10-18T21:06:38+08:00">2019-10-18</time>
             
 
             
@@ -545,7 +545,17 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span>[] squareVerticesWithTriangles = &#123;</span><br><span class="line">    <span class="comment">// Square</span></span><br><span class="line">    -<span class="number">0.5f</span>, -<span class="number">0.5f</span>, </span><br><span class="line">    <span class="number">0.5f</span>,  <span class="number">0.5f</span>,</span><br><span class="line">    -<span class="number">0.5f</span>,  <span class="number">0.5f</span>,</span><br><span class="line">    <span class="number">0.5f</span>, -<span class="number">0.5f</span>,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Line</span></span><br><span class="line">    -<span class="number">0.5f</span>, <span class="number">0</span>,</span><br><span class="line">    <span class="number">0.5f</span>, <span class="number">0</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p><img src="http://cdn.littlecorgi.top/mweb/2019-10-18/%E7%BA%BF%E6%AD%A3%E6%96%B9%E5%BD%A2%E5%9D%90%E6%A0%87.png" alt="线正方形坐标"></p>
-
+<h1 id="让数据可以被OpenGL读取"><a href="#让数据可以被OpenGL读取" class="headerlink" title="让数据可以被OpenGL读取"></a>让数据可以被OpenGL读取</h1><p>在上面，我们已经完成了顶点的定义，但是现在OpenGL尚还不能读取他们。其原因是这些代码的运行环境与OpenGL运行环境使用了不一样的语言。</p>
+<p>当我们运行Java语言的时候，并不是直接运行在硬件上的，而是运行在JVM(纯Java)或者Dalvik(Android)虚拟机上的，并且运行在这些虚拟机上的时候，并不能直接访问本地环境；其次，虚拟机还采用的垃圾回收机制，当检测到变量、对象不再被使用时，就自动释放掉这些内存。</p>
+<p>但是本地环境不能这样，因为他是直接运行在硬件上的，他不希望内存会被移来移去或者自动释放。</p>
+<p>所以我们就需要一个方案，让Android程序与OpenGL进行通信。<br>其实Android代码与硬件通信有两种方法：</p>
+<ol>
+<li>通过JNI技术；</li>
+<li>通过调用android.opengl.GLES20包里面的方法。</li>
+</ol>
+<p>我们这块主要是通过第二种方法。</p>
+<p>Java中有一种特殊的集合，可以分配本地的内存块，并将Java的数据复制到本地内存。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因为Java中国一个Float型数据占4个字节</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BYTES_PER_FLOAT = <span class="number">4</span>;</span><br><span class="line"><span class="comment">// 声明一个字节缓冲区</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> FloatBuffer vertexData;</span><br><span class="line"> </span><br><span class="line">vertexData = ByteBuffer</span><br><span class="line">    <span class="comment">// 分配一块本地内存，所以是数组长度 * 类型所占字节</span></span><br><span class="line">    .allocateDirect(tableVerticesWithTriangles.length * BYTES_PER_FLOAT)</span><br><span class="line">    <span class="comment">// 按照本地字节序组织内容</span></span><br><span class="line">    .order(ByteOrder.nativeOrder())</span><br><span class="line">    .asFloatBuffer();</span><br><span class="line">    <span class="comment">// 将数据存入</span></span><br><span class="line">    .put(tableVerticesWithTriangles);</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -619,7 +629,7 @@
   <p><span>本文标题:</span><a href="/posts/268eb1c2.html">OpenGL ES 2.0笔记2——顶点、坐标、图元</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 littlecorgi 的个人博客">littlecorgi</a></p>
   <p><span>发布时间:</span>2019年10月18日 - 21:06</p>
-  <p><span>最后更新:</span>2019年10月18日 - 21:09</p>
+  <p><span>最后更新:</span>2019年10月18日 - 21:43</p>
   <p><span>原始链接:</span><a href="/posts/268eb1c2.html" title="OpenGL ES 2.0笔记2——顶点、坐标、图元">https://a1203991686.github.io/posts/268eb1c2.html</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/268eb1c2.html" aria-label="复制成功！"></i></span>
   </p>
@@ -922,7 +932,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#顶点"><span class="nav-number">1.</span> <span class="nav-text">顶点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenGL坐标系"><span class="nav-number">1.1.</span> <span class="nav-text">OpenGL坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在代码中定义顶点"><span class="nav-number">1.2.</span> <span class="nav-text">在代码中定义顶点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图元"><span class="nav-number">2.</span> <span class="nav-text">图元</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#顶点"><span class="nav-number">1.</span> <span class="nav-text">顶点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenGL坐标系"><span class="nav-number">1.1.</span> <span class="nav-text">OpenGL坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在代码中定义顶点"><span class="nav-number">1.2.</span> <span class="nav-text">在代码中定义顶点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图元"><span class="nav-number">2.</span> <span class="nav-text">图元</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让数据可以被OpenGL读取"><span class="nav-number">3.</span> <span class="nav-text">让数据可以被OpenGL读取</span></a></li></ol></div>
             
 
           </div>
