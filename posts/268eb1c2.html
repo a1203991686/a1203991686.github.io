@@ -109,18 +109,22 @@
 
 
 
-  <meta name="description" content="1. 简介ijkplayer是哔哩哔哩的一个开源视频播放框架，支持Android、iOS。底层是ffplay。 Github地址：bilibili/ijkplayer">
-<meta name="keywords" content="Android,ijkplayer,音视频">
+  <meta name="description" content="顶点在OpenGL中，所有的东西的结构都是从一个顶点开始的。 所谓顶点，就是一个几何图形的拐点。在介绍顶点之前，我们首先介绍下OpenGL坐标。 OpenGL坐标系如果有会Android开发的朋友，一定会默认为从屏幕的左上角开始，水平往右是x轴，竖直向下是y轴。 但是在OpenGL中是不同的，OpenGL是从显示视窗的正中心是中心，也就是$(0, 0)$，而屏幕最左边的x轴坐标是-1，屏幕最右边的">
+<meta name="keywords" content="Android,OpenGL,图像处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ijkPlayer编译-Android">
-<meta property="og:url" content="https://a1203991686.github.io/posts/d61d5542.html">
+<meta property="og:title" content="OpenGL ES 2.0笔记2——顶点、坐标、图元">
+<meta property="og:url" content="https://a1203991686.github.io/posts/268eb1c2.html">
 <meta property="og:site_name" content="littlecrogi的小站">
-<meta property="og:description" content="1. 简介ijkplayer是哔哩哔哩的一个开源视频播放框架，支持Android、iOS。底层是ffplay。 Github地址：bilibili/ijkplayer">
+<meta property="og:description" content="顶点在OpenGL中，所有的东西的结构都是从一个顶点开始的。 所谓顶点，就是一个几何图形的拐点。在介绍顶点之前，我们首先介绍下OpenGL坐标。 OpenGL坐标系如果有会Android开发的朋友，一定会默认为从屏幕的左上角开始，水平往右是x轴，竖直向下是y轴。 但是在OpenGL中是不同的，OpenGL是从显示视窗的正中心是中心，也就是$(0, 0)$，而屏幕最左边的x轴坐标是-1，屏幕最右边的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-06T11:53:35.000Z">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/opengl_coordinate.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/%E5%9D%90%E6%A0%87.png">
+<meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/%E7%BA%BF%E6%AD%A3%E6%96%B9%E5%BD%A2%E5%9D%90%E6%A0%87.png">
+<meta property="og:updated_time" content="2019-10-18T13:07:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ijkPlayer编译-Android">
-<meta name="twitter:description" content="1. 简介ijkplayer是哔哩哔哩的一个开源视频播放框架，支持Android、iOS。底层是ffplay。 Github地址：bilibili/ijkplayer">
+<meta name="twitter:title" content="OpenGL ES 2.0笔记2——顶点、坐标、图元">
+<meta name="twitter:description" content="顶点在OpenGL中，所有的东西的结构都是从一个顶点开始的。 所谓顶点，就是一个几何图形的拐点。在介绍顶点之前，我们首先介绍下OpenGL坐标。 OpenGL坐标系如果有会Android开发的朋友，一定会默认为从屏幕的左上角开始，水平往右是x轴，竖直向下是y轴。 但是在OpenGL中是不同的，OpenGL是从显示视窗的正中心是中心，也就是$(0, 0)$，而屏幕最左边的x轴坐标是-1，屏幕最右边的">
+<meta name="twitter:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/opengl_coordinate.png">
 
 
 
@@ -128,7 +132,7 @@
 
   
   
-  <link rel="canonical" href="https://a1203991686.github.io/posts/d61d5542">
+  <link rel="canonical" href="https://a1203991686.github.io/posts/268eb1c2">
 
 
 
@@ -138,7 +142,7 @@
   };
 </script>
 
-  <title>ijkPlayer编译-Android | littlecrogi的小站</title>
+  <title>OpenGL ES 2.0笔记2——顶点、坐标、图元 | littlecrogi的小站</title>
   
 
 
@@ -385,7 +389,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/d61d5542.html">
+    <link itemprop="mainEntityOfPage" href="https://a1203991686.github.io/posts/268eb1c2.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="littlecorgi">
@@ -402,7 +406,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ijkPlayer编译-Android
+          <h1 class="post-title" itemprop="name headline">OpenGL ES 2.0笔记2——顶点、坐标、图元
 
               
             
@@ -428,7 +432,7 @@
                 
               
 
-              <time title="创建时间：2019-08-06 19:51:28 / 修改时间：19:53:35" itemprop="dateCreated datePublished" datetime="2019-08-06T19:51:28+08:00">2019-08-06</time>
+              <time title="创建时间：2019-10-18 21:06:38 / 修改时间：21:07:35" itemprop="dateCreated datePublished" datetime="2019-10-18T21:06:38+08:00">2019-10-18</time>
             
 
             
@@ -450,7 +454,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a></span>
 
                 
                 
@@ -469,8 +473,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/posts/d61d5542.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/posts/d61d5542.html" itemprop="commentCount"></span>
+                <a href="/posts/268eb1c2.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/268eb1c2.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -478,7 +482,7 @@
 
           
           
-            <span id="/posts/d61d5542.html" class="leancloud_visitors" data-flag-title="ijkPlayer编译-Android">
+            <span id="/posts/268eb1c2.html" class="leancloud_visitors" data-flag-title="OpenGL ES 2.0笔记2——顶点、坐标、图元">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -516,36 +520,26 @@
       
 
       
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>ijkplayer是哔哩哔哩的一个开源视频播放框架，支持Android、iOS。底层是ffplay。</p>
-<p>Github地址：<a href="https://github.com/bilibili/ijkplayer" target="_blank" rel="noopener">bilibili/ijkplayer</a></p>
-<a id="more"></a>
+        <h1 id="顶点"><a href="#顶点" class="headerlink" title="顶点"></a>顶点</h1><p>在OpenGL中，所有的东西的结构都是从一个顶点开始的。</p>
+<p>所谓顶点，就是一个几何图形的拐点。在介绍顶点之前，我们首先介绍下OpenGL坐标。</p>
+<h2 id="OpenGL坐标系"><a href="#OpenGL坐标系" class="headerlink" title="OpenGL坐标系"></a>OpenGL坐标系</h2><p>如果有会Android开发的朋友，一定会默认为从屏幕的左上角开始，水平往右是x轴，竖直向下是y轴。</p>
+<p>但是在OpenGL中是不同的，OpenGL是从显示视窗的正中心是中心，也就是$(0, 0)$，而屏幕最左边的x轴坐标是-1，屏幕最右边的x轴坐标是1，屏幕最上面的y轴坐标是1，屏幕最下面的y轴坐标是-1，也就是下面这幅图：</p>
+<p><img src="http://cdn.littlecorgi.top/mweb/2019-10-18/opengl_coordinate.png" alt="opengl_coordinate"></p>
+<h2 id="在代码中定义顶点"><a href="#在代码中定义顶点" class="headerlink" title="在代码中定义顶点"></a>在代码中定义顶点</h2><p>在OpenGL中定义顶点有点特殊，我们第一反应都是直接拿数组将顶端存起来就行了，但是在OpenGL中，你除了要将顶点的坐标用数组存起来以外，还得定义一个常量，用来标记一个顶点有两个分量：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> POSITION_COMPONENT_COUNT = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">float</span>[] tableVerticesWithTriangles = &#123;</span><br><span class="line">    <span class="comment">// Triangle 1</span></span><br><span class="line">    -<span class="number">0.5f</span>, -<span class="number">0.5f</span>, </span><br><span class="line">    <span class="number">0.5f</span>,  <span class="number">0.5f</span>,</span><br><span class="line">    -<span class="number">0.5f</span>,  <span class="number">0.5f</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Triangle 2</span></span><br><span class="line">    -<span class="number">0.5f</span>, -<span class="number">0.5f</span>, </span><br><span class="line">    <span class="number">0.5f</span>, -<span class="number">0.5f</span>, </span><br><span class="line">    <span class="number">0.5f</span>,  <span class="number">0.5f</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Line 1</span></span><br><span class="line">    -<span class="number">0.5f</span>, <span class="number">0f</span>, </span><br><span class="line">    <span class="number">0.5f</span>, <span class="number">0f</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Mallets</span></span><br><span class="line">    <span class="number">0f</span>, -<span class="number">0.25f</span>, </span><br><span class="line">    <span class="number">0f</span>,  <span class="number">0.25f</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-编译方法"><a href="#2-编译方法" class="headerlink" title="2. 编译方法"></a>2. 编译方法</h1><p>由于通过Gradle编译起来很慢而且一旦失败又得重头来，所以这块就使用AndroidNDK的方式来编译。</p>
-<h2 id="2-1-编译之前"><a href="#2-1-编译之前" class="headerlink" title="2.1 编译之前"></a>2.1 编译之前</h2><p>首先你得配置好等会编译需要的东西。这块我们都会使用<a href="https://brew.sh/index_zh-cn" target="_blank" rel="noopener">Homebrew</a>来安装git和yasm。<br>Homebrew类似于Ubuntu的dpkg、RedHat和centOS的yum，他是macOS上的一个软件包管理器。但是后来出了Linux版。<br>由于ijkplayer官方说用的它，那咱们就用它吧。</p>
-<h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><h4 id="1-先把目前已有的包更新"><a href="#1-先把目前已有的包更新" class="headerlink" title="1. 先把目前已有的包更新"></a>1. 先把目前已有的包更新</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 从镜像站下载软件列表，并检查有没有需要更新的包</span><br><span class="line">sudo apt update</span><br><span class="line"></span><br><span class="line">// 更新需要更新的包</span><br><span class="line">sudo apt upgrade</span><br><span class="line"></span><br><span class="line">// 自动卸载掉当初为了安装其他软件或其他原因而安装但是目前已经没用的包</span><br><span class="line">sudo apt autoremove</span><br></pre></td></tr></table></figure>
+<p>我们采用浮点数的顺序列表定义顶点数据，这个数组通常被成为顶点属性。</p>
+<h1 id="图元"><a href="#图元" class="headerlink" title="图元"></a>图元</h1><p>在OpenGL中，只能绘制点、直线和三角形，这三个也被称为图元。</p>
+<p>也就意味着，其它所有的图形都得通过这三个基本图元来实现。</p>
+<p>如果我们需要绘制一个点，那么一个坐标就可以了，但是如果我们需要绘制一条直线，就需要两个坐标，如果绘制一个三角形，就需要三个坐标。</p>
+<p>那么我们就以绘制一个正方形举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span>[] squareVerticesWithTriangles = &#123;</span><br><span class="line">    -<span class="number">0.5f</span>, -<span class="number">0.5f</span>, </span><br><span class="line">    <span class="number">0.5f</span>,  <span class="number">0.5f</span>,</span><br><span class="line">    -<span class="number">0.5f</span>,  <span class="number">0.5f</span>,</span><br><span class="line">    <span class="number">0.5f</span>, -<span class="number">0.5f</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-安装Homebrew"><a href="#2-安装Homebrew" class="headerlink" title="2. 安装Homebrew"></a>2. 安装Homebrew</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 首先确定是否安装ruby  </span><br><span class="line">    apt install ruby<span class="string">'</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">2. 然后通过ruby安装Homebrew  </span></span><br><span class="line"><span class="string">    ruby -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">3. 再通过Homebrew安装git和yasm</span></span><br><span class="line"><span class="string">    brew install git</span></span><br><span class="line"><span class="string">    brew install yasm</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://cdn.littlecorgi.top/mweb/2019-10-18/%E5%9D%90%E6%A0%87.png" alt="坐标"></p>
+<p>如果我要在这个正方形中间加一个横线的话，那么就直接在上面的数组里面去加，到时候要将顶点着色器加载到图形中的时候再去处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span>[] squareVerticesWithTriangles = &#123;</span><br><span class="line">    <span class="comment">// Square</span></span><br><span class="line">    -<span class="number">0.5f</span>, -<span class="number">0.5f</span>, </span><br><span class="line">    <span class="number">0.5f</span>,  <span class="number">0.5f</span>,</span><br><span class="line">    -<span class="number">0.5f</span>,  <span class="number">0.5f</span>,</span><br><span class="line">    <span class="number">0.5f</span>, -<span class="number">0.5f</span>,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Line</span></span><br><span class="line">    -<span class="number">0.5f</span>, <span class="number">0</span>,</span><br><span class="line">    <span class="number">0.5f</span>, <span class="number">0</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h4 id="3-配置Android-SDK和NDK"><a href="#3-配置Android-SDK和NDK" class="headerlink" title="3. 配置Android SDK和NDK"></a>3. 配置Android SDK和NDK</h4><ol>
-<li><p>Android SDK<br> 你可以打开你的AndroidStudio，进入<code>Preferences -&gt; Appearance &amp; Behavior -&gt; System Settings -&gt; Android SDK</code>。这块就会显示你SDK安装目录。<br> 然后在终端中输入<code>vim ~/.bash_profile</code>。然后输入以下内容：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ANDROID_SDK_HOME=AndroidSDK的目录/android-sdk-linux</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$&#123;ANDROID_SDK_HOME&#125;</span>/tools</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$&#123;ANDROID_SDK_HOME&#125;</span>/platform-tools</span><br></pre></td></tr></table></figure>
-
-<p> 保存，然后再在终端输入<code>source ~/.bash_profile</code>，就可以了。</p>
-</li>
-<li><p>Android NDK<br> 首先你得到官网下载NDK：<a href="https://developer.android.com/ndk/downloads/older_releases.html?hl=zh-cn" target="_blank" rel="noopener">NDK 归档</a>。而且你只能下载r10e版本的，下载其它版本编译会报错。<br> 下载下来解压后，同样和上面一样得配置环境变量：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ANDROID_NDK_HOME=NDK目录</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$&#123;ANDROID_SDK_HOME&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p> 保存，然后再在终端输入<code>source ~/.bash_profile</code>，就可以了。</p>
-</li>
-</ol>
-<h3 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h3><p>安装Homebrew，由于macOS自带ruby，所以我们直接可以开始安装Homebrew。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br><span class="line">brew install git</span><br><span class="line">brew install yasm</span><br></pre></td></tr></table></figure>
-
-<p>然后就是配置你的Android SDK和Android NDK：<br>和上面Ubuntu下一样。</p>
-<h2 id="2-2-编译Android"><a href="#2-2-编译Android" class="headerlink" title="2.2 编译Android"></a>2.2 编译Android</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Bilibili/ijkplayer.git ijkplayer-android</span><br><span class="line"><span class="built_in">cd</span> ijkplayer-android</span><br><span class="line">git checkout -B latest k0.8.8</span><br><span class="line"></span><br><span class="line">./init-android.sh</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> android/contrib</span><br><span class="line">./compile-ffmpeg.sh clean</span><br><span class="line">// 这步特慢，耗时很长</span><br><span class="line">./compile-ffmpeg.sh all</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">./compile-ijk.sh all</span><br></pre></td></tr></table></figure>
-
-<p>上面这些执行完就可以了。<br>然后你就能在你的<code>/ijkplayer-android/android/ijkplayer</code>路径下就能看到编译后的项目了，其中每个<code>module的/src/mian/libs</code>里面就是so文件。</p>
-<h1 id="3-最后"><a href="#3-最后" class="headerlink" title="3. 最后"></a>3. 最后</h1><p>你可以直接通过AndroidStudio打开<code>/ijkplayer-android/android/ijkplayer</code>，然后在里面的<code>/ijkplayer-example</code>下谢你自己的代码就可以了。</p>
+<p><img src="http://cdn.littlecorgi.top/mweb/2019-10-18/%E7%BA%BF%E6%AD%A3%E6%96%B9%E5%BD%A2%E5%9D%90%E6%A0%87.png" alt="线正方形坐标"></p>
 
       
     </div>
@@ -617,12 +611,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/posts/d61d5542.html">ijkPlayer编译-Android</a></p>
+  <p><span>本文标题:</span><a href="/posts/268eb1c2.html">OpenGL ES 2.0笔记2——顶点、坐标、图元</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 littlecorgi 的个人博客">littlecorgi</a></p>
-  <p><span>发布时间:</span>2019年08月06日 - 19:51</p>
-  <p><span>最后更新:</span>2019年08月06日 - 19:53</p>
-  <p><span>原始链接:</span><a href="/posts/d61d5542.html" title="ijkPlayer编译-Android">https://a1203991686.github.io/posts/d61d5542.html</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/d61d5542.html" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年10月18日 - 21:06</p>
+  <p><span>最后更新:</span>2019年10月18日 - 21:07</p>
+  <p><span>原始链接:</span><a href="/posts/268eb1c2.html" title="OpenGL ES 2.0笔记2——顶点、坐标、图元">https://a1203991686.github.io/posts/268eb1c2.html</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/268eb1c2.html" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -649,9 +643,9 @@
           
             <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/ijkplayer/" rel="tag"># ijkplayer</a>
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
           
-            <a href="/tags/音视频/" rel="tag"># 音视频</a>
+            <a href="/tags/图像处理/" rel="tag"># 图像处理</a>
           
         </div>
       
@@ -664,8 +658,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/a2a8de56.html" rel="next" title="Android网络请求4--解析Retrofit源码">
-                <i class="fa fa-chevron-left"></i> Android网络请求4--解析Retrofit源码
+              <a href="/posts/a92b4a54.html" rel="next" title="OpenGL ES 2.0笔记1——简介">
+                <i class="fa fa-chevron-left"></i> OpenGL ES 2.0笔记1——简介
               </a>
             
           </div>
@@ -673,10 +667,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/eb898689.html" rel="prev" title="Android网络请求1--HttpClient与HttpURLConnection">
-                Android网络请求1--HttpClient与HttpURLConnection <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -927,7 +917,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-编译方法"><span class="nav-number">2.</span> <span class="nav-text">2. 编译方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-编译之前"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 编译之前</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu"><span class="nav-number">2.1.1.</span> <span class="nav-text">Ubuntu</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-先把目前已有的包更新"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">1. 先把目前已有的包更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安装Homebrew"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">2. 安装Homebrew</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-配置Android-SDK和NDK"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">3. 配置Android SDK和NDK</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#macOS"><span class="nav-number">2.1.2.</span> <span class="nav-text">macOS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-编译Android"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 编译Android</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-最后"><span class="nav-number">3.</span> <span class="nav-text">3. 最后</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#顶点"><span class="nav-number">1.</span> <span class="nav-text">顶点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenGL坐标系"><span class="nav-number">1.1.</span> <span class="nav-text">OpenGL坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在代码中定义顶点"><span class="nav-number">1.2.</span> <span class="nav-text">在代码中定义顶点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图元"><span class="nav-number">2.</span> <span class="nav-text">图元</span></a></li></ol></div>
             
 
           </div>
