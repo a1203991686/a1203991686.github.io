@@ -109,21 +109,21 @@
 
 
 
-  <meta name="description" content="顶点在OpenGL中，所有的东西的结构都是从一个顶点开始的。 所谓顶点，就是一个几何图形的拐点。在介绍顶点之前，我们首先介绍下OpenGL坐标。 OpenGL坐标系如果有会Android开发的朋友，一定会默认为从屏幕的左上角开始，水平往右是x轴，竖直向下是y轴。 但是在OpenGL中是不同的，OpenGL是从显示视窗的正中心是中心，也就是$(0, 0)$，而屏幕最左边的x轴坐标是-1，屏幕最右边的">
+  <meta name="description" content="上节我们对OpenGL做了一个大致的介绍，并写了一个基本框架，在这节中我们将会介绍顶点、坐标系和图元">
 <meta name="keywords" content="Android,OpenGL,图像处理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL ES 2.0笔记2——顶点、坐标、图元">
 <meta property="og:url" content="https://a1203991686.github.io/posts/268eb1c2.html">
 <meta property="og:site_name" content="littlecrogi的小站">
-<meta property="og:description" content="顶点在OpenGL中，所有的东西的结构都是从一个顶点开始的。 所谓顶点，就是一个几何图形的拐点。在介绍顶点之前，我们首先介绍下OpenGL坐标。 OpenGL坐标系如果有会Android开发的朋友，一定会默认为从屏幕的左上角开始，水平往右是x轴，竖直向下是y轴。 但是在OpenGL中是不同的，OpenGL是从显示视窗的正中心是中心，也就是$(0, 0)$，而屏幕最左边的x轴坐标是-1，屏幕最右边的">
+<meta property="og:description" content="上节我们对OpenGL做了一个大致的介绍，并写了一个基本框架，在这节中我们将会介绍顶点、坐标系和图元">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/opengl_coordinate.png">
 <meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/%E5%9D%90%E6%A0%87.png">
 <meta property="og:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/%E7%BA%BF%E6%AD%A3%E6%96%B9%E5%BD%A2%E5%9D%90%E6%A0%87.png">
-<meta property="og:updated_time" content="2019-10-18T13:07:35.000Z">
+<meta property="og:updated_time" content="2019-10-18T13:09:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL ES 2.0笔记2——顶点、坐标、图元">
-<meta name="twitter:description" content="顶点在OpenGL中，所有的东西的结构都是从一个顶点开始的。 所谓顶点，就是一个几何图形的拐点。在介绍顶点之前，我们首先介绍下OpenGL坐标。 OpenGL坐标系如果有会Android开发的朋友，一定会默认为从屏幕的左上角开始，水平往右是x轴，竖直向下是y轴。 但是在OpenGL中是不同的，OpenGL是从显示视窗的正中心是中心，也就是$(0, 0)$，而屏幕最左边的x轴坐标是-1，屏幕最右边的">
+<meta name="twitter:description" content="上节我们对OpenGL做了一个大致的介绍，并写了一个基本框架，在这节中我们将会介绍顶点、坐标系和图元">
 <meta name="twitter:image" content="http://cdn.littlecorgi.top/mweb/2019-10-18/opengl_coordinate.png">
 
 
@@ -432,7 +432,7 @@
                 
               
 
-              <time title="创建时间：2019-10-18 21:06:38 / 修改时间：21:07:35" itemprop="dateCreated datePublished" datetime="2019-10-18T21:06:38+08:00">2019-10-18</time>
+              <time title="创建时间：2019-10-18 21:06:38 / 修改时间：21:09:30" itemprop="dateCreated datePublished" datetime="2019-10-18T21:06:38+08:00">2019-10-18</time>
             
 
             
@@ -520,7 +520,12 @@
       
 
       
-        <h1 id="顶点"><a href="#顶点" class="headerlink" title="顶点"></a>顶点</h1><p>在OpenGL中，所有的东西的结构都是从一个顶点开始的。</p>
+        <blockquote>
+<p>上节我们对OpenGL做了一个大致的介绍，并写了一个基本框架，在这节中我们将会介绍顶点、坐标系和图元</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="顶点"><a href="#顶点" class="headerlink" title="顶点"></a>顶点</h1><p>在OpenGL中，所有的东西的结构都是从一个顶点开始的。</p>
 <p>所谓顶点，就是一个几何图形的拐点。在介绍顶点之前，我们首先介绍下OpenGL坐标。</p>
 <h2 id="OpenGL坐标系"><a href="#OpenGL坐标系" class="headerlink" title="OpenGL坐标系"></a>OpenGL坐标系</h2><p>如果有会Android开发的朋友，一定会默认为从屏幕的左上角开始，水平往右是x轴，竖直向下是y轴。</p>
 <p>但是在OpenGL中是不同的，OpenGL是从显示视窗的正中心是中心，也就是$(0, 0)$，而屏幕最左边的x轴坐标是-1，屏幕最右边的x轴坐标是1，屏幕最上面的y轴坐标是1，屏幕最下面的y轴坐标是-1，也就是下面这幅图：</p>
@@ -614,7 +619,7 @@
   <p><span>本文标题:</span><a href="/posts/268eb1c2.html">OpenGL ES 2.0笔记2——顶点、坐标、图元</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 littlecorgi 的个人博客">littlecorgi</a></p>
   <p><span>发布时间:</span>2019年10月18日 - 21:06</p>
-  <p><span>最后更新:</span>2019年10月18日 - 21:07</p>
+  <p><span>最后更新:</span>2019年10月18日 - 21:09</p>
   <p><span>原始链接:</span><a href="/posts/268eb1c2.html" title="OpenGL ES 2.0笔记2——顶点、坐标、图元">https://a1203991686.github.io/posts/268eb1c2.html</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://a1203991686.github.io/posts/268eb1c2.html" aria-label="复制成功！"></i></span>
   </p>
