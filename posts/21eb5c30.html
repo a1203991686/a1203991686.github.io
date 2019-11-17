@@ -1,156 +1,81 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Android消息机制之Handler详解 | littlecrogi的小站</title><meta name="description" content="Android消息机制之Handler详解"><meta name="keywords" content="Android,Handler,ThreadLocal,源码"><meta name="author" content="littlecorgi"><meta name="copyright" content="littlecorgi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="https://i.loli.net/2017/11/26/5a19c0b50432e.png"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Android消息机制之Handler详解"><meta name="twitter:description" content="Android消息机制之Handler详解"><meta name="twitter:image" content="http://cdn.littlecorgi.top/blog/Keynote_Blog_FINAL.png"><meta property="og:type" content="article"><meta property="og:title" content="Android消息机制之Handler详解"><meta property="og:url" content="https://a1203991686.github.io/posts/21eb5c30"><meta property="og:site_name" content="littlecrogi的小站"><meta property="og:description" content="Android消息机制之Handler详解"><meta property="og:image" content="http://cdn.littlecorgi.top/blog/Keynote_Blog_FINAL.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
 
 
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
 
-
-
-
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="preconnect" href="//www.googletagmanager.com">
-	<link rel="preconnect" href="//zz.bdstatic.com">
-	<link rel="preconnect" href="//sp0.baidu.com">
-	<link rel="preconnect" href="//www.google-analytics.com">
-	<link rel="preconnect" href="//cdn1.lncld.net">
-	<link rel="preconnect" href="//unpkg.com">
-	<link rel="preconnect" href="//app-router.leancloud.cn">
-	<link rel="preconnect" href="//9qpuwspm.api.lncld.net">
-	<link rel="preconnect" href="//gravatar.loli.net">
-
-	<title>Android消息机制之Handler详解 | littlecrogi的小站</title>
-
-	<meta name="HandheldFriendly" content="True">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-	<meta name="generator" content="hexo">
-	<meta name="author" content="littlecorgi">
-	<meta name="description" content>
-
-	
-	<meta name="keywords" content>
-	
-
-	
-	<link rel="shortcut icon" href="https://i.loli.net/2017/11/26/5a19c0b50432e.png">
-	<link rel="apple-touch-icon" href="https://i.loli.net/2017/11/26/5a19c0b50432e.png">
-	
-
-	
-	<meta name="theme-color" content="#3c484e">
-	<meta name="msapplication-TileColor" content="#3c484e">
-	
-
-	
-
-	
-
-	<meta property="og:site_name" content="littlecrogi的小站">
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="Android消息机制之Handler详解 | littlecrogi的小站">
-	<meta property="og:description" content>
-	<meta property="og:url" content="https://a1203991686.github.io/posts/21eb5c30.html">
-
-	
-	<meta property="article:published_time" content="2019-11-17T14:11:00+08:00"> 
-	<meta property="article:author" content="littlecorgi">
-	<meta property="article:published_first" content="littlecrogi的小站, /posts/21eb5c30.html">
-	
-
-	
-	
-	<link rel="stylesheet" href="/css/allinonecss.min.css">
-
-	
-	
-	
-</head>
-<body class="post-template">
-	<div class="site-wrapper">
-		
-
-
-
-
-<header class="site-header post-site-header outer">
-    <div class="inner">
-        
-<nav class="site-nav"> 
-    <div class="site-nav-left">
-        <ul class="nav">
-            <li>
-                
-                <a href="/" title="Home">HOME</a>
-                
-            </li>
-            
-            
-            <li>
-                <a href="/about" title="ABOUT">ABOUT</a>
-            </li>
-            
-            <li>
-                <a href="/categories" title="CATEGORIES">CATEGORIES</a>
-            </li>
-            
-            <li>
-                <a href="/archives" title="ARCHIVES">ARCHIVES</a>
-            </li>
-            
-            
-        </ul> 
-    </div>
-    
-    <div class="search-button-area">
-        <a href="#search" class="search-button">Search ...</a>
-    </div>
-     
-    <div class="site-nav-right">
-        
-        <a href="#search" class="search-button">Search ...</a>
-         
-        
-<div class="social-links">
-    
-    
-    <a class="social-link" title="github" href="https://github.com/a1203991686" target="_blank" rel="noopener">
-        <svg viewbox="0 0 1049 1024" xmlns="http://www.w3.org/2000/svg"><path d="M524.979332 0C234.676191 0 0 234.676191 0 524.979332c0 232.068678 150.366597 428.501342 358.967656 498.035028 26.075132 5.215026 35.636014-11.299224 35.636014-25.205961 0-12.168395-0.869171-53.888607-0.869171-97.347161-146.020741 31.290159-176.441729-62.580318-176.441729-62.580318-23.467619-60.841976-58.234462-76.487055-58.234463-76.487055-47.804409-32.15933 3.476684-32.15933 3.476685-32.15933 53.019436 3.476684 80.83291 53.888607 80.83291 53.888607 46.935238 79.963739 122.553122 57.365291 152.97411 43.458554 4.345855-33.897672 18.252593-57.365291 33.028501-70.402857-116.468925-12.168395-239.022047-57.365291-239.022047-259.012982 0-57.365291 20.860106-104.300529 53.888607-140.805715-5.215026-13.037566-23.467619-66.926173 5.215027-139.067372 0 0 44.327725-13.906737 144.282399 53.888607 41.720212-11.299224 86.917108-17.383422 131.244833-17.383422s89.524621 6.084198 131.244833 17.383422C756.178839 203.386032 800.506564 217.29277 800.506564 217.29277c28.682646 72.1412 10.430053 126.029806 5.215026 139.067372 33.897672 36.505185 53.888607 83.440424 53.888607 140.805715 0 201.64769-122.553122 245.975415-239.891218 259.012982 19.121764 16.514251 35.636014 47.804409 35.636015 97.347161 0 70.402857-0.869171 126.898978-0.869172 144.282399 0 13.906737 9.560882 30.420988 35.636015 25.205961 208.601059-69.533686 358.967656-265.96635 358.967655-498.035028C1049.958663 234.676191 814.413301 0 524.979332 0z"/></svg>
-    </a>
-    
-    
-    
-    
-    
-    
-</div>
-    </div>
-</nav>
-    </div>
-</header>
-
-
-<div id="site-main" class="site-main outer" role="main">
-    <div class="inner">
-        <header class="post-full-header">
-            <div class="post-full-meta">
-                <time class="post-full-meta-date" datetime="2019-11-17T06:43:10.000Z">
-                    2019-11-17
-                </time>
-                
-                <span class="date-divider">/</span>
-                
-                <a href="/categories/Android/">Android</a>&nbsp;&nbsp;
-                
-                
-            </div>
-            <h1 class="post-full-title">Android消息机制之Handler详解</h1>
-        </header>
-        <div class="post-full no-image">
-            
-            <div class="post-full-content">
-                <article id="photoswipe" class="markdown-body">
-                    <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>作为一个Android开发者，Handler的大名你一定听过。做Android开发肯定离不开Handler，它通常被我们用来连通主线程和子线程。</p>
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.css"><link rel="canonical" href="https://a1203991686.github.io/posts/21eb5c30"><link rel="next" title="Android消息机制之ThreadLocal" href="https://a1203991686.github.io/posts/64f0a9f6.html"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d96f5834c289ac641e8340af58c61f69";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://littlecorgi.top/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'true',
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"}
+  
+}</script></head><body><canvas class="fireworks"></canvas><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">littlecrogi的小站</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">33</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">24</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">7</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#简介"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">简介</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#Handler的基本用法"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">Handler的基本用法</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#从Handler构造方法入手"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">从Handler构造方法入手</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#分析1-1-Handler-构造方法"><span class="toc_mobile_items-number">3.1.</span> <span class="toc_mobile_items-text">分析1.1 Handler # 构造方法</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#分析1-2-Looper-myLooper"><span class="toc_mobile_items-number">3.2.</span> <span class="toc_mobile_items-text">分析1.2 Looper # myLooper()</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#分析1-3-Looper-prepare"><span class="toc_mobile_items-number">3.3.</span> <span class="toc_mobile_items-text">分析1.3 Looper # prepare()</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#分析1-4-Looper-构造方法"><span class="toc_mobile_items-number">3.4.</span> <span class="toc_mobile_items-text">分析1.4 Looper # 构造方法</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#消息是如何存放的"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text">消息是如何存放的</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Handler-sendMessage-amp-post"><span class="toc_mobile_items-number">4.1.</span> <span class="toc_mobile_items-text">Handler # sendMessage() &amp; post()</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#分析2-1-Handler-sendMessageAtTime"><span class="toc_mobile_items-number">4.2.</span> <span class="toc_mobile_items-text">分析2.1 Handler # sendMessageAtTime()</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#分析2-2-Handler-enqueueMessage"><span class="toc_mobile_items-number">4.3.</span> <span class="toc_mobile_items-text">分析2.2 Handler # enqueueMessage()</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#消息是如何存放的-1"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text">消息是如何存放的</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Looper-loop"><span class="toc_mobile_items-number">5.1.</span> <span class="toc_mobile_items-text">Looper # loop()</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#分析3-1-MessageQueue-next"><span class="toc_mobile_items-number">5.2.</span> <span class="toc_mobile_items-text">分析3.1 MessageQueue # next()</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#分析3-2-1"><span class="toc_mobile_items-number">5.2.1.</span> <span class="toc_mobile_items-text">分析3.2.1</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#分析3-2-Handler-dispatchMessage"><span class="toc_mobile_items-number">5.3.</span> <span class="toc_mobile_items-text">分析3.2 Handler # dispatchMessage()</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#流程图"><span class="toc_mobile_items-number">6.</span> <span class="toc_mobile_items-text">流程图</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#延伸"><span class="toc_mobile_items-number">7.</span> <span class="toc_mobile_items-text">延伸</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#1-为什么说Handler可能会导致内存泄漏"><span class="toc_mobile_items-number">7.1.</span> <span class="toc_mobile_items-text">1. 为什么说Handler可能会导致内存泄漏</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#2-为什么主线程不需要创建Looper，而且主线程的Looper不许退出"><span class="toc_mobile_items-number">7.2.</span> <span class="toc_mobile_items-text">2. 为什么主线程不需要创建Looper，而且主线程的Looper不许退出</span></a></li></ol></li></ol></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Handler的基本用法"><span class="toc-number">2.</span> <span class="toc-text">Handler的基本用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从Handler构造方法入手"><span class="toc-number">3.</span> <span class="toc-text">从Handler构造方法入手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分析1-1-Handler-构造方法"><span class="toc-number">3.1.</span> <span class="toc-text">分析1.1 Handler # 构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析1-2-Looper-myLooper"><span class="toc-number">3.2.</span> <span class="toc-text">分析1.2 Looper # myLooper()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析1-3-Looper-prepare"><span class="toc-number">3.3.</span> <span class="toc-text">分析1.3 Looper # prepare()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析1-4-Looper-构造方法"><span class="toc-number">3.4.</span> <span class="toc-text">分析1.4 Looper # 构造方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#消息是如何存放的"><span class="toc-number">4.</span> <span class="toc-text">消息是如何存放的</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Handler-sendMessage-amp-post"><span class="toc-number">4.1.</span> <span class="toc-text">Handler # sendMessage() &amp; post()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析2-1-Handler-sendMessageAtTime"><span class="toc-number">4.2.</span> <span class="toc-text">分析2.1 Handler # sendMessageAtTime()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析2-2-Handler-enqueueMessage"><span class="toc-number">4.3.</span> <span class="toc-text">分析2.2 Handler # enqueueMessage()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#消息是如何存放的-1"><span class="toc-number">5.</span> <span class="toc-text">消息是如何存放的</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Looper-loop"><span class="toc-number">5.1.</span> <span class="toc-text">Looper # loop()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析3-1-MessageQueue-next"><span class="toc-number">5.2.</span> <span class="toc-text">分析3.1 MessageQueue # next()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分析3-2-1"><span class="toc-number">5.2.1.</span> <span class="toc-text">分析3.2.1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析3-2-Handler-dispatchMessage"><span class="toc-number">5.3.</span> <span class="toc-text">分析3.2 Handler # dispatchMessage()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#流程图"><span class="toc-number">6.</span> <span class="toc-text">流程图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#延伸"><span class="toc-number">7.</span> <span class="toc-text">延伸</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-为什么说Handler可能会导致内存泄漏"><span class="toc-number">7.1.</span> <span class="toc-text">1. 为什么说Handler可能会导致内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-为什么主线程不需要创建Looper，而且主线程的Looper不许退出"><span class="toc-number">7.2.</span> <span class="toc-text">2. 为什么主线程不需要创建Looper，而且主线程的Looper不许退出</span></a></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(http://cdn.littlecorgi.top/blog/Keynote_Blog_FINAL.png)"><div id="post-info"><div id="post-title"><div class="posttitle">Android消息机制之Handler详解</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-11-17<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2019-11-17</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Android/">Android</a></span><div class="post-meta-wordcount"><i class="fa fa-file-word-o post-meta__icon" aria-hidden="true"></i><span>字数总计: </span><span class="word-count">3.2k</span><span class="post-meta__separator">|</span><i class="fa fa-clock-o post-meta__icon" aria-hidden="true"></i><span>阅读时长: 12 分钟</span><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>作为一个Android开发者，Handler的大名你一定听过。做Android开发肯定离不开Handler，它通常被我们用来连通主线程和子线程。</p>
 <p>可以说只要有异步的地方一定有Handler。</p>
 <p>那么，你了解过为什么Handler能连通主线程和子线程吗，也就是说，你了解过Handler背后的原理吗？</p>
 <p>就让本文带你了解。</p>
@@ -207,8 +132,8 @@
 <li>优先级最低的是Handler自己的handleMessage(msg)方法，这也是我们最常用的消息处理方法。</li>
 </ol>
 <h1 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h1><p>（图片来自于<a href="https://juejin.im/post/5c74b64a6fb9a049be5e22fc#heading-7" target="_blank" rel="noopener">此处</a>）
-<img alt class="post-img b-lazy" data-img="http://cdn.littlecorgi.top/mweb/2019-11-17/15739707276639.jpg" data-index="0" data-src="http://cdn.littlecorgi.top/mweb/2019-11-17/15739707276639.jpg"><br><img alt class="post-img b-lazy" data-img="http://cdn.littlecorgi.top/mweb/2019-11-17/15739710069538.jpg" data-index="1" data-src="http://cdn.littlecorgi.top/mweb/2019-11-17/15739710069538.jpg"></p>
-<h1 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h1><h2 id="1-为什么说Handler可能会导致内存泄漏"><a href="#1-为什么说Handler可能会导致内存泄漏" class="headerlink" title="1. 为什么说Handler可能会导致内存泄漏"></a>1. 为什么说Handler可能会导致内存泄漏</h2><p>只要你用Android Studio，并在Activity里面用过Handler，都会注意到一个地方，就是如果你直接创建Handler对象并重写handleMessage方法的话，AS一把都会报一个warning：<br><img alt class="post-img b-lazy" data-img="http://cdn.littlecorgi.top/mweb/2019-11-17/15739712887055.jpg" data-index="2" data-src="http://cdn.littlecorgi.top/mweb/2019-11-17/15739712887055.jpg"></p>
+<img alt data-src="http://cdn.littlecorgi.top/mweb/2019-11-17/15739707276639.jpg" class="lazyload"><br><img alt data-src="http://cdn.littlecorgi.top/mweb/2019-11-17/15739710069538.jpg" class="lazyload"></p>
+<h1 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h1><h2 id="1-为什么说Handler可能会导致内存泄漏"><a href="#1-为什么说Handler可能会导致内存泄漏" class="headerlink" title="1. 为什么说Handler可能会导致内存泄漏"></a>1. 为什么说Handler可能会导致内存泄漏</h2><p>只要你用Android Studio，并在Activity里面用过Handler，都会注意到一个地方，就是如果你直接创建Handler对象并重写handleMessage方法的话，AS一把都会报一个warning：<br><img alt data-src="http://cdn.littlecorgi.top/mweb/2019-11-17/15739712887055.jpg" class="lazyload"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">This Handler class should be static or leaks might occur.</span><br><span class="line"></span><br><span class="line">该处理程序类应为静态，否则可能发生泄漏</span><br></pre></td></tr></table></figure>
 
 <p>就是说如果直接这样写就可能会导致内存泄漏，但是如果你在不是Activity的类里面这样写又不会报warning，这是为什么呢？</p>
@@ -218,399 +143,26 @@
 
 <h2 id="2-为什么主线程不需要创建Looper，而且主线程的Looper不许退出"><a href="#2-为什么主线程不需要创建Looper，而且主线程的Looper不许退出" class="headerlink" title="2. 为什么主线程不需要创建Looper，而且主线程的Looper不许退出"></a>2. 为什么主线程不需要创建Looper，而且主线程的Looper不许退出</h2><p>因为在主线程创建时会自动调用Looper的prepare方法，并调用loop方法。我们就可以直接在主线程使用Handler。</p>
 <p>而为什么不能退出，是因为如果Looper退出了，那么主线程就会挂掉。Android也不许你手动退出主线程的Looper。</p>
-
-                </article>
-                <ul class="tags-postTags">
-                    
-                    <li>
-                        <a href="/tags/Android/" rel="tag"># Android</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/tags/Handler/" rel="tag"># Handler</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/tags/ThreadLocal/" rel="tag"># ThreadLocal</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/tags/源码/" rel="tag"># 源码</a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    
-    <nav id="gobottom" class="pagination">
-        
-        <span class="prev-next-post">·</span>
-        
-        <a class="next-post" title="Android消息机制之ThreadLocal" href="/posts/64f0a9f6.html">
-            Android消息机制之ThreadLocal →
-        </a>
-        
-    </nav>
-
-    
-    <div class="inner">
-        <div id="comment"></div>
-    </div>
-    
-</div>
-
-<div class="toc-bar">
-    <div class="toc-btn-bar">
-        <a href="#site-main" class="toc-btn">
-            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M793.024 710.272a32 32 0 1 0 45.952-44.544l-310.304-320a32 32 0 0 0-46.4 0.48l-297.696 320a32 32 0 0 0 46.848 43.584l274.752-295.328 286.848 295.808z"/></svg>
-        </a>
-        <div class="toc-btn toc-switch">
-            <svg class="toc-open" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M779.776 480h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M779.776 672h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M256 288a32 32 0 1 0 0 64 32 32 0 0 0 0-64M392.576 352h387.2a32 32 0 0 0 0-64h-387.2a32 32 0 0 0 0 64M256 480a32 32 0 1 0 0 64 32 32 0 0 0 0-64M256 672a32 32 0 1 0 0 64 32 32 0 0 0 0-64"/></svg>
-            <svg class="toc-close hide" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 960c-247.039484 0-448-200.960516-448-448S264.960516 64 512 64 960 264.960516 960 512 759.039484 960 512 960zM512 128.287273c-211.584464 0-383.712727 172.128262-383.712727 383.712727 0 211.551781 172.128262 383.712727 383.712727 383.712727 211.551781 0 383.712727-172.159226 383.712727-383.712727C895.712727 300.415536 723.551781 128.287273 512 128.287273z"/><path d="M557.05545 513.376159l138.367639-136.864185c12.576374-12.416396 12.672705-32.671738 0.25631-45.248112s-32.704421-12.672705-45.248112-0.25631l-138.560301 137.024163-136.447897-136.864185c-12.512727-12.512727-32.735385-12.576374-45.248112-0.063647-12.512727 12.480043-12.54369 32.735385-0.063647 45.248112l136.255235 136.671523-137.376804 135.904314c-12.576374 12.447359-12.672705 32.671738-0.25631 45.248112 6.271845 6.335493 14.496116 9.504099 22.751351 9.504099 8.12794 0 16.25588-3.103239 22.496761-9.247789l137.567746-136.064292 138.687596 139.136568c6.240882 6.271845 14.432469 9.407768 22.65674 9.407768 8.191587 0 16.352211-3.135923 22.591372-9.34412 12.512727-12.480043 12.54369-32.704421 0.063647-45.248112L557.05545 513.376159z"/></svg>
-        </div>
-        <a href="#gobottom" class="toc-btn">
-            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M231.424 346.208a32 32 0 0 0-46.848 43.584l297.696 320a32 32 0 0 0 46.4 0.48l310.304-320a32 32 0 1 0-45.952-44.544l-286.848 295.808-274.752-295.36z"/></svg>
-        </a>
-    </div>
-    <div class="toc-main">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Handler的基本用法"><span class="toc-text">Handler的基本用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从Handler构造方法入手"><span class="toc-text">从Handler构造方法入手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分析1-1-Handler-构造方法"><span class="toc-text">分析1.1 Handler # 构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析1-2-Looper-myLooper"><span class="toc-text">分析1.2 Looper # myLooper()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析1-3-Looper-prepare"><span class="toc-text">分析1.3 Looper # prepare()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析1-4-Looper-构造方法"><span class="toc-text">分析1.4 Looper # 构造方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#消息是如何存放的"><span class="toc-text">消息是如何存放的</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Handler-sendMessage-amp-post"><span class="toc-text">Handler # sendMessage() &amp; post()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析2-1-Handler-sendMessageAtTime"><span class="toc-text">分析2.1 Handler # sendMessageAtTime()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析2-2-Handler-enqueueMessage"><span class="toc-text">分析2.2 Handler # enqueueMessage()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#消息是如何存放的-1"><span class="toc-text">消息是如何存放的</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Looper-loop"><span class="toc-text">Looper # loop()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析3-1-MessageQueue-next"><span class="toc-text">分析3.1 MessageQueue # next()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分析3-2-1"><span class="toc-text">分析3.2.1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析3-2-Handler-dispatchMessage"><span class="toc-text">分析3.2 Handler # dispatchMessage()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#流程图"><span class="toc-text">流程图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#延伸"><span class="toc-text">延伸</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-为什么说Handler可能会导致内存泄漏"><span class="toc-text">1. 为什么说Handler可能会导致内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-为什么主线程不需要创建Looper，而且主线程的Looper不许退出"><span class="toc-text">2. 为什么主线程不需要创建Looper，而且主线程的Looper不许退出</span></a></li></ol></li></ol>
-    </div>
-</div>
-
-
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-
-	</div>
-	
-
-
-<aside class="read-next outer">
-    <div class="inner">
-        <div class="read-next-feed">
-            
-            
-
-<article class="read-next-card" style="background-image: url(http://cdn.littlecorgi.top/blog/headPic.jpg)">
-  <header class="read-next-card-header">
-    <small class="read-next-card-header-sitetitle">&mdash; littlecrogi的小站 &mdash;</small>
-    <h3 class="read-next-card-header-title">最新文章</h3>
-  </header>
-  <div class="read-next-divider">
-    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
-      <path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/>
-    </svg>
-  </div>
-  <div class="read-next-card-content">
-    <ul>
-      
-      
-      
-      <li>
-        <a href="/posts/21eb5c30.html">Android消息机制之Handler详解</a>
-      </li>
-      
-      
-      
-      <li>
-        <a href="/posts/64f0a9f6.html">Android消息机制之ThreadLocal</a>
-      </li>
-      
-      
-      
-      <li>
-        <a href="/posts/bfb9e8a9.html">View的事件分发</a>
-      </li>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    </ul>
-  </div>
-  <footer class="read-next-card-footer">
-    <a href="/archives">  MORE  → </a>
-  </footer>
-</article>
-
-            
-            
-            
-
-<article class="read-next-card" style="background-image: url(http://cdn.littlecorgi.top/blog/headPic.jpg)">
-    <header class="read-next-card-header tagcloud-card">
-        <h3 class="read-next-card-header-title">分类</h3>
-    </header>
-    <div class="read-next-card-content">
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Flutter/">Flutter</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/">Kotlin</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenGL/">OpenGL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂项/">杂项</a></li></ul>
-    </div>
-</article>
-
-
-            
-            
-            
-
-<article class="read-next-card" style="background-image: url(http://cdn.littlecorgi.top/blog/headPic.jpg)">
-	<header class="read-next-card-header tagcloud-card">
-		<h3 class="read-next-card-header-title">标签云</h3>
-	</header>
-	<div class="read-next-card-content-ext">
-		<a href="/tags/Android/" style="font-size: 24px;">Android</a> <a href="/tags/Aria2/" style="font-size: 14px;">Aria2</a> <a href="/tags/Flutter/" style="font-size: 22.33px;">Flutter</a> <a href="/tags/Handler/" style="font-size: 15.67px;">Handler</a> <a href="/tags/Hexo/" style="font-size: 14px;">Hexo</a> <a href="/tags/Java/" style="font-size: 15.67px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 15.67px;">Kotlin</a> <a href="/tags/OkHttp/" style="font-size: 15.67px;">OkHttp</a> <a href="/tags/OpenGL/" style="font-size: 15.67px;">OpenGL</a> <a href="/tags/Retrofit/" style="font-size: 14px;">Retrofit</a> <a href="/tags/ThreadLocal/" style="font-size: 15.67px;">ThreadLocal</a> <a href="/tags/View/" style="font-size: 17.33px;">View</a> <a href="/tags/Volley/" style="font-size: 15.67px;">Volley</a> <a href="/tags/ijkplayer/" style="font-size: 14px;">ijkplayer</a> <a href="/tags/kotlin/" style="font-size: 19px;">kotlin</a> <a href="/tags/uCrop/" style="font-size: 14px;">uCrop</a> <a href="/tags/事件分发/" style="font-size: 14px;">事件分发</a> <a href="/tags/图像处理/" style="font-size: 15.67px;">图像处理</a> <a href="/tags/图片处理/" style="font-size: 14px;">图片处理</a> <a href="/tags/多线程/" style="font-size: 15.67px;">多线程</a> <a href="/tags/操作系统/" style="font-size: 20.67px;">操作系统</a> <a href="/tags/源码/" style="font-size: 22.33px;">源码</a> <a href="/tags/语言基础/" style="font-size: 14px;">语言基础</a> <a href="/tags/音视频/" style="font-size: 14px;">音视频</a>
-	</div>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
-
-	
-
-
-
-
-<div id="search" class="search-overlay">
-    <div class="search-form">
-        
-        <div class="search-overlay-logo">
-        	<img src="https://i.loli.net/2017/11/26/5a19c0b50432e.png" alt="littlecrogi的小站">
-        </div>
-        
-        <input id="local-search-input" class="search-input" type="text" name="search" placeholder="搜索 ...">
-        <a class="search-overlay-close" href="#"></a>
-    </div>
-    <div id="local-search-result"></div>
-</div>
-
-<footer class="site-footer outer">
-	<div class="site-footer-content inner">
-		<div class="copyright">
-			<a href="/" title="littlecrogi的小站">littlecrogi的小站 &copy; 2019</a>
-			
-				
-			        <span hidden="true" id="/posts/21eb5c30.html" class="leancloud-visitors" data-flag-title="Android消息机制之Handler详解">
-			            <span>阅读量 </span>
-			            <span class="leancloud-visitors-count">0</span>
-			        </span>
-	    		
-    		
-		</div>
-		<nav class="site-footer-nav">
-			
-			<a href="https://hexo.io" title="Hexo" target="_blank" rel="noopener">Hexo</a>
-			<a href="https://github.com/xzhih/hexo-theme-casper" title="Casper" target="_blank" rel="noopener">Casper</a>
-		</nav>
-	</div>
-</footer>
-	
-
-
-<script>
-    if(window.navigator && navigator.serviceWorker) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-            for(let registration of registrations) {
-                registration.unregister()
-            }
-        })
-    }
-</script>
-
-
-<script id="scriptLoad" src="/js/allinone.min.js" async></script>
-
-
-<script>
-    document.getElementById('scriptLoad').addEventListener('load', function () {
-        
-        
-            var bLazy = new Blazy();
-        
-
-        
-        
-
-        
-        
-        
-            searchFunc("/");
-        
-        
-    })
-</script>
-
-
-
-<link rel="stylesheet" href="/photoswipe/photoswipe.css">
-<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
-<script src="/photoswipe/photoswipe.min.js"></script>
-<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
-
-
-
-
-<script id="valineScript" src="//unpkg.com/valine/dist/Valine.min.js" async></script>
-<script>
-    document.getElementById('valineScript').addEventListener("load", function() {
-        new Valine({
-            el: '#comment' ,
-            verify: true,
-            notify: true,
-            appId: 'nF5a5kxmNMeIjBsNRjTRf7XC-gzGzoHsz',
-            appKey: 'WNksxvK6nRsDExWmFIMITafq',
-            placeholder: '留下点什么再走也不迟',
-            pageSize: 10,
-            avatar: 'mm',
-            visitor: true
-        })
-    });
-</script>
-
-
-
-
-<script>
-    document.addEventListener('DOMContentLoaded',function(){
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        }
-        else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    });
-</script>
-
-
-</body>
-</html>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">littlecorgi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://a1203991686.github.io/posts/21eb5c30.html">https://a1203991686.github.io/posts/21eb5c30.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://a1203991686.github.io">littlecrogi的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Android/">Android    </a><a class="post-meta__tags" href="/tags/Handler/">Handler    </a><a class="post-meta__tags" href="/tags/ThreadLocal/">ThreadLocal    </a><a class="post-meta__tags" href="/tags/源码/">源码    </a></div><div class="post_share"><div class="social-share" data-image="http://cdn.littlecorgi.top/blog/Keynote_Blog_FINAL.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.png"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.png"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="next-post pull-full"><a href="/posts/64f0a9f6.html"><img class="next_cover lazyload" data-src="http://cdn.littlecorgi.top/blog/Keynote_Blog_FINAL.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>Android消息机制之ThreadLocal</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/64f0a9f6.html" title="Android消息机制之ThreadLocal"><img class="relatedPosts_cover lazyload" data-src="http://cdn.littlecorgi.top/blog/Keynote_Blog_FINAL.png"><div class="relatedPosts_title">Android消息机制之ThreadLocal</div></a></div><div class="relatedPosts_item"><a href="/posts/eb898689.html" title="Android网络请求1--HttpClient与HttpURLConnection"><img class="relatedPosts_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">Android网络请求1--HttpClient与HttpURLConnection</div></a></div><div class="relatedPosts_item"><a href="/posts/df8fd75e.html" title="Android网络请求2--解析Volley源码"><img class="relatedPosts_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">Android网络请求2--解析Volley源码</div></a></div><div class="relatedPosts_item"><a href="/posts/a2a8de56.html" title="Android网络请求4--解析Retrofit源码"><img class="relatedPosts_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">Android网络请求4--解析Retrofit源码</div></a></div><div class="relatedPosts_item"><a href="/posts/151ac78a.html" title="Android网络请求3--解析OkHttp源码"><img class="relatedPosts_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><div class="relatedPosts_title">Android网络请求3--解析OkHttp源码</div></a></div><div class="relatedPosts_item"><a href="/posts/bfb9e8a9.html" title="View的事件分发"><img class="relatedPosts_cover lazyload" data-src="http://cdn.littlecorgi.top/blog/Snipaste_2019-10-31_23-03-31.png"><div class="relatedPosts_title">View的事件分发</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = false == true ? true : false;
+var verify = false == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'nF5a5kxmNMeIjBsNRjTRf7XC-gzGzoHsz',
+  appKey:'WNksxvK6nRsDExWmFIMITafq',
+  placeholder:'留下点什么再走也不迟',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang:'zh-cn',
+  recordIP: true
+});</script></div></div></div><footer id="footer" style="background-image: url(http://cdn.littlecorgi.top/blog/Keynote_Blog_FINAL.png)"><div id="footer-wrap"><div class="copyright">&copy;2019 By littlecorgi</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://littlecorgi.top/">blog</a>!</div><div class="icp"><a href="http://www.beian.miit.gov.cn/"><img class="icp-icon" src="/img/icp.png"><span>鄂ICP备19018829号</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zindex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
