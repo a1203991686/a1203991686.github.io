@@ -3649,4 +3649,56 @@
         <tag>语言基础</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LiveData的map()和switchMap</title>
+    <url>/posts/b1488352.html</url>
+    <content><![CDATA[<h1 id="LiveData的map-和switchMap"><a href="#LiveData的map-和switchMap" class="headerlink" title="LiveData的map()和switchMap"></a>LiveData的map()和switchMap</h1><h1 id="官方文档中的介绍"><a href="#官方文档中的介绍" class="headerlink" title="官方文档中的介绍"></a>官方文档中的介绍</h1><p>在Android Developer官网上，对于map和switchMap的解释是这样的：</p>
+<ul>
+<li>map：</li>
+</ul>
+<blockquote>
+<p>Applies a function on the value stored in the LiveData object, and propagates the result downstream.</p>
+</blockquote>
+<p>对存储在 LiveData 对象中的值应用函数，并将结果传播到下游。</p>
+<ul>
+<li>switchMap：</li>
+</ul>
+<blockquote>
+<p>applies a function to the value stored in the LiveData object and unwraps and dispatches the result downstream. <strong>The function passed to switchMap() must return a LiveData object, as illustrated by the following example:</strong></p>
+</blockquote>
+<p>对存储在 LiveData 对象中的值应用函数，并将结果解封和分派到下游。<strong>传递给 switchMap() 的函数必须返回 LiveData 对象。</strong></p>
+<a id="more"></a>
+<p>其实单纯的看上面两个官方文档反而还会觉得更加的莫名其妙。其实这两句话差异的核心在于 <strong>“解封”</strong> 和 <strong>“返回LiveData对象”</strong> 。</p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>我们先来举个栗子来说明下这两个方法的区别(例子来源于<a href="https://medium.com/@elye.project/understanding-live-data-made-simple-a820fcd7b4d0" target="_blank" rel="noopener">此文章</a>)：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TransformationMapFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> changeObserver = Observer&lt;String&gt; &#123; value -&gt;</span><br><span class="line">        value?.let &#123; txt_fragment.text = it &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAttach</span><span class="params">(context: <span class="type">Context</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onAttach(context)</span><br><span class="line">        <span class="keyword">val</span> transformedLiveData = Transformations.map(</span><br><span class="line">                getLiveDataA()) &#123; <span class="string">"A:<span class="variable">$it</span>"</span> &#125;</span><br><span class="line">        transformedLiveData.observe(<span class="keyword">this</span>, changeObserver)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到运行结果是这样的：</p>
+<p><img src="http://cdn.littlecorgi.top/mweb/2020-06-24/1_6cTWqtHlJgnzF701QFtZQg.gif" alt="1_6cTWqtHlJgnzF701QFtZQg"></p>
+<p>结合代码运行结果以及上面文档中对map函数的定义，我们可以得出下面这个结论：map函数主要的功能就是根据原LiveData，对其原LiveData的值进行改变然后生成一个新的LiveData。<strong>基于原LiveData</strong>。</p>
+<p>而switchMap，同样的，我们也来看一个例子：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TransformationSwitchMapFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> changeObserver = Observer&lt;String&gt; &#123; value -&gt;</span><br><span class="line">        value?.let &#123; txt_fragment.text = it &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAttach</span><span class="params">(context: <span class="type">Context</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onAttach(context)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> transformSwitchedLiveData =</span><br><span class="line">            Transformations.switchMap(getLiveDataSwitch()) &#123; </span><br><span class="line">                switchToB -&gt;</span><br><span class="line">                <span class="keyword">if</span> (switchToB) &#123;</span><br><span class="line">                     getLiveDataB()</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                     getLiveDataA()</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        transformSwitchedLiveData.observe(<span class="keyword">this</span>, changeObserver)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// .. some other Fragment specific code ..</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到运行结果是这样的：</p>
+<p><img src="http://cdn.littlecorgi.top/mweb/2020-06-24/1_9RDrsXCBQhZmmc8XMQWw6Q.gif" alt="1_9RDrsXCBQhZmmc8XMQWw6Q"></p>
+<p>同样的结合这个例子和上面的文档描述，我们也可以得出一个结论：switchMap是根据传入的LiveData的值，然后判断这个值，然后再去切换或者构建新的LiveData。<strong>手动生成新的LiveData</strong>。</p>
+<h1 id="差异"><a href="#差异" class="headerlink" title="差异"></a>差异</h1><p>所以对于这两个函数的区别来说，map，更关注于数值的转换，也就是说，他只会通过你之前的值去生成一个新的值，强调的是这个<strong>转换</strong>，也就是说新的LiveData对象的值，仍然是基于当前这个LiveData的值而生成的。</p>
+<p>而switchMap，更关注于数值的<strong>触发</strong>，也就是说，他会监听你这个值的变化，而不关注你这个值本身，你可以理解成触发器或者扳机，当触发之后，你就需要自己去主动的返回任意一个你指定的liveData对象。</p>
+<p>所以我们再回过头来看一下上面说的 <strong>“解封”</strong> 和 <strong>“返回LiveData对象” ：</strong></p>
+<p>对于这个，我觉得应该相对的来看，对于map来说，他把值从LiveData中读取了出来，但是他只是在原值的基础上进行操作生成新的LiveData对象，新的LiveData对象的值是基于旧的LiveData对象的，也就是说没有完全的将值独立出来；而对于switchMap，它不仅仅将值从LiveData中取出来了，并且取出来之后，对于新的LiveData来说，他并没有要求新的LiveData的值必须得基于旧的LiveData咋样，而是只是单纯的作为一个触发器，你返回的新的LiveData对象中存储的值，与旧的LiveData对象的值有没有关系，他并不在意。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>所以，总结一下。</p>
+<p>map强调的是，<strong>新的LiveData的值必须基于旧的LiveData中的值</strong>(比方说像上面的例子，取出旧的LiveData的每个值然后加上相同的String从而生成新的LiveData)。</p>
+<p>而switchMap，他并不在意这些，他在意的是他会<strong>将旧的LiveData的值作为一个触发，作为一个switch</strong>，他不管你你到底是利用这个switch做判断返回不用的值(像上面的例子)，还是你利用这个值去网络请求生成新的值(比方说旧的LiveData存了用户名，而你根据这个用户名去请求用户的具体信息作为新的LiveData返回)也好，只要你<strong>手动返回了一个新的LiveData</strong>就行。</p>
+<h1 id="相关文档"><a href="#相关文档" class="headerlink" title="相关文档"></a>相关文档</h1><ul>
+<li><a href="https://medium.com/@elye.project/understanding-live-data-made-simple-a820fcd7b4d0" target="_blank" rel="noopener">Understanding LiveData made simple - Elye - Medium</a></li>
+<li><a href="https://stackoverflow.com/a/47690327/13753159" target="_blank" rel="noopener">What is the difference between map() and switchMap() methods? - stack overflow</a></li>
+<li><a href="https://developer.android.google.cn/topic/libraries/architecture/livedata#transform_livedata" target="_blank" rel="noopener">LiveData 概览 # 转换 LiveData - Android Developer</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>Jetpack</tag>
+        <tag>LiveData</tag>
+      </tags>
+  </entry>
 </search>
