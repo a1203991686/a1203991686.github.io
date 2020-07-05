@@ -1269,31 +1269,6 @@
   </entry>
   
   <entry>
-    <title>Android类之SharedPreferences</title>
-    <link href="https://a1203991686.github.io/posts/8a47fe84.html"/>
-    <id>https://a1203991686.github.io/posts/8a47fe84.html</id>
-    <published>2019-05-31T11:21:25.000Z</published>
-    <updated>2019-07-26T13:47:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Android类之SharedPreferences"><a href="#Android类之SharedPreferences" class="headerlink" title="Android类之SharedPreferences"></a>Android类之SharedPreferences</h1><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>SharedPreferences是一个轻量的存储类，用于把一些只需要少量简单类型数据保存到本地，例如搜索历史、用户设置等。 他只适合处理简单的数据，处理太过于庞大的数据会减慢程序运行。</p><a id="more"></a><h1 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h1><h2 id="1-存储数据"><a href="#1-存储数据" class="headerlink" title="1. 存储数据"></a>1. 存储数据</h2><ol><li>使用Activity类的getSharedPreferences()方法获得SharedPreferences对象，其中存储key-value的文件名由getSharedPreferences()方法的第一个参数指定。</li><li>使用SharedPreferences接口的edit()获得SharedPreferences.Editor对象。</li><li>通过SharedPreferences.Editor接口的putXxx()方法保存key-value对，其中Xxx表示不同的数据类型。例如：字符串类型的value需要用putString方法。</li><li>通过SharedPreferences.Editor接口的commit()方法保存key-value对，commit方法相当于数据库事务中的提交操作。</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SharedPreferences sharedPreferences = getSharedPreferences(<span class="string">"test"</span>, Context.MODE_PRIVATE);</span><br><span class="line">Editor editor = sharedPreferences.edit();<span class="comment">//获取编辑器</span></span><br><span class="line">editor.putString(<span class="string">"name"</span>, <span class="string">"小明"</span>);</span><br><span class="line">editor.putInt(<span class="string">"age"</span>, <span class="number">24</span>);</span><br><span class="line">editor.commit();<span class="comment">//提交修改</span></span><br></pre></td></tr></table></figure><h2 id="2-读取数据"><a href="#2-读取数据" class="headerlink" title="2. 读取数据"></a>2. 读取数据</h2><ol><li>使用Activity类的getSharedPreferences()方法获得SharedPreferences对象。</li><li>通过SharedPreferences对象的getXxx()方法得到数据。</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SharedPreferences sharedPreferences= getSharedPreferences(<span class="string">"test"</span>, Activity.MODE_PRIVATE);</span><br><span class="line"><span class="comment">// 使用getString方法获得value，注意第2个参数是value的默认值   </span></span><br><span class="line">String name =sharedPreferences.getString(<span class="string">"name"</span>, <span class="string">""</span>);</span><br><span class="line"><span class="keyword">int</span> age =sharedPreferences.getInt(<span class="string">"age"</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure><p><code>SharedPreferences</code>的四种模式</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Context.MODE_PRIVATE：为默认操作模式,代表该文件是私有数据,只能被应用本身访问,在该模式下,写入的内容会覆盖原文件的内容</span><br><span class="line">Context.MODE_APPEND：模式会检查文件是否存在,存在就往文件追加内容,否则就创建新文件.</span><br><span class="line">Context.MODE_WORLD_READABLE：表示当前文件可以被其他应用读取.</span><br><span class="line">Context.MODE_WORLD_WRITEABLE：表示当前文件可以被其他应用写入.</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Android类之SharedPreferences&quot;&gt;&lt;a href=&quot;#Android类之SharedPreferences&quot; class=&quot;headerlink&quot; title=&quot;Android类之SharedPreferences&quot;&gt;&lt;/a&gt;Android类之SharedPreferences&lt;/h1&gt;&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;SharedPreferences是一个轻量的存储类，用于把一些只需要少量简单类型数据保存到本地，例如搜索历史、用户设置等。 他只适合处理简单的数据，处理太过于庞大的数据会减慢程序运行。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="https://a1203991686.github.io/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="https://a1203991686.github.io/tags/Android/"/>
-    
-      <category term="View" scheme="https://a1203991686.github.io/tags/View/"/>
-    
-  </entry>
-  
-  <entry>
     <title>AndroidView之PopupWindow</title>
     <link href="https://a1203991686.github.io/posts/1900f7eb.html"/>
     <id>https://a1203991686.github.io/posts/1900f7eb.html</id>
