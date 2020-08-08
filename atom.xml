@@ -1294,6 +1294,41 @@
   </entry>
   
   <entry>
+    <title>面试题总结</title>
+    <link href="https://a1203991686.github.io/posts/5c3dbcbd.html"/>
+    <id>https://a1203991686.github.io/posts/5c3dbcbd.html</id>
+    <published>2018-12-31T16:00:00.000Z</published>
+    <updated>2020-08-08T09:30:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-第一份"><a href="#1-第一份" class="headerlink" title="1. 第一份"></a>1. 第一份</h1><ol><li>算法：链表的逆置<br>算法思路不正确</li><li>Java线程池<br>照着源码讲了一遍<br>追问：LinkedBlockingQueue有什么作用？<br>讲的不清楚<br>追问：线程同步有什么办法？<br>只回答了锁<br>追问：锁有哪些？可用于什么场景？<br>synchronized、lock、可重用锁、CAS<br>基本原理回答正确，但不清楚具体场景  </li><li>ThreadLocal作用<br>不清楚</li><li>Handler使用的时候需要注意什么问题？<br>内存泄露<br>内部类、弱引用，静态内部类<br>onDestroy移除消息<br>追问：Handler都能干什么事？<br>卡顿丢帧检测</li><li>Java里面的几种引用区别？使用场景<br>原理回答正确，使用场景理解不够深入</li><li>卡顿检测和优化<br>检测方法：BlockCanary、TraceView、屏幕刷新机制<br>造成卡顿的原因回答正确<br>优化：扁平化布局、过渡绘制、刷新次数区域控制<br>主线程耗时操作、SP初始化、不要放大对象，不要频繁提交，减少IO操作<br>自定义View的onDraw方法</li><li>SP内部数据结构<br>XML文件，map kv形式<br>追问：线程安全吗？<br>回答正确<br>追问：进程安全吗？<br>不安全<br>追问：怎么保证进程安全？<br>包一层ContentProvider<br>追问：用SQLite可以吗？为什么<br>应该可以</li><li>进程间通信的办法<br>AIDL，Binder，除了Binder不知道其他的</li><li>LruCache<br>基本原理回答正确<br>追问：get/put方法设计的时候需要注意什么问题？<br>LinkedHashMap不安全，加同步锁</li><li>HTTPS<br>基本流程正确，但不完善，不知道如何优化</li><li>Kotlin遇到的坑？<br>没遇到什么坑，只觉得有好处<br>追问：有什么好处<br>简洁、语法糖<br>追问：object和compaion object区别<br>回答的比较片面<br>追问：object实现单例的原理<br>回答错误</li></ol><h1 id="2-第二份"><a href="#2-第二份" class="headerlink" title="2. 第二份"></a>2. 第二份</h1><ol><li>2sum算法<br>给出了双重循环的办法，但算法不完善<br>追问：是否有更快的办法？<br>没想法</li><li>I am a student变成student a am I<br>没想法</li><li>Java的HashMap的哈希冲突<br>回答正确<br>追问：HashMap和HashTable，ConcurrentHashMap<br>回答正确，对比详细</li><li>LinkedBlockQueue的作用<br>基本原理回答正常，使用场景基本正确 </li><li>ThreadLocal作用，使用时需要注意什么问题？<br>基本原理回答正确<br>注意的问题：内存泄露相关，具体说的不太清楚</li><li>几种引用形式的区别<br>内存控制上的区别回答正确、详细<br>追问：具体使用场景<br>能答出Weak的使用场景</li><li>Bitmap使用的时候注意的问题<br>颜色配置、过大（缩放、BitmapFactory、option）、及时recycle<br>追问：Recycle了怎么办？<br>磁盘缓存<br>追问：Bitmap的OOM避免<br>能说出基本的<br>追问：Android 6.0和9.0上的Bitmap加载有什么区别<br>基本方向正确，但不完全正确<br>追问：565和8888区别<br>占用空间问题，透明度信息<br>追问：Bitmap在Android上变绿的问题，原因、解决？<br>不了解</li><li>MessageQueue<br>Java层回答比较详细<br>追问：死循环为什么不会阻塞主线程？<br>回答错误<br>追问：操作系统上对应什么IO复用模型？<br>不太清楚</li><li>图片加载框架的节流设计<br>按需加载，其他不了解，提示了以后，webp<br>追问：怎么知道缓存？<br>不清楚<br>追问：其他节流格式<br>回答不完全正确<br>追问：png和jpeg区别<br>不清楚</li><li>ConstraintLayout、LinearLayout、FrameLayout、RelativeLayout性能&amp;使用场景<br>基本测量、layout原理对比回答正确<br>使用场景回答比较抽象，不是很具体<br>追问：列表卡顿优化<br>注意onDraw方法、避免重复创建<br>追问：结合以上几种Layout<br>需要看具体使用场景，基本方向正确，但不是很具体</li><li>http2<br>不太清楚</li><li>HTTP状态码<br>301、302区别：不清楚<br>404、403区别：404回答基本正确、403不清楚</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      记录下网络上别人发的面试汇总
+    
+    </summary>
+    
+    
+      <category term="面试" scheme="https://a1203991686.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+      <category term="Android" scheme="https://a1203991686.github.io/tags/Android/"/>
+    
+      <category term="Java" scheme="https://a1203991686.github.io/tags/Java/"/>
+    
+      <category term="Kotlin" scheme="https://a1203991686.github.io/tags/Kotlin/"/>
+    
+      <category term="操作系统" scheme="https://a1203991686.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="JVM" scheme="https://a1203991686.github.io/tags/JVM/"/>
+    
+      <category term="计组" scheme="https://a1203991686.github.io/tags/%E8%AE%A1%E7%BB%84/"/>
+    
+      <category term="计网" scheme="https://a1203991686.github.io/tags/%E8%AE%A1%E7%BD%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>杂项</title>
     <link href="https://a1203991686.github.io/posts/bc8ba982.html"/>
     <id>https://a1203991686.github.io/posts/bc8ba982.html</id>
