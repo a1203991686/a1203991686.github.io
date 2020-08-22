@@ -1768,7 +1768,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="4-1-3-流程图"><a href="#4-1-3-流程图" class="headerlink" title="4.1.3 流程图"></a>4.1.3 流程图</h3><p>对于流程我们可以用下图表示：<br><img src="http://cdn.littlecorgi.top/mweb/2020-08-22/Jetpack%E6%BA%90%E7%A0%81-%E4%B9%8B-LiveData-LiveData%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt="Jetpack源码-之-LiveData-LiveData流程图"></p>
+<h3 id="4-1-3-流程图"><a href="#4-1-3-流程图" class="headerlink" title="4.1.3 流程图"></a>4.1.3 流程图</h3><p>对于流程我们可以用下图表示：<br><img src="https://cdn.littlecorgi.top/mweb/2020-08-22/Jetpack%E6%BA%90%E7%A0%81-%E4%B9%8B-LiveData-LiveData%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt="Jetpack源码-之-LiveData-LiveData流程图"></p>
 <h2 id="4-2-LiveData真的可以被用于事件分发吗"><a href="#4-2-LiveData真的可以被用于事件分发吗" class="headerlink" title="4.2 LiveData真的可以被用于事件分发吗"></a>4.2 LiveData真的可以被用于事件分发吗</h2><p>LiveData本质上是可观察的数据存储类，但是可观察这个特性不就可以被用来事件分发吗(EventBus)，而且还通过Lifecycle实现了生命周期感知，这些相对来说比EventBus更加简单。</p>
 <p>但是LiveData真的有表面上看上去的这个简单吗？真的有这么好吗？</p>
 <h3 id="4-2-1-postValue-数据丢失"><a href="#4-2-1-postValue-数据丢失" class="headerlink" title="4.2.1 postValue 数据丢失"></a>4.2.1 postValue 数据丢失</h3><p>在postValue方法中，如果mPendingData == NOT_SET的话，就会直接丢弃调这次的数据。也就是说，如果上次的事件还在分发，还没完成的话，那么这次的事件就会直接丢弃。</p>
