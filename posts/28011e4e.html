@@ -167,7 +167,7 @@ if (autoChangeMode === '1') {
 <h3 id="4-1-1-添加观察者"><a href="#4-1-1-添加观察者" class="headerlink" title="4.1.1 添加观察者"></a>4.1.1 添加观察者</h3><ol>
 <li>调用<code>observer()</code>方法，<ol>
 <li>在这个方法中会先构造一个LifecycleBoundObserver的对象，这个对象保存了这个<code>mObserver</code>以及激活状态<code>mActive</code>；</li>
-<li>接着把这个对象添加到通过<code>mObservers.putIfAbsent()</code>添加进去；</li>
+<li>接着把这个对象通过<code>mObservers.putIfAbsent()</code>添加到mObservers这个map中去；</li>
 <li>并调用<code>owner.getLifecycle().addObserver(wrapper)</code>添加到Lifecycle中进行监听。</li>
 </ol>
 </li>
