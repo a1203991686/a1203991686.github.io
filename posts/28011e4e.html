@@ -171,7 +171,7 @@ if (autoChangeMode === '1') {
 <li>并调用<code>owner.getLifecycle().addObserver(wrapper)</code>添加到Lifecycle中进行监听。</li>
 </ol>
 </li>
-<li>之后每当<code>owner</code>生命周期变化时，就会调用LifecycleBoundObserver的<code>onStateChanged()</code>方法<ol>
+<li>之后每当<code>owner</code>生命周期变化时，就会调用LifecycleBoundObserver的<code>onStateChanged()</code>方法 (具体可见Lifecycle的源码)<ol>
 <li>如果当前<code>owner</code>的状态为<code>DESTROYED</code>的时候，就会将这个<code>observer</code>从<code>mObservers</code>中移除</li>
 <li>如果不是，就调用<code>activeStateChanged()</code>去更新<code>mActive</code></li>
 </ol>
