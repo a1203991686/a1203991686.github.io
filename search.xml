@@ -4825,6 +4825,27 @@
     <url>/posts/fd6f0996.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/introduction">https://start.insert-koin.io/#/introduction</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <h2 id="KOIN是什么"><a href="#KOIN是什么" class="headerlink" title="KOIN是什么?"></a><a href="https://start.insert-koin.io/#/introduction?id=what-is-koin">KOIN是什么?</a></h2><p>给Kotlin开发者的一个实用的轻量级的Kotlin依赖注入框架。</p>
 <p>用纯Kotlin编写，仅使用函数来解决：无代理，无代码生成，无反射。</p>
@@ -4854,6 +4875,27 @@
     <url>/posts/63fa5724.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/getting-started/testing">https://start.insert-koin.io/#/getting-started/testing</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <p><code>Koin-test</code> 项目能提供给你轻量但是强大的工具来测试你的Koin应用程序。</p>
 <h2 id="获取组件"><a href="#获取组件" class="headerlink" title="获取组件"></a><a href="https://start.insert-koin.io/#/getting-started/testing?id=getting-your-components">获取组件</a></h2><p>只要用 <code>KoinTest</code> 标记你的测试类，你就可以解锁KoinComponent &amp;测试特性：</p>
@@ -4898,6 +4940,27 @@
     <url>/posts/ebed2a69.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/getting-started/koin-for-java">https://start.insert-koin.io/#/getting-started/koin-for-java</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <p>下面是 <code>koin-java</code> 特性的简短描述。这个项目是帮助java开发人员的静态utils的一个小子集。</p>
 <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a><a href="https://start.insert-koin.io/#/getting-started/koin-for-java?id=start-koin">开始</a></h2><p>Just use the <code>startKoin()</code> static function (with the static import to reduce the syntax):</p>
@@ -4927,6 +4990,27 @@
     <url>/posts/f5a785d7.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/getting-started/koin-for-android">https://start.insert-koin.io/#/getting-started/koin-for-android</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <h2 id="在Android中开始"><a href="#在Android中开始" class="headerlink" title="在Android中开始"></a><a href="https://start.insert-koin.io/#/getting-started/koin-for-android?id=starting-koin-for-android">在Android中开始</a></h2><p>在任何一个Android类中：</p>
 <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> : <span class="type">Application</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate()</span><br><span class="line"></span><br><span class="line">        startKoin &#123;</span><br><span class="line">            <span class="comment">// use AndroidLogger as Koin Logger - default Level.INFO</span></span><br><span class="line">            <span class="comment">// 使用AndroidLogger代替KoinLogger - 默认Lovel.INFO</span></span><br><span class="line">            androidLogger()</span><br><span class="line"></span><br><span class="line">            <span class="comment">// use the Android context given there 在这使用给定的AndroidContext</span></span><br><span class="line">            androidContext(<span class="keyword">this</span><span class="symbol">@MainApplication</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">// load properties from assets/koin.properties file</span></span><br><span class="line">            <span class="comment">// 从assets/koin.properties文件中加载属性</span></span><br><span class="line">            androidFileProperties()</span><br><span class="line"></span><br><span class="line">            <span class="comment">// module list 模块列表</span></span><br><span class="line">            modules(offlineWeatherApp)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -4977,6 +5061,27 @@
     <url>/posts/b075de90.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/setup/index">https://start.insert-koin.io/#/setup/index</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <h1 id="为您的项目配置Koin"><a href="#为您的项目配置Koin" class="headerlink" title="为您的项目配置Koin"></a>为您的项目配置Koin</h1><h3 id="最新版本"><a href="#最新版本" class="headerlink" title="最新版本"></a><a href="https://start.insert-koin.io/#/setup/index?id=current-version">最新版本</a></h3><p>Koin的最新版本：</p>
 <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 最新的stable版本</span></span><br><span class="line">koin_version= <span class="string">&quot;2.1.6&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 最新的unstable版本</span></span><br><span class="line">koin_version= <span class="string">&quot;2.2.0-rc-1&quot;</span></span><br></pre></td></tr></table></figure>
@@ -5009,6 +5114,27 @@
     <url>/posts/f88fedb6.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/quickstart/kotlin?id=getting-started-with-kotlin-app">https://start.insert-koin.io/#/quickstart/kotlin?id=getting-started-with-kotlin-app</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <h1 id="在Kotlin-app中使用"><a href="#在Kotlin-app中使用" class="headerlink" title="在Kotlin app中使用"></a><a href="https://start.insert-koin.io/#/quickstart/kotlin?id=getting-started-with-kotlin-app">在Kotlin app中使用</a></h1><blockquote>
 <p>本教程将会告诉你如何使用Koin注入和检索组件来编写一个Kotlin app。</p>
@@ -5056,6 +5182,27 @@
     <url>/posts/2a806fe1.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/quickstart/android">https://start.insert-koin.io/#/quickstart/android</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <h1 id="在Android-application中使用"><a href="#在Android-application中使用" class="headerlink" title="在Android application中使用"></a><a href="https://start.insert-koin.io/#/quickstart/android?id=getting-started-with-android-application">在Android application中使用</a></h1><blockquote>
 <p>这个教程将会告诉你如何使用Koin注入和检索组件来编写一个Android/Kotlin application。</p>
@@ -5096,6 +5243,27 @@
     <url>/posts/e7ad0613.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/quickstart/android-java">https://start.insert-koin.io/#/quickstart/android-java</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <h1 id="在Android-Java-application中使用"><a href="#在Android-Java-application中使用" class="headerlink" title="在Android Java application中使用"></a><a href="https://start.insert-koin.io/#/quickstart/android-java?id=getting-started-with-android-java-application">在Android Java application中使用</a></h1><blockquote>
 <p>这个教程将会告诉你如何使用Koin注入和检索组件来编写一个Android Java application。</p>
@@ -5136,6 +5304,27 @@
     <url>/posts/6d1e0fe7.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/quickstart/android-viewmodel">https://start.insert-koin.io/#/quickstart/android-viewmodel</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <h1 id="在Android-ViewModel-application中使用"><a href="#在Android-ViewModel-application中使用" class="headerlink" title="在Android ViewModel application中使用"></a><a href="https://start.insert-koin.io/#/quickstart/android-viewmodel?id=getting-started-with-android-viewmodel-application">在Android ViewModel application中使用</a></h1><blockquote>
 <p>这个教程将会告诉你如何使用Koin注入和检索ViewModel组件来编写一个Android/Kotlin application。</p>
@@ -5176,6 +5365,27 @@
     <url>/posts/c99907a8.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/getting-started/starting-koin">https://start.insert-koin.io/#/getting-started/starting-koin</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 <p>Koin is a DSL, a container &amp; a pragamtic API to leverage your dependencies.</p>
 <p>Koin是一个DSL、一个容器、一个实用的API来有效利用我们的依赖</p>
 </blockquote>
@@ -5230,6 +5440,27 @@
     <url>/posts/d8ca0532.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/getting-started/modules-definitions">https://start.insert-koin.io/#/getting-started/modules-definitions</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <p>用Koin编写定义是通过Kotlin函数完成的，该函数描述了实例的构建方式。 </p>
 <p>配置完Koin应用程序后，让我们来编写一些模块和定义。</p>
@@ -5291,6 +5522,27 @@
     <url>/posts/f85e8eae.html</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://start.insert-koin.io/#/getting-started/koin-components">https://start.insert-koin.io/#/getting-started/koin-components</a></p>
+<p>开始</p>
+<ul>
+<li><a href="/posts/fd6f0996.html">Intro(介绍)</a></li>
+<li><a href="/posts/b075de90.html">Setup(初始化)</a></li>
+</ul>
+<p>Koin in 5 minutes (5分钟快速入手Koin)</p>
+<ul>
+<li><a href="/posts/f88fedb6.html">Kotlin</a></li>
+<li><a href="/posts/2a806fe1.html">Android</a></li>
+<li><a href="/posts/e7ad0613.html">Android Java</a></li>
+<li><a href="/posts/6d1e0fe7.html">Android ViewModel</a></li>
+</ul>
+<p>Getting Started (开始)</p>
+<ul>
+<li><a href="/posts/c99907a8.html">Starting Koin(开始使用Koin)</a></li>
+<li><a href="/posts/d8ca0532.html">Modules &amp; definitions(模块和定义)</a></li>
+<li><a href="/posts/f85e8eae.html">Koin Components(Koin组件)</a></li>
+<li><a href="/posts/63fa5724.html">Testing(测试)</a></li>
+<li><a href="/posts/ebed2a69.html">Koin for Java</a></li>
+<li><a href="/posts/f5a785d7.html">Koin for Android</a></li>
+</ul>
 </blockquote>
 <p>有时不能仅通过Koin声明组件。依赖于你的运行时技术，你可能需要在一个不是用Koin创建的类中从Koin检索实例（例如Android）。</p>
 <h2 id="Koin组件实例"><a href="#Koin组件实例" class="headerlink" title="Koin组件实例"></a><a href="https://start.insert-koin.io/#/getting-started/koin-components?id=the-koincomponent-interface">Koin组件实例</a></h2><p>通过 <code>KoinComponent</code> 接口来标记你的类就能解锁Koin的注入功能：</p>
